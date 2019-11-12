@@ -10,6 +10,7 @@ import java.util.Calendar;
  */
 public class UsersSQL extends MySQL {
 
+    //TODO FIX MY COPY PASTE
     /**
      * Adds user
      * @param  u Users data
@@ -79,23 +80,7 @@ public class UsersSQL extends MySQL {
         return s;
     }
 
-    /**
-     * Increase stock if below 20
-     * @param name tool name
-     * @param amount tool amount increases
-     * @param toolSQL tool database
-     */
-    private void increaseItem(String name, int amount, PropertySQL toolSQL){
-        try {
-            String query2 = "UPDATE tool SET quantity = ? WHERE name= ?";
-            PreparedStatement pStmt2 = conn.prepareStatement(query2);
-            pStmt2.setInt(1, toolSQL.getQuantityInt(name) + amount);
-            pStmt2.setString(2,name);
-            pStmt2.executeUpdate();
-            pStmt2.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
+
 }
 
