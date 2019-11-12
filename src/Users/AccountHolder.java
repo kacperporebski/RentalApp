@@ -2,7 +2,7 @@ package Users;
 
 import Client.Container.Account;
 
-public abstract class AccountHolder {
+public abstract class AccountHolder extends User {
 
     private Account account;
 

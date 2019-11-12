@@ -17,6 +17,6 @@ public class Registration {
         //TODO changeToRegRenter
     }
 
-
+//TODO I have no idea whats going on with this object tbh
 
 }

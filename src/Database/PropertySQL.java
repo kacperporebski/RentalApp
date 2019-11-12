@@ -5,7 +5,7 @@ import java.sql.*;
 /**
  * Tool database
  */
-public class ToolSQL extends MySQL {
+public class PropertySQL extends MySQL {
 
     /**
      * Creates table of tools

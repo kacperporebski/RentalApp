@@ -85,7 +85,7 @@ public class UsersSQL extends MySQL {
      * @param amount tool amount increases
      * @param toolSQL tool database
      */
-    private void increaseItem(String name, int amount, ToolSQL toolSQL){
+    private void increaseItem(String name, int amount, PropertySQL toolSQL){
         try {
             String query2 = "UPDATE tool SET quantity = ? WHERE name= ?";
             PreparedStatement pStmt2 = conn.prepareStatement(query2);
