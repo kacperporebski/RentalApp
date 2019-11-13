@@ -1,5 +1,7 @@
 package Client.Container;
 
+import Users.User;
+
 public class Email {
     private User sender;
     private User receiver;
