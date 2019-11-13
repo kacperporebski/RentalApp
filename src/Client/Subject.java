@@ -4,7 +4,7 @@ import Client.Container.Observer;
 
 public interface Subject
 {
-    void register(Observer obs);
-    void remove(Observer obs);
+    void registerObserver(Observer obs);
+    void removeObserver(Observer obs);
     void notifyObserver();
 }

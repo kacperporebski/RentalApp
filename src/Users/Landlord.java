@@ -1,6 +1,7 @@
 package Users;
 
-public class Landlord extends AccountHolder {
+public class Landlord extends AccountHolder
+{
 
 
 }

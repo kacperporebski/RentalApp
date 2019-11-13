@@ -1,8 +1,8 @@
 package Client;
 
 import Client.Container.Property;
-import Users.Manager;
-import Users.User;
+import Client.Repositories.PropertyReposory;
+import Client.Repositories.UserRepository;
 
 import java.util.ArrayList;
 
@@ -12,10 +12,11 @@ public class RenterWebsite
    //TODO private Observer observer;
 
     public UserRepository userRepo;
+    public PropertyReposory proeprtyRepo;
 
     //private ArrayList<Manager> managers;
     //private ArrayList<User> users;
-    private ArrayList<Property> properties;
+    //private ArrayList<Property> properties;
 
 
     //TODO FUNCTIONS HELLO?
