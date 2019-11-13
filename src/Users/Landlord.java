@@ -9,4 +9,10 @@ public class Landlord extends AccountHolder
     {
         super(fname, lname, mail, account);
     }
+
+    @Override
+    public String toString() {
+        return "Name " + getName().getFname() + " " + getName().getLname()
+                + " Username: " +getUsername() + " Password: " + getPassword();
+    }
 }

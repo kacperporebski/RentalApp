@@ -8,6 +8,13 @@ public class Fee {
     private double paymentAmount;
 
 
+    public Fee(double pay){
+        paymentAmount = pay;
+        paymentDate = new Date();
+        //TODO period and ID
+
+    }
+
     public Date getPaymentDate() {
         return paymentDate;
     }

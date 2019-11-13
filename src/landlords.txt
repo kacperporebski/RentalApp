@@ -1,0 +1,13 @@
+John;Mikeson;j.mike@gmail.com;john;password123
+Mike;Johnson;m.johnson@gmail.com;mike;pass123
+Paul;Hapon;paulh@gmail.com;pauler;hapon20
+Fred;Frank;ff@gmail.com;ffred;ffpass
+Paula;Pot;paula@gmail.com;potpaul;paulpot
+Howdy;Sir;howdy@gmail.com;howdy;sir
+Love;This;love@gmail.com;lotsoflove;password22
+Waston;Smith;watson@gmail.com;friendlyw;wpasswordw
+Frankenstein;Junior;zombie@gmail.com;frankenstein;howtonotbeazombie
+Nikola;Tesla;nik@tesla.com;nikolat;energyisgood
+Thomas;Eddison;eddy@gmail.com;eddy;thomaslight
+Barack;Obama;obama@president.us;barack;obamapasswordtoostrong
+Britney;Spears;brit@pop.com;britney;itsbritney

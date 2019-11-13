@@ -10,4 +10,12 @@ public class Name
         fname = first;
         lname = last;
     }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
 }

@@ -13,7 +13,21 @@ public class Property
     private int numberOfBedrooms;
     private int numberOfBathrooms;
     private boolean furnished;
+    private String address;
     private String cityQuadrant;
+    private int ID;
+
+
+    public Property(int idnum, Landlord l, String addr,int bedroom, int bathroom, boolean furnished, Fee rentfee ){
+        ID=idnum;
+        myLandlord=l;
+        address=addr;
+        numberOfBedrooms=bedroom;
+        numberOfBathrooms=bathroom;
+        this.furnished=furnished;
+        rent = rentfee;
+
+    }
 
     public Landlord getMyLandlord()
     {
@@ -55,8 +69,11 @@ public class Property
         return furnished;
     }
 
-    public String getCityQuadrant()
-    {
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCityQuadrant() {
         return cityQuadrant;
     }
 }

@@ -9,6 +9,7 @@ public class Main
         GUI gui = new GUI();
         RenterWebsite model = new RenterWebsite();
         RPMSController controller = new RPMSController(gui, model);
+        model.printAllData();
     }
 
 }

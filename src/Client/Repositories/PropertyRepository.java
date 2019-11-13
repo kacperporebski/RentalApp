@@ -18,6 +18,8 @@ public class PropertyRepository implements Subject
 
     private PropertyRepository()
     {
+        properties= new ArrayList<Property>();
+        observerList = new ArrayList<Observer>();
     }
 
     public void addProperty(Property property)
@@ -69,5 +71,15 @@ public class PropertyRepository implements Subject
         if(instance == null)
             instance = new PropertyRepository();
         return instance;
+    }
+
+
+    public void printAll(){
+        for(Property x : properties){
+            System.out.println(x.getAddress() + " Num of bedrooms and bathrooms : " +
+                    x.getNumberOfBedrooms() + " , " + x.getNumberOfBathrooms() +
+                    "\nLandlord info: " + x.getMyLandlord().toString());
+        }
+
     }
 }

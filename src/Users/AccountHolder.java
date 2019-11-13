@@ -24,7 +24,9 @@ public abstract class AccountHolder
         return account.getPassword();
     }
 
-
+    public Name getName() {
+        return name;
+    }
     //TODO DO I NEED ANYTHING EXTRA HERE?
 
 
