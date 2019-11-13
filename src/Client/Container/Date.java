@@ -1,12 +1,20 @@
 package Client.Container;
 
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 public class Date {
     private int day, month, year;
 
     public Date()
     {
-        //Todo default constructor that sets today's date
+
+        LocalDate today = LocalDate.now(ZoneId.of("America/Edmonton"));
+        day = today.getDayOfMonth();
+        month = today.getMonthValue();
+        year = today.getYear();
+
     }
 
     public Date(int d, int m, int y)
