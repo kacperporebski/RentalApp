@@ -1,5 +1,7 @@
 package Client.Services;
 
+import Client.Container.Observer;
+import Client.Container.Property;
 import Users.AccountHolder;
 
 import java.util.ArrayList;
@@ -17,14 +19,14 @@ public class LoginService
         return instance;
     }
 
-    public void add(String username, String password)
+    public AccountHolder add(String username, String password)
     {
 
         //TODO users.add(new AccountHolder??? WHAT TYPE THOUGH AAAAA U WOULD HAVE TO PASS THE ACCOUNT IN HERE NOT CREATE IT HERE)
 
     }
 
-    public AccountHolder validate(String username, String password)
+    public boolean validate(String username, String password)
     {
         //TODO validate
         for (AccountHolder a : users)
@@ -34,6 +36,4 @@ public class LoginService
         }
 
     }
-
-
 }

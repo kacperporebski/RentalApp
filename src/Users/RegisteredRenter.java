@@ -18,6 +18,7 @@ public class RegisteredRenter extends AccountHolder implements Observer
     @Override
     public void update(ArrayList<Property> properties)
     {
+        //Todo Currently this function recreates notifications for already added properties. Fix so that it only creates new ones for new properties.
         for(Property p : properties)
         {
             if(renter.searchCriteria.matchingProperty(p))

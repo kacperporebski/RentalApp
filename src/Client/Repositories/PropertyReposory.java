@@ -15,10 +15,12 @@ public class PropertyReposory implements Subject
     public void addProperty(Property property)
     {
         properties.add(property);
+        notifyObserver();
     }
 
     public void removeProperty(Property property)
     {
+        notifyObserver();
         properties.remove(property);
     }
 
@@ -36,18 +38,21 @@ public class PropertyReposory implements Subject
     @Override
     public void registerObserver(Observer obs)
     {
-
+        observerList.add(obs);
     }
 
     @Override
     public void removeObserver(Observer obs)
     {
-
+        observerList.remove(obs);
     }
 
     @Override
     public void notifyObserver()
     {
-
+        for(Observer o : observerList)
+        {
+            o.update(properties);
+        }
     }
 }

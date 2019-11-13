@@ -2,7 +2,8 @@ package Client.Container;
 
 import Users.Landlord;
 
-public class Property {
+public class Property
+{
 
     private Landlord myLandlord;
     private Fee rent;

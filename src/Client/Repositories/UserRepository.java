@@ -9,12 +9,9 @@ import Users.User;
 
 import java.util.ArrayList;
 
-public class UserRepository implements Subject
+public class UserRepository
 {
     private ArrayList<AccountHolder> users;
-    private ArrayList<Observer> observerList;
-
-
 
     AccountHolder login(String username, String password)
     {
@@ -28,21 +25,4 @@ public class UserRepository implements Subject
         return true;
     }
 
-    @Override
-    public void registerObserver(Observer obs)
-    {
-
-    }
-
-    @Override
-    public void removeObserver(Observer obs)
-    {
-
-    }
-
-    @Override
-    public void notifyObserver()
-    {
-
-    }
 }
