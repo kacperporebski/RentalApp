@@ -19,14 +19,14 @@ public class LoginService
         return instance;
     }
 
-    public AccountHolder add(String username, String password)
+    public boolean add(String username, String password)
     {
 
         //TODO users.add(new AccountHolder??? WHAT TYPE THOUGH AAAAA U WOULD HAVE TO PASS THE ACCOUNT IN HERE NOT CREATE IT HERE)
 
     }
 
-    public boolean validate(String username, String password)
+    public AccountHolder validate(String username, String password)
     {
         //TODO validate
         for (AccountHolder a : users)
