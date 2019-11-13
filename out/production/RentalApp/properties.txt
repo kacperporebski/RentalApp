@@ -1,0 +1,13 @@
+8001;John;Mikeson;788 30th St., SE, Calgary;3;2;furnished;1500
+8002;Mike;Johnson;749 Dufferin Blvd., SE, Calgary;3;1;furnished;2000
+8003;Paul;Hapon;26 40th St., SE, Calgary;4;6;furnished;2500
+8004;Fred;Frank;156 51st Ave., SE, Calgary;3;5;furnished;1700
+8005;Paula;Pot;138 42nd Ave., NE, Calgary;7;6;furnished;1900
+8006;Howdy;Sir;311 McCall Way, NE, Calgary;9;2;furnished;2500
+8007;Love;This;966 Smed Lane, SE, Calgary;4;2;furnished;3000
+8008;Waston;Smith;879 37th Ave., NE, Calgary;5;3;furnished;2300
+8009;Frankenstein;Junior;472 Ogden Dale Rd., SE, Calgary;3;1;furnished;1200
+8010;Nikola;Tesla;754 Sunridge Way, NE, Calgary;5;4;furnished;2500
+8011;Thomas;Eddison;690 19th St., NE, Calgary;3;6;furnished;2340
+8012;Barack;Obama;318 29th St.,NE, Calgary;15;7;furnished;3760
+8013;Britney;Spears;238 112th Ave., NE, Calgary;5;3;furnished;2200
