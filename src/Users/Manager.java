@@ -1,4 +1,6 @@
 package Users;
 
-public class Manager extends AccountHolder {
+public class Manager extends AccountHolder
+{
+
 }

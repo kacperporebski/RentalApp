@@ -2,9 +2,8 @@ package Client.Repositories;
 
 import Client.Container.Account;
 import Client.Container.Observer;
-import Client.Container.UserType;
-import Client.LoginService;
-import Client.Subject;
+import Client.Services.LoginService;
+import Client.Container.Subject;
 import Users.AccountHolder;
 import Users.User;
 
@@ -24,7 +23,7 @@ public class UserRepository implements Subject
 
     boolean addUser(Account account)
     {
-        //Todo link users arraylist to that of LoginService
+        //Todo link users arraylist to that of LoginService or maybe change this to Registration
         LoginService.getInstance().add(account);
         return true;
     }

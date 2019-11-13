@@ -1,9 +1,10 @@
-package Client;
+package Client.Services;
 
 import Users.RegisteredRenter;
 import Users.Renter;
 
-public class Registration {
+public class Registration
+{
 
     private Renter renter;
     private RegisteredRenter regRenter;

@@ -8,11 +8,10 @@ import java.util.ArrayList;
 
 public class RenterWebsite
 {
-   //TODO private Database myDatabase;
-   //TODO private Observer observer;
+   //TODO private Database myDatabase; ... Maybe add to Repo?
 
     public UserRepository userRepo;
-    public PropertyReposory proeprtyRepo;
+    public PropertyReposory propertyRepo;
 
     //private ArrayList<Manager> managers;
     //private ArrayList<User> users;
