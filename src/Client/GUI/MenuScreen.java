@@ -1,6 +1,10 @@
 package Client.GUI;
 
+import Users.AccountHolder;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuScreen extends JFrame
 {
@@ -15,6 +19,17 @@ public class MenuScreen extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
+
+        loginButton.addActionListener(new LoginScreenButtonActionListener());
+    }
+
+    public class LoginScreenButtonActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            LoginScreen loginScreen = new LoginScreen();
+        }
     }
 
     public JButton getLoginButton()
