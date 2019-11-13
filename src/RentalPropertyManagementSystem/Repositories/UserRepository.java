@@ -21,8 +21,8 @@ public class UserRepository
     }
 
 
-    public void addUser(AccountHolder u) {
-
+    public void addUser(AccountHolder u)
+    {
         users.add(u);
     }
 
@@ -35,11 +35,11 @@ public class UserRepository
         return null;
     }
 
-        public Optional<AccountHolder> addUser(Account account)
+    public Optional<AccountHolder> addUser(Account account)
     {
         //Todo link users arraylist to that of LoginService or maybe change this to Registration
         Optional<AccountHolder> user = validate(account.getUsername(), account.getPassword());
-        if(user.isPresent())
+        if(!user.isPresent())
             users.add(user.get());
         return user;
     }

@@ -8,8 +8,8 @@ public class LoginScreen extends JFrame
     private JTextField usernameTextField;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
-    private JPasswordField passwordField1;
     private JButton loginButton;
+    private JTextField passwordTextField;
 
     public LoginScreen()
     {
@@ -38,9 +38,9 @@ public class LoginScreen extends JFrame
         return passwordLabel;
     }
 
-    public JPasswordField getPasswordField1()
+    public JTextField getPasswordTextField()
     {
-        return passwordField1;
+        return passwordTextField;
     }
 
     public JButton getLoginButton()

@@ -36,12 +36,15 @@ public class RPMSController
         public void actionPerformed(ActionEvent e)
         {
             String username = view.getLoginScreen().getUsernameTextField().getText();
-            String password = view.getLoginScreen().getPasswordField1().getPassword().toString();
+            String password = view.getLoginScreen().getPasswordTextField().getText();
+            System.out.println(password);
 
             Optional<AccountHolder> user = renterWebsite.userRepo.login(username, password);
             //TODO switch case for which display to show depending on usertype
             if(user.isPresent())
             {
+                System.out.println("Logged in");
+
                 switch (user.get().getAccountType())
                 {
                     case LANDLORD:
