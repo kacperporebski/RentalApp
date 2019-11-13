@@ -1,10 +1,10 @@
 package Client.Container;
 
-import Users.User;
+import Users.AccountHolder;
 
 public class Email {
-    private User sender;
-    private User receiver;
+    private AccountHolder sender;
+    private AccountHolder receiver;
     private String message;
 
     public String getMessage() {

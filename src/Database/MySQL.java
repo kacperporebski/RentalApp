@@ -25,8 +25,8 @@ public class MySQL implements DatabaseCreds {
     public void connect(){
 
         try{
-            Driver driver = new com.mysql.cj.jdbc.Driver();
-            DriverManager.registerDriver(driver);
+           // Driver driver = new com.mysql.cj.jdbc.Driver();
+            //DriverManager.registerDriver(driver);
             conn = DriverManager.getConnection(DB_URL, USERNAME,PASSWORD);
         }catch(SQLException e){
             System.out.println("Connection failed");

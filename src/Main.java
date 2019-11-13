@@ -1,5 +1,5 @@
 import Client.Controller.RPMSController;
-import Client.GUI;
+import Client.GUI.GUI;
 import Client.RenterWebsite;
 
 public class Main

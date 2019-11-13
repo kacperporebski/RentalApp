@@ -14,11 +14,6 @@ public class RegisteredRenter extends AccountHolder implements Observer
         super(fname, lname, mail, account);
     }
 
-    public void register(Renter renter)
-    {
-
-    }
-
 
     @Override
     public void update(ArrayList<Property> properties)
@@ -27,11 +22,11 @@ public class RegisteredRenter extends AccountHolder implements Observer
         for(Property p : properties)
         {
             if(renter.searchCriteria.matchingProperty(p))
-                createNotification(p, new Date());
+                notify(p, new Date());
         }
     }
 
-    public void createNotification(Property property, Date date)
+    public void notify(Property property, Date date)
     {
         notifications.add(new Notification(property, date));
     }

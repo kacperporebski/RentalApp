@@ -3,11 +3,10 @@ package Client.Controller;
 import Client.Container.Account;
 import Client.Container.Property;
 import Client.Container.UserType;
-import Client.GUI;
+import Client.GUI.GUI;
 import Client.RenterWebsite;
 import Users.AccountHolder;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
