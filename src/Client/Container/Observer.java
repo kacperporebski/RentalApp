@@ -1,6 +1,8 @@
 package Client.Container;
 
+import java.util.ArrayList;
+
 public interface Observer
 {
-    void update();
+    public void update(ArrayList<Property> properties);
 }

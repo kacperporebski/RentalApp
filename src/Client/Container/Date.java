@@ -3,6 +3,12 @@ package Client.Container;
 
 public class Date {
     private int day, month, year;
+
+    public Date()
+    {
+        //Todo default constructor that sets today's date
+    }
+
     public Date(int d, int m, int y)
     {
         day = d;

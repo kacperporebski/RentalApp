@@ -31,6 +31,11 @@ public class RPMSController
             //String password = view.getLoginPasswordField.getText();
 
             Account account = renterWebsite.userRepo.login(username, password);
+            /*if(account doesn't exist)
+                view.displayInvalidLogin
+              else
+                switch case for which display to show depending on usertype
+            */
         }
     }
 

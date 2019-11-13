@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class UserRepository implements Subject
 {
-    private ArrayList<User> users;
+    private ArrayList<AccountHolder> users;
     private ArrayList<Observer> observerList;
 
 
