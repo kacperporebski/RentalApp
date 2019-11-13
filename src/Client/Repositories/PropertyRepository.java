@@ -7,10 +7,18 @@ import Client.Container.Subject;
 
 import java.util.ArrayList;
 
-public class PropertyReposory implements Subject
+/**
+ * Singleton class which maintains list of properties
+ */
+public class PropertyRepository implements Subject
 {
-    private ArrayList<Property> properties;
-    private ArrayList<Observer> observerList;
+    private static ArrayList<Property> properties;
+    private static PropertyRepository instance;
+    private static ArrayList<Observer> observerList;
+
+    private PropertyRepository()
+    {
+    }
 
     public void addProperty(Property property)
     {
@@ -54,5 +62,12 @@ public class PropertyReposory implements Subject
         {
             o.update(properties);
         }
+    }
+
+    public static PropertyRepository getInstance()
+    {
+        if(instance == null)
+            instance = new PropertyRepository();
+        return instance;
     }
 }

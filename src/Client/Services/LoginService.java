@@ -1,3 +1,4 @@
+/*
 package Client.Services;
 
 import Client.Container.Observer;
@@ -37,3 +38,4 @@ public class LoginService
 
     }
 }
+*/

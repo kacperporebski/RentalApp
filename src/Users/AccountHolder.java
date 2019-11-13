@@ -20,6 +20,10 @@ public abstract class AccountHolder
     public String getUsername(){
         return account.getUsername();
     }
+    public String getPassword(){
+        return account.getPassword();
+    }
+
 
     //TODO DO I NEED ANYTHING EXTRA HERE?
 

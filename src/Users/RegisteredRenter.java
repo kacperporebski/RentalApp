@@ -14,6 +14,11 @@ public class RegisteredRenter extends AccountHolder implements Observer
         super(fname, lname, mail, account);
     }
 
+    public void register(Renter renter)
+    {
+
+    }
+
 
     @Override
     public void update(ArrayList<Property> properties)
