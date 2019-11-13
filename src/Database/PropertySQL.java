@@ -1,5 +1,7 @@
 package Database;
 
+import RentalPropertyManagementSystem.Database.MySQL;
+
 import java.sql.*;
 
 /**

@@ -1,11 +1,10 @@
 package RentalPropertyManagementSystem.Controller;
 
+import Client.RenterWebsite;
 import RentalPropertyManagementSystem.Client.Container.Account;
 import RentalPropertyManagementSystem.Client.Container.Property;
 import RentalPropertyManagementSystem.Client.Container.UserType;
 import RentalPropertyManagementSystem.GUI.GUI;
-import RentalPropertyManagementSystem.Client.RenterWebsite;
-import RentalPropertyManagementSystem.GUI.LoginScreen;
 import RentalPropertyManagementSystem.Users.AccountHolder;
 
 import java.awt.event.ActionEvent;

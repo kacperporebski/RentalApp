@@ -33,4 +33,8 @@ public abstract class AccountHolder
     //TODO DO I NEED ANYTHING EXTRA HERE?
 
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

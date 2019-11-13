@@ -1,12 +1,14 @@
 package Client;
 
-import Client.Container.Account;
-import Client.Container.Fee;
-import Client.Container.Property;
-import Client.Container.UserType;
-import Client.Repositories.PropertyRepository;
-import Client.Repositories.UserRepository;
-import Users.Landlord;
+
+import RentalPropertyManagementSystem.Client.Container.Account;
+import RentalPropertyManagementSystem.Client.Container.Fee;
+import RentalPropertyManagementSystem.Client.Container.Property;
+import RentalPropertyManagementSystem.Client.Container.UserType;
+import RentalPropertyManagementSystem.Repositories.PropertyRepository;
+import RentalPropertyManagementSystem.Repositories.UserRepository;
+import RentalPropertyManagementSystem.Users.Landlord;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
