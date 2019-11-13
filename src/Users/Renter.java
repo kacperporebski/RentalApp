@@ -1,32 +1,17 @@
 package Users;
 
-import Client.Container.Fee;
+import Client.Container.CityQuadrants;
 import Client.Container.SearchCriteria;
-import Client.LoginService;
 
-public class Renter extends User{
+import java.util.ArrayList;
 
-    SearchCriteria criteria;
+public class Renter
+{
+    SearchCriteria searchCriteria;
 
-    void PayRent(Fee f){
-        //TODO ??
+    public void enterCriteria(ArrayList<String> type, ArrayList<Integer> bedrooms, ArrayList<Integer> bathrooms, boolean furnished, ArrayList<CityQuadrants> cityQuadrants)
+    {
+        searchCriteria = new SearchCriteria(type, bedrooms, bathrooms, furnished, cityQuadrants);
     }
-
-    void emailLandLord(Landlord L){
-        //TODO WHERE ARE WE GETTING LANDLORD FROM? I GUESS MAGIC
-    }
-
-    void subscribe(){
-        //TODO I HAVE NO IDEA
-    }
-
-    void register(){
-       // this = new RegisteredRenter(this) //TODO??????
-
-
-    }
-
-
-
 
 }

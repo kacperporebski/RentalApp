@@ -2,7 +2,8 @@ package Client.Container;
 
 import Users.Landlord;
 
-public class Property {
+public class Property
+{
 
     private Landlord myLandlord;
     private Fee rent;
@@ -14,7 +15,48 @@ public class Property {
     private boolean furnished;
     private String cityQuadrant;
 
+    public Landlord getMyLandlord()
+    {
+        return myLandlord;
+    }
 
+    public Fee getRent()
+    {
+        return rent;
+    }
 
+    public Fee getRegistrationFee()
+    {
+        return registrationFee;
+    }
 
+    public String getType()
+    {
+        return type;
+    }
+
+    public STATE getState()
+    {
+        return state;
+    }
+
+    public int getNumberOfBedrooms()
+    {
+        return numberOfBedrooms;
+    }
+
+    public int getNumberOfBathrooms()
+    {
+        return numberOfBathrooms;
+    }
+
+    public boolean isFurnished()
+    {
+        return furnished;
+    }
+
+    public String getCityQuadrant()
+    {
+        return cityQuadrant;
+    }
 }

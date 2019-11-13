@@ -1,13 +1,22 @@
+/*
 package Users;
 
-import Client.Container.Email;
+import Client.Container.Name;
 
-public abstract class User {
+public abstract class User
+{
+    Name name;
+    String email;
 
-    Email email;
-    String name;
+    public User(String fname, String lname, String mail)
+    {
+        name = new Name(fname, lname);
+        email = mail;
+    }
 
-//abstract void register(); //TODO ?? WHY DOES EVERY USER NEED TO HAVE A REGISTER??
+
+
 
 
 }
+*/

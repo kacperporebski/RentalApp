@@ -4,10 +4,14 @@ public class Account {
 
   private String username;
   private String password;
+  private UserType accountType;
 
-  public Account (String x, String y ){
+  public Account (String x, String y, UserType type)
+  {
       username=x;
       password=y;
+      accountType = type;
+
   }
 
     public String getPassword() {
