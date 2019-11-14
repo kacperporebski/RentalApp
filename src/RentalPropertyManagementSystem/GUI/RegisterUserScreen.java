@@ -1,0 +1,95 @@
+package RentalPropertyManagementSystem.GUI;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class RegisterUserScreen extends JFrame
+{
+    private JTextField firstNameTextField;
+    private JTextField lastNameTextField;
+    private JLabel lastNameLabel;
+    private JLabel firstNameLabel;
+    private JTextField emailTextField;
+    private JComboBox accountTypeBox;
+    private JTextField usernameTextField;
+    private JTextField passwordTextField;
+    private JButton registerButton;
+    private JButton cancelButton;
+    private JPanel panel;
+
+    public RegisterUserScreen()
+    {
+        this.setName("Register");
+        this.setContentPane(panel);
+        this.pack();
+
+        cancelButton.addActionListener(new cancelButtonActionListener());
+    }
+
+    public class cancelButtonActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            firstNameTextField.setText("");
+            lastNameTextField.setText("");
+            emailTextField.setText("");
+            accountTypeBox.setSelectedIndex(0);
+            usernameTextField.setText("");
+            passwordTextField.setText("");
+
+            setVisible(false);
+        }
+    }
+
+    public JTextField getFirstNameTextField()
+    {
+        return firstNameTextField;
+    }
+
+    public JTextField getLastNameTextField()
+    {
+        return lastNameTextField;
+    }
+
+    public JLabel getLastNameLabel()
+    {
+        return lastNameLabel;
+    }
+
+    public JLabel getFirstNameLabel()
+    {
+        return firstNameLabel;
+    }
+
+    public JTextField getEmailTextField()
+    {
+        return emailTextField;
+    }
+
+    public JComboBox getAccountTypeBox()
+    {
+        return accountTypeBox;
+    }
+
+    public JTextField getUsernameTextField()
+    {
+        return usernameTextField;
+    }
+
+    public JTextField getPasswordTextField()
+    {
+        return passwordTextField;
+    }
+
+    public JButton getRegisterButton()
+    {
+        return registerButton;
+    }
+
+    public JButton getCancelButton()
+    {
+        return cancelButton;
+    }
+}

@@ -9,4 +9,10 @@ public class Manager extends AccountHolder
     {
         super(fname, lname, mail, account);
     }
+
+    @Override
+    public String toString()
+    {
+        return account.getAccountType().toString() + " " + super.toString();
+    }
 }

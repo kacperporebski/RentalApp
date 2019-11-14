@@ -34,7 +34,9 @@ public abstract class AccountHolder
 
 
     @Override
-    public String toString() {
-        return super.toString();
+    public String toString()
+    {
+        return "Name " + getName().getFname() + " " + getName().getLname()
+            + " Username: " +getUsername() + " Password: " + getPassword();
     }
 }

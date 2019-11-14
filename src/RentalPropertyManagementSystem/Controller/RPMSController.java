@@ -6,6 +6,9 @@ import RentalPropertyManagementSystem.Client.Container.Property;
 import RentalPropertyManagementSystem.Client.Container.UserType;
 import RentalPropertyManagementSystem.GUI.GUI;
 import RentalPropertyManagementSystem.Users.AccountHolder;
+import RentalPropertyManagementSystem.Users.Landlord;
+import RentalPropertyManagementSystem.Users.Manager;
+import RentalPropertyManagementSystem.Users.RegisteredRenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,9 +30,13 @@ public class RPMSController
 
         //TODO add ActionListeners to view...
         view.getLoginScreen().getLoginButton().addActionListener(new LoginActionListener());
+        view.getRegUserScreen().getRegisterButton().addActionListener(new RegisterUserActionListener());
 
     }
 
+    /**
+     * ActionListener which validates the user existence, then logs into the system
+     */
     public class LoginActionListener implements ActionListener
     {
         @Override
@@ -63,17 +70,42 @@ public class RPMSController
         }
     }
 
+    /**
+     * ActionListener which
+     */
     public class RegisterUserActionListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            String username = "";
-            String password = "";
-            UserType type = UserType.LANDLORD;
+            String username = view.getRegUserScreen().getUsernameTextField().getText();
+            String password = view.getRegUserScreen().getPasswordTextField().getText();
+            UserType type = UserType.valueOf(view.getRegUserScreen().getAccountTypeBox().getSelectedItem().toString());
             Account account = new Account(username, password, type);
+            String firstname = view.getRegUserScreen().getFirstNameTextField().getText();
+            String lastname = view.getRegUserScreen().getLastNameTextField().getText();
+            String email = view.getRegUserScreen().getEmailTextField().getText();
 
-            renterWebsite.userRepo.addUser(account);
+            AccountHolder user;
+            switch(account.getAccountType())
+            {
+                case MANAGER:
+                    user = new Manager(firstname, lastname, email, account);
+                    break;
+                case LANDLORD:
+                    user = new Landlord(firstname, lastname, email, account);
+                    break;
+                case REGRENTER:
+                    user = new RegisteredRenter(firstname, lastname, email, account);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + account.getAccountType());
+            }
+            boolean added = renterWebsite.userRepo.addUser(user);
+            if(added)
+                System.out.println("Added user " + user.toString());
+            else
+                System.out.println("User already exists " + user.toString());
 
         }
     }

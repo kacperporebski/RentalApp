@@ -11,8 +11,8 @@ public class Landlord extends AccountHolder
     }
 
     @Override
-    public String toString() {
-        return "Name " + getName().getFname() + " " + getName().getLname()
-                + " Username: " +getUsername() + " Password: " + getPassword();
+    public String toString()
+    {
+        return account.getAccountType().toString() + " " + super.toString();
     }
 }

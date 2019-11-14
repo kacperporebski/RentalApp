@@ -7,6 +7,7 @@ public class MenuScreen extends JFrame
     private JButton loginButton;
     private JPanel panel;
     private JButton continueWithoutLoggingInButton;
+    private JButton registerButton;
 
     public MenuScreen()
     {
@@ -30,5 +31,10 @@ public class MenuScreen extends JFrame
     public JButton getContinueWithoutLoggingInButton()
     {
         return continueWithoutLoggingInButton;
+    }
+
+    public JButton getRegisterButton()
+    {
+        return registerButton;
     }
 }

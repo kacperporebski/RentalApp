@@ -30,4 +30,10 @@ public class RegisteredRenter extends AccountHolder implements Observer
     {
         notifications.add(new Notification(property, date));
     }
+
+    @Override
+    public String toString()
+    {
+        return account.getAccountType().toString() + " " + super.toString();
+    }
 }
