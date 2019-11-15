@@ -14,17 +14,18 @@ public class Property
     private int numberOfBathrooms;
     private boolean furnished;
     private String address;
-    private String cityQuadrant;
+    private CityQuadrants cityQuadrant;
     private int ID;
 
 
-    public Property(int idnum, Landlord l, String addr,int bedroom, int bathroom, boolean furnished, Fee rentfee ){
-        ID=idnum;
-        myLandlord=l;
-        address=addr;
-        numberOfBedrooms=bedroom;
-        numberOfBathrooms=bathroom;
-        this.furnished=furnished;
+    public Property(int idnum, Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee)
+    {
+        ID = idnum;
+        myLandlord = l;
+        address = addr;
+        numberOfBedrooms = bedroom;
+        numberOfBathrooms = bathroom;
+        this.furnished = furnished;
         rent = rentfee;
 
     }
@@ -69,11 +70,68 @@ public class Property
         return furnished;
     }
 
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 
-    public String getCityQuadrant() {
+    public CityQuadrants getCityQuadrant()
+    {
         return cityQuadrant;
+    }
+
+    public void setMyLandlord(Landlord myLandlord)
+    {
+        this.myLandlord = myLandlord;
+    }
+
+    public void setRent(Fee rent)
+    {
+        this.rent = rent;
+    }
+
+    public void setRegistrationFee(Fee registrationFee)
+    {
+        this.registrationFee = registrationFee;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
+    }
+
+    public void setState(STATE state)
+    {
+        this.state = state;
+    }
+
+    public void setNumberOfBedrooms(int numberOfBedrooms)
+    {
+        this.numberOfBedrooms = numberOfBedrooms;
+    }
+
+    public void setNumberOfBathrooms(int numberOfBathrooms)
+    {
+        this.numberOfBathrooms = numberOfBathrooms;
+    }
+
+    public void setFurnished(boolean furnished)
+    {
+        this.furnished = furnished;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
+
+    public void setCityQuadrant(CityQuadrants cityQuadrant)
+    {
+        this.cityQuadrant = cityQuadrant;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
     }
 }

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class SearchCriteria
 {
-    private ArrayList<String> propertyType;
+    private ArrayList<PropertyType> propertyType;
     private ArrayList<Integer> rangeOfBedrooms;
     private ArrayList<Integer> rangeOfBathrooms;
     private boolean furnished;
     private ArrayList<CityQuadrants> cityQuadrants;
 
-    public SearchCriteria(ArrayList<String> type, ArrayList<Integer> bedrooms, ArrayList<Integer> bathrooms, boolean furnished, ArrayList<CityQuadrants> cityQuadrants)
+    public SearchCriteria(ArrayList<PropertyType> type, ArrayList<Integer> bedrooms, ArrayList<Integer> bathrooms, boolean furnished, ArrayList<CityQuadrants> cityQuadrants)
     {
         this.propertyType = type;
         rangeOfBedrooms = bedrooms;
@@ -28,7 +28,7 @@ public class SearchCriteria
     {
         boolean matching = true;
 
-        for(String type : propertyType)
+        for(PropertyType type : propertyType)
         {
             if(type.equals(p.getType()) == false)
                 matching = false;

@@ -36,7 +36,26 @@ public class PropertyRepository implements Subject
 
     public void updatePropertyState(Property property, STATE state)
     {
+        for(Property p : properties)
+        {
+            if(p.equals(property))
+            {
+                p.setState(state);
+                break;
+            }
+        }
+    }
 
+    public void updateProperty(Property oldProperty, Property newProperty)
+    {
+        for(Property p : properties)
+        {
+            if(p.equals(oldProperty))
+            {
+                properties.set(properties.indexOf(p), newProperty);
+                break;
+            }
+        }
     }
 
     public ArrayList<Property> getAllProperties()
