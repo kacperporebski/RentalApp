@@ -4,18 +4,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RenterScreen extends JFrame
+public class RegRenterScreen extends JFrame
 {
-    private JPanel renterPanel;
-    private JList propertyList;
-
+    private JPanel panel;
     private JButton refreshButton;
     private JButton enterSearchCriteriaButton;
+    private JScrollPane scrollPane;
+    private JList propertyList;
+    private JButton logoutButton;
     private SearchCriteriaScreen searchCriteriaScreen;
 
-    public RenterScreen()
+
+    public RegRenterScreen()
     {
-        this.setContentPane(renterPanel);
+        this.setContentPane(panel);
         this.pack();
         searchCriteriaScreen = new SearchCriteriaScreen();
 
@@ -31,9 +33,9 @@ public class RenterScreen extends JFrame
         }
     }
 
-    public JList getPropertyList()
+    public JPanel getPanel()
     {
-        return propertyList;
+        return panel;
     }
 
     public JButton getRefreshButton()
@@ -45,4 +47,25 @@ public class RenterScreen extends JFrame
     {
         return enterSearchCriteriaButton;
     }
+
+    public JScrollPane getScrollPane()
+    {
+        return scrollPane;
+    }
+
+    public JList getPropertyList()
+    {
+        return propertyList;
+    }
+
+    public JButton getLogoutButton()
+    {
+        return logoutButton;
+    }
+
+    public SearchCriteriaScreen getSearchCriteriaScreen()
+    {
+        return searchCriteriaScreen;
+    }
 }
+

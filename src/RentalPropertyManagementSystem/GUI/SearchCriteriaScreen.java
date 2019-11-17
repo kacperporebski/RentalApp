@@ -23,6 +23,7 @@ public class SearchCriteriaScreen extends JFrame
     private JPanel panel;
     private JButton enterButton;
     private JButton cancelButton;
+    private JButton subscribeButton;
 
     public SearchCriteriaScreen()
     {

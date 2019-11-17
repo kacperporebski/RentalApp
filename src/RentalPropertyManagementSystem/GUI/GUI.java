@@ -10,6 +10,7 @@ public class GUI extends JFrame
     LoginScreen loginScreen;
     RegisterUserScreen regUserScreen;
     RenterScreen renterScreen;
+    RegRenterScreen regRenterScreen;
 
     public GUI()
     {
@@ -17,10 +18,11 @@ public class GUI extends JFrame
         loginScreen = new LoginScreen();
         regUserScreen = new RegisterUserScreen();
         renterScreen = new RenterScreen();
+        regRenterScreen = new RegRenterScreen();
 
         menuScreen.getLoginButton().addActionListener(new DisplayLoginScreenActionListener());
         menuScreen.getRegisterButton().addActionListener(new DisplayRegUserScreenActionListener());
-
+        menuScreen.getContinueWithoutLoggingInButton().addActionListener(new DisplayRenterScreen());
     }
 
     public class DisplayLoginScreenActionListener implements ActionListener
@@ -47,6 +49,7 @@ public class GUI extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             renterScreen.setVisible(true);
+            menuScreen.setVisible(false);
         }
     }
 
@@ -73,5 +76,10 @@ public class GUI extends JFrame
     public RenterScreen getRenterScreen()
     {
         return renterScreen;
+    }
+
+    public RegRenterScreen getRegRenterScreen()
+    {
+        return regRenterScreen;
     }
 }

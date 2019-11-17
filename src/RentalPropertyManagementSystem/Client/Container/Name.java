@@ -11,6 +11,11 @@ public class Name
         lname = last;
     }
 
+    public String toString()
+    {
+        return fname + " " + lname;
+    }
+
     public String getFname() {
         return fname;
     }

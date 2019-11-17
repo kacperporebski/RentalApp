@@ -30,6 +30,13 @@ public class Property
 
     }
 
+    public String toString()
+    {
+        return address + "\t Num of bedrooms and bathrooms : " +
+                numberOfBedrooms + " ,\t " + numberOfBathrooms +
+                "\tLandlord info: " + myLandlord.getName().toString();
+    }
+
     public Landlord getMyLandlord()
     {
         return myLandlord;

@@ -10,6 +10,7 @@ import RentalPropertyManagementSystem.Users.Landlord;
 import RentalPropertyManagementSystem.Users.Manager;
 import RentalPropertyManagementSystem.Users.RegisteredRenter;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class RPMSController
 {
     GUI view;
     RenterWebsite renterWebsite;
+    Optional<AccountHolder> currentUser;
+
 
     public RPMSController(GUI view, RenterWebsite website)
     {
@@ -31,6 +34,9 @@ public class RPMSController
         //TODO add ActionListeners to view...
         view.getLoginScreen().getLoginButton().addActionListener(new LoginActionListener());
         view.getRegUserScreen().getRegisterButton().addActionListener(new RegisterUserActionListener());
+        view.getRegRenterScreen().getLogoutButton().addActionListener(new LoginActionListener());
+        view.getRegRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
+        view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
 
     }
 
@@ -50,6 +56,7 @@ public class RPMSController
             //TODO switch case for which display to show depending on usertype
             if(user.isPresent())
             {
+                currentUser = user;
                 System.out.println("Logged in");
 
                 switch (user.get().getAccountType())
@@ -59,16 +66,31 @@ public class RPMSController
                     case MANAGER:
                         break;
                     case REGRENTER:
+                        view.getRegRenterScreen().setVisible(true);
+
                         break;
                 }
+
+                view.getMenuScreen().setVisible(false);
             }
             else
             {
                 System.out.println("Couldn't login");
-
             }
         }
     }
+
+    public class LogoutActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            currentUser.equals(Optional.empty());
+            System.out.println("Logged out");
+            view.getMenuScreen().setVisible(true);
+        }
+    }
+
 
     /**
      * ActionListener which
@@ -126,9 +148,22 @@ public class RPMSController
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            ArrayList<Property> propertyList = renterWebsite.propertyRepo.getAllProperties();
-
+            
+            displayProperties(view.getRenterScreen().getPropertyList());
         }
+    }
+
+    public void displayProperties(JList list)
+    {
+        ArrayList<Property> propertyList = renterWebsite.propertyRepo.getAllProperties();
+
+        DefaultListModel<String> dlm = new DefaultListModel<String>();
+        for(Property p : propertyList)
+        {
+            dlm.addElement(p.toString());
+        }
+        list.setModel(dlm);
+        System.out.println("Displaying properties");
     }
 
 
