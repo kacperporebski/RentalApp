@@ -31,9 +31,24 @@ public class RegisteredRenter extends AccountHolder implements Observer
         notifications.add(new Notification(property, date));
     }
 
+    public void setSearchCriteria(SearchCriteria criteria)
+    {
+        renter.searchCriteria = criteria;
+    }
+
     @Override
     public String toString()
     {
         return account.getAccountType().toString() + " " + super.toString();
+    }
+
+    public Renter getRenter()
+    {
+        return renter;
+    }
+
+    public ArrayList<Notification> getNotifications()
+    {
+        return notifications;
     }
 }

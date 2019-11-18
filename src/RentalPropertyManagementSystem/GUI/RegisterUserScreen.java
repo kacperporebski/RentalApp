@@ -92,4 +92,59 @@ public class RegisterUserScreen extends JFrame
     {
         return cancelButton;
     }
+
+    public void setFirstNameTextField(JTextField firstNameTextField)
+    {
+        this.firstNameTextField = firstNameTextField;
+    }
+
+    public void setLastNameTextField(JTextField lastNameTextField)
+    {
+        this.lastNameTextField = lastNameTextField;
+    }
+
+    public void setLastNameLabel(JLabel lastNameLabel)
+    {
+        this.lastNameLabel = lastNameLabel;
+    }
+
+    public void setFirstNameLabel(JLabel firstNameLabel)
+    {
+        this.firstNameLabel = firstNameLabel;
+    }
+
+    public void setEmailTextField(JTextField emailTextField)
+    {
+        this.emailTextField = emailTextField;
+    }
+
+    public void setAccountTypeBox(JComboBox accountTypeBox)
+    {
+        this.accountTypeBox = accountTypeBox;
+    }
+
+    public void setUsernameTextField(JTextField usernameTextField)
+    {
+        this.usernameTextField = usernameTextField;
+    }
+
+    public void setPasswordTextField(JTextField passwordTextField)
+    {
+        this.passwordTextField = passwordTextField;
+    }
+
+    public void setRegisterButton(JButton registerButton)
+    {
+        this.registerButton = registerButton;
+    }
+
+    public void setCancelButton(JButton cancelButton)
+    {
+        this.cancelButton = cancelButton;
+    }
+
+    public void setPanel(JPanel panel)
+    {
+        this.panel = panel;
+    }
 }

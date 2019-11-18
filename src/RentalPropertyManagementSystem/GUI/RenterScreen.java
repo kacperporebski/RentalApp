@@ -45,4 +45,9 @@ public class RenterScreen extends JFrame
     {
         return enterSearchCriteriaButton;
     }
+
+    public SearchCriteriaScreen getSearchCriteriaScreen()
+    {
+        return searchCriteriaScreen;
+    }
 }

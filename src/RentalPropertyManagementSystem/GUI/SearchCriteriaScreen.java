@@ -125,4 +125,10 @@ public class SearchCriteriaScreen extends JFrame
     {
         return cancelButton;
     }
+
+
+    public JButton getSubscribeButton()
+    {
+        return subscribeButton;
+    }
 }

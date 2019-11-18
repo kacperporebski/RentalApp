@@ -4,7 +4,9 @@ import RentalPropertyManagementSystem.Client.Container.Observer;
 import RentalPropertyManagementSystem.Client.Container.Property;
 import RentalPropertyManagementSystem.Client.Container.STATE;
 import RentalPropertyManagementSystem.Client.Container.Subject;
+import RentalPropertyManagementSystem.Users.Landlord;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -63,6 +65,17 @@ public class PropertyRepository implements Subject
         return properties;
     }
 
+    public ArrayList<Property> getLandlordProperties(Landlord landlord)
+    {
+        ArrayList<Property> landlordProperties = new ArrayList<>();
+        for(Property p: properties)
+        {
+            if (landlord == p.getMyLandlord())
+                landlordProperties.add(p);
+        }
+        return landlordProperties;
+    }
+
 
     @Override
     public void registerObserver(Observer obs)
@@ -99,6 +112,15 @@ public class PropertyRepository implements Subject
                     x.getNumberOfBedrooms() + " , " + x.getNumberOfBathrooms() +
                     "\nLandlord info: " + x.getMyLandlord().toString());
         }
+    }
 
+    public DefaultListModel<String> toStringList(ArrayList<Property> pList)
+    {
+        DefaultListModel<String> dlm = new DefaultListModel<String>();
+        for(Property p : pList)
+        {
+            dlm.addElement(p.toString());
+        }
+        return dlm;
     }
 }

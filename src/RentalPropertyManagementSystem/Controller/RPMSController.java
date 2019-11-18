@@ -1,10 +1,9 @@
 package RentalPropertyManagementSystem.Controller;
 
 import Client.RenterWebsite;
-import RentalPropertyManagementSystem.Client.Container.Account;
-import RentalPropertyManagementSystem.Client.Container.Property;
-import RentalPropertyManagementSystem.Client.Container.UserType;
+import RentalPropertyManagementSystem.Client.Container.*;
 import RentalPropertyManagementSystem.GUI.GUI;
+import RentalPropertyManagementSystem.GUI.SearchCriteriaScreen;
 import RentalPropertyManagementSystem.Users.AccountHolder;
 import RentalPropertyManagementSystem.Users.Landlord;
 import RentalPropertyManagementSystem.Users.Manager;
@@ -34,9 +33,10 @@ public class RPMSController
         //TODO add ActionListeners to view...
         view.getLoginScreen().getLoginButton().addActionListener(new LoginActionListener());
         view.getRegUserScreen().getRegisterButton().addActionListener(new RegisterUserActionListener());
-        view.getRegRenterScreen().getLogoutButton().addActionListener(new LoginActionListener());
+        view.getRegRenterScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getRegRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
+        view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
 
     }
 
@@ -128,7 +128,7 @@ public class RPMSController
                 System.out.println("Added user " + user.toString());
             else
                 System.out.println("User already exists " + user.toString());
-
+            view.getLoginScreen().setVisible(true);
         }
     }
 
@@ -148,23 +148,97 @@ public class RPMSController
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            
-            displayProperties(view.getRenterScreen().getPropertyList());
+            if(e.getSource() == view.getRenterScreen().getRefreshButton())
+                 displayProperties(view.getRenterScreen().getPropertyList());
+            else if(e.getSource() == view.getRegRenterScreen().getRefreshButton())
+                displayProperties(view.getRegRenterScreen().getPropertyList());
         }
     }
 
     public void displayProperties(JList list)
     {
         ArrayList<Property> propertyList = renterWebsite.propertyRepo.getAllProperties();
-
-        DefaultListModel<String> dlm = new DefaultListModel<String>();
-        for(Property p : propertyList)
-        {
-            dlm.addElement(p.toString());
-        }
-        list.setModel(dlm);
+        list.setModel(renterWebsite.propertyRepo.toStringList(propertyList));
         System.out.println("Displaying properties");
     }
+
+    public class SubscribeSearchCriteria implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SearchCriteria criteria;
+            if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
+            {
+                criteria = createCriteria(view.getRenterScreen().getSearchCriteriaScreen());
+                ((RegisteredRenter)currentUser.get()).setSearchCriteria(criteria);
+            }
+            else if(e.getSource() == view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
+            {
+                //Todo figure out how to convert renter into a registered renter
+                view.getRegUserScreen().setVisible(true);
+                view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(3);
+            }
+        }
+    }
+
+    public SearchCriteria createCriteria(SearchCriteriaScreen frame)
+    {
+        ArrayList<PropertyType> propertyTypes = new ArrayList<>();
+        ArrayList<Integer> bedrooms = new ArrayList<Integer>();
+        ArrayList<Integer> bathrooms = new ArrayList<Integer>();
+        boolean furnished;
+        ArrayList<CityQuadrants> cityQuadrants = new ArrayList<>();
+
+        if(frame.getApartmentCheckBox().isSelected())
+            propertyTypes.add(PropertyType.Apartment);
+        if(frame.getAttachedHouseCheckBox().isSelected())
+            propertyTypes.add(PropertyType.AttachedHouse);
+        if(frame.getDetachedHouseCheckBox().isSelected())
+            propertyTypes.add(PropertyType.DetachedHouse);
+        if(frame.getTownHouseCheckBox().isSelected())
+            propertyTypes.add(PropertyType.TownHouse);
+        if(frame.getCondoCheckBox().isSelected())
+            propertyTypes.add(PropertyType.Condo);
+        if(frame.getDuplexCheckBox().isSelected())
+            propertyTypes.add(PropertyType.Duplex);
+
+        try
+        {
+            int lowerBedrooms = Integer.parseInt(frame.getBedroomLowerTextField().getText());
+            int upperBedrooms = Integer.parseInt(frame.getBedroomUpperTextField().getText());
+            int lowerBathrooms = Integer.parseInt(frame.getBathroomLowerTextField().getText());
+            int upperBathrooms = Integer.parseInt(frame.getBathroomUpperTextField().getText());
+
+            bedrooms.add(lowerBedrooms);
+            bedrooms.add(upperBedrooms);
+            bathrooms.add(lowerBathrooms);
+            bathrooms.add(upperBathrooms);
+
+        }catch(NumberFormatException e)
+        {
+            e.printStackTrace();
+        }
+
+        if(frame.getFurnishedCheckBox().isSelected())
+            furnished = true;
+        else
+            furnished = false;
+
+        if(frame.getSWCheckBox().isSelected())
+            cityQuadrants.add(CityQuadrants.SW);
+        if(frame.getNWCheckBox().isSelected())
+            cityQuadrants.add(CityQuadrants.NW);
+        if(frame.getSECheckBox().isSelected())
+            cityQuadrants.add(CityQuadrants.SE);
+        if(frame.getNECheckBox().isSelected())
+            cityQuadrants.add(CityQuadrants.NE);
+
+
+        SearchCriteria criteria = new SearchCriteria(propertyTypes, bedrooms, bathrooms, furnished, cityQuadrants);
+        return criteria;
+    }
+
 
 
 

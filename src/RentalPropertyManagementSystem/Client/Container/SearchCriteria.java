@@ -12,11 +12,22 @@ public class SearchCriteria
 
     public SearchCriteria(ArrayList<PropertyType> type, ArrayList<Integer> bedrooms, ArrayList<Integer> bathrooms, boolean furnished, ArrayList<CityQuadrants> cityQuadrants)
     {
+        if(rangeOfBathrooms.get(0) > rangeOfBathrooms.get(1))
+        {
+            System.out.println("Invalid Input");
+            return;
+        }
+        if(rangeOfBedrooms.get(0) > rangeOfBedrooms.get(1))
+        {
+            System.out.println("Invalid Input");
+            return;
+        }
         this.propertyType = type;
         rangeOfBedrooms = bedrooms;
         rangeOfBathrooms = bathrooms;
         this.furnished = furnished;
         this.cityQuadrants = cityQuadrants;
+
     }
 
     public boolean matchingProperty(Property p)
