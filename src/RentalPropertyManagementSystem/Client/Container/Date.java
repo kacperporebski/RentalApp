@@ -36,7 +36,11 @@ public class Date {
     }
 
     void set_day(int d) {day = d;}
-    void set_month(int  m) {month = m;}
+    void set_month(int  m) {
+        if(m > 12)
+            set_year(get_year()+1);
+        month = m % 12;
+    }
     void set_year(int y) {year = y;}
 
     public String toString()
