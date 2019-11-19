@@ -57,7 +57,7 @@ public class RPMSController
             if(user.isPresent())
             {
                 currentUser = user;
-                System.out.println("Logged in");
+                System.out.println("Logged in as " + currentUser.toString());
 
                 switch (user.get().getAccountType())
                 {
