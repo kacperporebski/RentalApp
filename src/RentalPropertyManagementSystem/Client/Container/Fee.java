@@ -1,18 +1,21 @@
 package RentalPropertyManagementSystem.Client.Container;
 
 public class Fee {
-
-    private int ID;
     private Date paymentDate;
     private Period period;
     private double paymentAmount;
+    static private int ID = 0;
 
 
     public Fee(double pay){
+        ID++;
         paymentAmount = pay;
         paymentDate = new Date();
-        //TODO period and ID
-
+        period = new Period();
+        period.setStartDate(paymentDate);
+        Date endDate = getPaymentDate();
+        endDate.set_month(getPaymentDate().get_month() + 2);
+        period.setEndDate(endDate);
     }
 
     public Date getPaymentDate() {
