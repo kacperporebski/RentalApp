@@ -130,8 +130,10 @@ public class RPMSController
                     throw new IllegalStateException("Unexpected value: " + account.getAccountType());
             }
             boolean added = renterWebsite.userRepo.addUser(user);
-            if(added)
+            if(added) {
                 System.out.println("Added user " + user.toString());
+                view.getRegUserScreen().setVisible(false);
+            }
             else
                 System.out.println("User already exists " + user.toString());
             view.getLoginScreen().setVisible(true);
