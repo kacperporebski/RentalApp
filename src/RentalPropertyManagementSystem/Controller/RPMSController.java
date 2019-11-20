@@ -40,6 +40,8 @@ public class RPMSController
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
 
+        view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
+        view.getLandlordScreen().getRegisterNewPropertyButton().addActionListener(new RegisterPropertyActionListener());
     }
 
     /**
@@ -75,6 +77,7 @@ public class RPMSController
                 }
 
                 view.getMenuScreen().setVisible(false);
+                view.getLoginScreen().setVisible(false);
             }
             else
             {
@@ -88,6 +91,9 @@ public class RPMSController
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            view.getLandlordScreen().setVisible(false);
+            view.getRegRenterScreen().setVisible(false);
+
             currentUser.equals(Optional.empty());
             System.out.println("Logged out");
             view.getMenuScreen().setVisible(true);
@@ -136,6 +142,16 @@ public class RPMSController
     }
 
     //Todo implement registration class and call from here
+    public class RegisterPropertyActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+
+        }
+    }
+
+    //Todo implement registration class and call from here
     public class RegisterRenterActionListener implements ActionListener
     {
         @Override
@@ -160,6 +176,7 @@ public class RPMSController
 
     public void displayProperties(JList list, ArrayList<Property> propertyList)
     {
+        ArrayList<Property> propertyList = renterWebsite.propertyRepo.getAllProperties();
         list.setModel(renterWebsite.propertyRepo.toStringList(propertyList));
         System.out.println("Displaying properties");
     }
