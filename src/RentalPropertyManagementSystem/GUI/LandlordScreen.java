@@ -13,11 +13,46 @@ public class LandlordScreen extends JFrame
     private JButton openEmailsButton;
     private JButton logoutButton;
 
+   /* private RegPropertyScreen regPropertyScreen;
+      private EmailScreen emailsScreen;
+      private FeeScreen feeScreen;
+*/
     public LandlordScreen(){
         this.setName("Landlord Screen");
         this.setContentPane(landlordPanel);
         this.pack();
-         }
+
+        registerNewPropertyButton.addActionListener(new RegPropertyActionListener());
+        viewUnpaidFeesButton.addActionListener(new UnpaidFeesActionListener());
+        openEmailsButton.addActionListener(new EmailsActionListener());
+    }
+
+    public class RegPropertyActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+           // regPropertyScreen.setVisible(true);
+        }
+    }
+
+    public class UnpaidFeesActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            // feeScreen.setVisible(true);
+        }
+    }
+
+    public class EmailsActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            // emailsScreen.setVisible(true);
+        }
+    }
 
     public JButton getLogoutButton() {
         return logoutButton;
