@@ -5,9 +5,12 @@ public class Fee {
     private Period period;
     private double paymentAmount;
     static private int ID = 0;
+    private boolean paid;
 
 
-    public Fee(double pay){
+    public Fee(double pay)
+    {
+        paid = false;
         ID++;
         paymentAmount = pay;
         paymentDate = new Date();
@@ -16,6 +19,36 @@ public class Fee {
         Date endDate = getPaymentDate();
         endDate.set_month(getPaymentDate().get_month() + 2);
         period.setEndDate(endDate);
+    }
+
+    public void setPaymentDate(Date paymentDate)
+    {
+        this.paymentDate = paymentDate;
+    }
+
+    public void setPeriod(Period period)
+    {
+        this.period = period;
+    }
+
+    public void setPaymentAmount(double paymentAmount)
+    {
+        this.paymentAmount = paymentAmount;
+    }
+
+    public static void setID(int ID)
+    {
+        Fee.ID = ID;
+    }
+
+    public boolean isPaid()
+    {
+        return paid;
+    }
+
+    public void setPaid(boolean paid)
+    {
+        this.paid = paid;
     }
 
     public Date getPaymentDate() {

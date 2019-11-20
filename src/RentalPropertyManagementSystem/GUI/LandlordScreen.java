@@ -13,6 +13,7 @@ public class LandlordScreen extends JFrame
     private JButton logoutButton;
 
     private RegisterPropertyScreen regPropertyScreen;
+    private UnpaidFeeScreen unpaidFeeScreen;
 
     public LandlordScreen(){
         this.setName("Landlord Screen");
@@ -20,6 +21,7 @@ public class LandlordScreen extends JFrame
         this.pack();
 
         regPropertyScreen = new RegisterPropertyScreen();
+        unpaidFeeScreen = new UnpaidFeeScreen();
 
         registerNewPropertyButton.addActionListener(new RegPropertyActionListener());
         viewUnpaidFeesButton.addActionListener(new UnpaidFeesActionListener());
@@ -39,7 +41,7 @@ public class LandlordScreen extends JFrame
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            // feeScreen.setVisible(true);
+            unpaidFeeScreen.setVisible(true);
         }
     }
 
@@ -72,5 +74,15 @@ public class LandlordScreen extends JFrame
     public RegisterPropertyScreen getRegPropertyScreen()
     {
         return regPropertyScreen;
+    }
+
+    public JPanel getLandlordPanel()
+    {
+        return landlordPanel;
+    }
+
+    public UnpaidFeeScreen getUnpaidFeeScreen()
+    {
+        return unpaidFeeScreen;
     }
 }

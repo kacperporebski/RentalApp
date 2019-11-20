@@ -84,6 +84,18 @@ public class PropertyRepository implements Subject
         return matchingProperties;
     }
 
+    public ArrayList<Property> getLandlordUnpaidProperties(Landlord landlord)
+    {
+        ArrayList<Property> landlordProperties = getLandlordProperties(landlord);
+        ArrayList<Property> unpaidProperties = new ArrayList<>();
+        for(Property p : landlordProperties)
+        {
+            if(p.getRegistrationFee().isPaid() == false)
+                unpaidProperties.add(p);
+        }
+        return unpaidProperties;
+    }
+
 
     @Override
     public void registerObserver(Observer obs)
