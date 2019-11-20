@@ -28,7 +28,7 @@ public class PropertySQL extends MySQL {
                 String sql = "CREATE TABLE property " + "(id INTEGER not NULL, " + "address VARCHAR(255), " +
                         "cityQuadrant VARCHAR(255), " +"state VARCHAR(255), " + "rent_fee DOUBLE, " +
                         "reg_fee DOUBLE, " + "bedrooms INTEGER not NULL, " + "bathrooms INTEGER not NULL," +
-                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," + "landLordUsername VARCHAR(255)," + "PRIMARY KEY (id))";
+                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," +  "cityQuad VARCHAR(255)," + "landLordUsername VARCHAR(255)," + "PRIMARY KEY (id))";
 
                 Statement st = conn.createStatement();
                 st.executeUpdate(sql);
@@ -46,7 +46,7 @@ public class PropertySQL extends MySQL {
     public void addProperty(Property addThisProperty){
         try{
             String query  = "INSERT INTO property (ID, address, cityQuadrant, state, " +
-                    "rent_fee, reg_fee, bedrooms, bathrooms, furnished , type, landLordUsername) values (?,?,?,?,?,?,?,?,?,?,?)";
+                    "rent_fee, reg_fee, bedrooms, bathrooms, furnished , type, cityQuad, landLordUsername) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement pState = conn.prepareStatement(query);
             pState.setInt(1, addThisProperty.getID());
@@ -62,7 +62,8 @@ public class PropertySQL extends MySQL {
             int val = (addThisProperty.furnished()) ? 1 : 0;
             pState.setInt(9,val);
             pState.setString(10,addThisProperty.getPropertyType().toString());
-            pState.setString(11, addThisProperty.getMyLandlord().getUsername());
+            pState.setString(12, addThisProperty.getMyLandlord().getUsername());
+            pState.setString(11, addThisProperty.getCityQuadrant().toString());
             int rowCount = pState.executeUpdate();
             pState.close();
         }catch (SQLException e){
@@ -128,8 +129,9 @@ public class PropertySQL extends MySQL {
               //   type)
                 //public Landlord(String fname, String lname, String mail, Account account)
                 boolean furnished = (rs.getInt(9) == 0) ? true : false;
-                Property temp = new Property(uRepo.findLandlordUsername(rs.getString(11)), rs.getString(2), rs.getInt(7),
-                rs.getInt(8), furnished , new Fee(rs.getDouble(5)), PropertyType.valueOf(rs.getString(10)));
+                Property temp = new Property(uRepo.findLandlordUsername(rs.getString(12)), rs.getString(2), rs.getInt(7),
+                rs.getInt(8), furnished , new Fee(rs.getDouble(5)), PropertyType.valueOf(rs.getString(10)),
+                        CityQuadrants.valueOf(rs.getString(11)));
                 uRepo.findLandlordUsername(rs.getString(11));
 
                // Property temp = new Property();

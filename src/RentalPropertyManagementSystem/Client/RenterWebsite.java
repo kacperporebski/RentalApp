@@ -143,7 +143,7 @@ public class RenterWebsite
                             furnished = true;
                         Fee tempFee = new Fee(Double.parseDouble(temp[7]));
                         Property p = new Property(tempMyL, temp[3],
-                                Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), furnished, tempFee, PropertyType.valueOf(temp[0]));
+                                Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), furnished, tempFee, PropertyType.valueOf(temp[0]), CityQuadrants.valueOf(temp[8]));
                         myDatabase.getPropertyDatabase().addProperty(p);
                     }
                 } catch (Exception e) {
