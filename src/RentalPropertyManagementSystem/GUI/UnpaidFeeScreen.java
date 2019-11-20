@@ -2,8 +2,9 @@ package RentalPropertyManagementSystem.GUI;
 
 import javax.swing.*;
 
-public class UnpaidFeeScreen {
-    private JList list1;
+public class UnpaidFeeScreen extends JFrame
+{
+    private JList unpaidFeesList;
     private JPanel panel1;
     private JScrollBar scrollBar1;
 }
