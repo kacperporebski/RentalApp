@@ -13,6 +13,8 @@ import RentalPropertyManagementSystem.Users.RegisteredRenter;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -368,9 +370,24 @@ public class RPMSController
                 furnished = false;
 
             renterWebsite.propertyRepo.addProperty(new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType, quadrant));
-
         }
     }
+
+    public class DisplayUnpaidFees implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            ArrayList<Property> unpaidProperties = renterWebsite.propertyRepo.getLandlordUnpaidProperties((Landlord)currentUser.get());
+            displayProperties(view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList(), unpaidProperties);
+        }
+    }
+
+    public class PayUnpaidFees extends MouseAdapter
+    {
+
+    }
+
 
 
 
