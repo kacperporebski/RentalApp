@@ -9,6 +9,8 @@ public class Property
     private Fee rent;
     private Fee registrationFee;
     private STATE state;
+    private Date dateRegistered;
+    private Date dateRented;
     private int numberOfBedrooms;
     private int numberOfBathrooms;
     private boolean furnished;
@@ -31,7 +33,24 @@ public class Property
         propertyType = type;
         state = STATE.ACTIVE;
         cityQuadrant = cq;
+        dateRegistered = new Date();
 
+    }
+
+    public Date getDateRegistered() {
+        return dateRegistered;
+    }
+
+    public void setDateRegistered(Date dateRegistered) {
+        this.dateRegistered = dateRegistered;
+    }
+
+    public Date getDateRented() {
+        return dateRented;
+    }
+
+    public void setDateRented(Date dateRented) {
+        this.dateRented = dateRented;
     }
 
     public String toString()

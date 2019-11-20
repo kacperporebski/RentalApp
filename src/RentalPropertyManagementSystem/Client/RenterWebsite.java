@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class RenterWebsite
 {
@@ -144,6 +145,8 @@ public class RenterWebsite
                         Fee tempFee = new Fee(Double.parseDouble(temp[7]));
                         Property p = new Property(tempMyL, temp[3],
                                 Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), furnished, tempFee, PropertyType.valueOf(temp[0]), CityQuadrants.valueOf(temp[8]));
+                        Random r = new Random();
+                        p.setDateRegistered(new Date(r.nextInt(30), r.nextInt(12), r.nextInt(19)+2000));
                         myDatabase.getPropertyDatabase().addProperty(p);
                     }
                 } catch (Exception e) {

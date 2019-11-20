@@ -2,6 +2,7 @@ package Database;
 
 
 import RentalPropertyManagementSystem.Client.Container.*;
+import RentalPropertyManagementSystem.Client.Container.Date;
 import RentalPropertyManagementSystem.Repositories.PropertyRepository;
 import RentalPropertyManagementSystem.Repositories.UserRepository;
 import RentalPropertyManagementSystem.Users.Landlord;
@@ -28,7 +29,8 @@ public class PropertySQL extends MySQL {
                 String sql = "CREATE TABLE property " + "(id INTEGER not NULL, " + "address VARCHAR(255), " +
                         "cityQuadrant VARCHAR(255), " +"state VARCHAR(255), " + "rent_fee DOUBLE, " +
                         "reg_fee DOUBLE, " + "bedrooms INTEGER not NULL, " + "bathrooms INTEGER not NULL," +
-                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," +  "cityQuad VARCHAR(255)," + "landLordUsername VARCHAR(255)," + "PRIMARY KEY (id))";
+                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," +  "cityQuad VARCHAR(255)," + "landLordUsername VARCHAR(255),"
+                        + "day INTEGER not NULL," + "month INTEGER not NULL," + "year INTEGER not NULL," + "PRIMARY KEY (id))";
 
                 Statement st = conn.createStatement();
                 st.executeUpdate(sql);
@@ -46,7 +48,7 @@ public class PropertySQL extends MySQL {
     public void addProperty(Property addThisProperty){
         try{
             String query  = "INSERT INTO property (ID, address, cityQuadrant, state, " +
-                    "rent_fee, reg_fee, bedrooms, bathrooms, furnished , type, cityQuad, landLordUsername) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "rent_fee, reg_fee, bedrooms, bathrooms, furnished , type, cityQuad, landLordUsername, day, month, year) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement pState = conn.prepareStatement(query);
             pState.setInt(1, addThisProperty.getID());
@@ -64,6 +66,9 @@ public class PropertySQL extends MySQL {
             pState.setString(10,addThisProperty.getPropertyType().toString());
             pState.setString(12, addThisProperty.getMyLandlord().getUsername());
             pState.setString(11, addThisProperty.getCityQuadrant().toString());
+            pState.setInt(13, addThisProperty.getDateRegistered().getDay());
+            pState.setInt(14, addThisProperty.getDateRegistered().getMonth());
+            pState.setInt(15,addThisProperty.getDateRegistered().getYear());
             int rowCount = pState.executeUpdate();
             pState.close();
         }catch (SQLException e){
@@ -133,7 +138,8 @@ public class PropertySQL extends MySQL {
                 rs.getInt(8), furnished , new Fee(rs.getDouble(5)), PropertyType.valueOf(rs.getString(10)),
                         CityQuadrants.valueOf(rs.getString(11)));
                 uRepo.findLandlordUsername(rs.getString(11));
-
+                temp.getRegistrationFee().setPaid(true);
+                temp.setDateRegistered(new Date(rs.getInt(13), rs.getInt(14), rs.getInt(15)));
                // Property temp = new Property();
                 pRepo.addProperty(temp);
 
