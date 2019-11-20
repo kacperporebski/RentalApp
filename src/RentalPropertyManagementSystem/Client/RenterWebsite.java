@@ -1,10 +1,7 @@
 package Client;
 
 
-import RentalPropertyManagementSystem.Client.Container.Account;
-import RentalPropertyManagementSystem.Client.Container.Fee;
-import RentalPropertyManagementSystem.Client.Container.Property;
-import RentalPropertyManagementSystem.Client.Container.UserType;
+import RentalPropertyManagementSystem.Client.Container.*;
 import RentalPropertyManagementSystem.Repositories.PropertyRepository;
 import RentalPropertyManagementSystem.Repositories.UserRepository;
 import RentalPropertyManagementSystem.Users.Landlord;
@@ -75,9 +72,8 @@ public class RenterWebsite
                 if (temp[6] == "furnished")
                     furnished = true;
                 Fee tempFee = new Fee(Double.parseDouble(temp[7]));
-
-                propertyRepo.getInstance().addProperty(new Property(Integer.parseInt(temp[0]), tempMyL, temp[3],
-                        Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), furnished, tempFee));
+                propertyRepo.getInstance().addProperty(new Property(tempMyL, temp[3],
+                        Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), furnished, tempFee, PropertyType.valueOf(temp[0]));
             }
         } catch (Exception e)
         {
