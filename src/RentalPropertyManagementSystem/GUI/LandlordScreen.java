@@ -17,46 +17,21 @@ public class LandlordScreen extends JFrame
         this.setName("Landlord Screen");
         this.setContentPane(landlordPanel);
         this.pack();
-        this.setVisible(true);
+         }
 
-        registerNewPropertyButton.addActionListener(new registerNewPropertyActionListener());
-        viewUnpaidFeesButton.addActionListener(new viewUnpaidFeesActionListener());
-        openEmailsButton.addActionListener(new openEmailsActionListener());
-        logoutButton.addActionListener(new logoutActionListener());
+    public JButton getLogoutButton() {
+        return logoutButton;
     }
 
-    public class registerNewPropertyActionListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-
-        }
+    public JButton getOpenEmailsButton() {
+        return openEmailsButton;
     }
 
-    public class viewUnpaidFeesActionListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-        }
+    public JButton getRegisterNewPropertyButton() {
+        return registerNewPropertyButton;
     }
 
-    public class openEmailsActionListener implements ActionListener
-{
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-
+    public JButton getViewUnpaidFeesButton() {
+        return viewUnpaidFeesButton;
     }
-}
-
-public class  logoutActionListener implements ActionListener
-{
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-
-    }
-}
 }

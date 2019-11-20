@@ -37,7 +37,8 @@ public class RPMSController
         view.getRegRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
-
+        view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
+        view.getLandlordScreen().getRegisterNewPropertyButton().addActionListener(new RegisterPropertyActionListener());
     }
 
     /**
@@ -73,6 +74,7 @@ public class RPMSController
                 }
 
                 view.getMenuScreen().setVisible(false);
+                view.getLoginScreen().setVisible(false);
             }
             else
             {
@@ -86,6 +88,9 @@ public class RPMSController
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            view.getLandlordScreen().setVisible(false);
+            view.getRegRenterScreen().setVisible(false);
+
             currentUser.equals(Optional.empty());
             System.out.println("Logged out");
             view.getMenuScreen().setVisible(true);
@@ -130,6 +135,16 @@ public class RPMSController
             else
                 System.out.println("User already exists " + user.toString());
             view.getLoginScreen().setVisible(true);
+        }
+    }
+
+    //Todo implement registration class and call from here
+    public class RegisterPropertyActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+
         }
     }
 
