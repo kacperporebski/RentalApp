@@ -131,4 +131,14 @@ public class PropertyRepository implements Subject
         }
         return dlm;
     }
+
+    public DefaultListModel<String> toStringSummaryList(ArrayList<Property> pList)
+    {
+        DefaultListModel<String> dlm = new DefaultListModel<String>();
+        for(Property p : pList)
+        {
+            dlm.addElement(p.toStringSummary());
+        }
+        return dlm;
+    }
 }

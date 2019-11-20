@@ -25,15 +25,6 @@ public class ManagerScreen extends JFrame
 
         changeFeeScreen = new ChangeFeeScreen();
         summaryScreen = new SummaryReportScreen();
-
-        requestSummaryReportButton.addActionListener(new SummaryReportActionListener());
-    }
-
-    public class SummaryReportActionListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            summaryScreen.setVisible(true);
-        }
     }
 
     public JButton getLogoutButton() {
@@ -62,5 +53,9 @@ public class ManagerScreen extends JFrame
 
     public ChangeFeeScreen getChangeFeeScreen() {
         return changeFeeScreen;
+    }
+
+    public SummaryReportScreen getSummaryScreen() {
+        return summaryScreen;
     }
 }

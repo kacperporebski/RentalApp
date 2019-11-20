@@ -49,6 +49,8 @@ public class RPMSController
 
         view.getManagerScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
+        view.getManagerScreen().getChangeRegistrationFeeButton().addActionListener(new ChangeRegFeeActionListener());
+        view.getManagerScreen().getRequestSummaryReportButton().addActionListener(new RequestSummaryReportActionListener());
     }
 
     /**
@@ -162,7 +164,16 @@ public class RPMSController
         }
     }
 
-    //Todo
+    public class ChangeRegFeeActionListener implements  ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            view.getManagerScreen().getChangeFeeScreen().getOldFee().setText(renterWebsite.propertyRepo.getAllProperties().get(0).getRegistrationFee().toString());
+            view.getManagerScreen().getChangeFeeScreen().setVisible(true);
+        }
+    }
+
+
+
     public class ChangeFeeActionListener implements ActionListener
     {
         @Override
@@ -193,6 +204,24 @@ public class RPMSController
     {
         list.setModel(renterWebsite.propertyRepo.toStringList(propertyList));
         System.out.println("Displaying properties");
+    }
+
+    public void displaySummaryProperties(JList list, ArrayList<Property> propertyList)
+    {
+        list.setModel(renterWebsite.propertyRepo.toStringSummaryList(propertyList));
+        System.out.println("Displaying properties");
+    }
+
+    public class RequestSummaryReportActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            SummaryReport sum = new SummaryReport();
+            view.getManagerScreen().getSummaryScreen().getSummaryInfo().setText(sum.numbersToString());
+            displaySummaryProperties(view.getManagerScreen().getSummaryScreen().getPropertyList(), sum.getListedHouses());
+            System.out.println("Displaying summary report");
+
+            view.getManagerScreen().getSummaryScreen().setVisible(true);
+        }
     }
 
     public class SubscribeSearchCriteria implements ActionListener

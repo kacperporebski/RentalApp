@@ -38,6 +38,10 @@ public class Property
                 " \tFurnished: " + furnished + " \tProperty Type:" + propertyType.toString() + " \tLandlord info: " + myLandlord.getName().toString();
     }
 
+    public String toStringSummary(){
+        return "";
+    }
+
     public Landlord getMyLandlord()
     {
         return myLandlord;

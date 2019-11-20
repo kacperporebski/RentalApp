@@ -38,4 +38,12 @@ public class ChangeFeeScreen extends JFrame{
     public JTextField getNewFee() {
         return newFee;
     }
+
+    public void setOldFee(JTextPane oldFee) {
+        this.oldFee = oldFee;
+    }
+
+    public JTextPane getOldFee() {
+        return oldFee;
+    }
 }

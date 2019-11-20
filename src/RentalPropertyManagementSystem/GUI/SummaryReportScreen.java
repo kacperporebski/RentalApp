@@ -8,6 +8,8 @@ public class SummaryReportScreen extends JFrame {
     private JPanel panel;
     private JTextArea summaryInfo;
     private JButton cancelButton;
+    private JList propertyList;
+    private JScrollBar scrollBar1;
 
     public SummaryReportScreen(){
         this.setContentPane(panel);
@@ -27,6 +29,18 @@ public class SummaryReportScreen extends JFrame {
         public void actionPerformed(ActionEvent e){
             screen.setVisible(false);
         }
+    }
+
+    public JTextArea getSummaryInfo() {
+        return summaryInfo;
+    }
+
+    public void setSummaryInfo(JTextArea summaryInfo) {
+        this.summaryInfo = summaryInfo;
+    }
+
+    public JList getPropertyList() {
+        return propertyList;
     }
 }
 

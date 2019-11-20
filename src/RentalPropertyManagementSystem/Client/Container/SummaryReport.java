@@ -27,5 +27,13 @@ public class SummaryReport {
         return periodOfTime;
     }
 
+    public String numbersToString() {
+        return "Total number of houses listed in period: " + numOfListed + "\nTotal number of houses rented in the period: "
+                + numOfRented + "\nTotal number of active listings: " + numOfActive;
+    }
 
+    public String listToString(){
+       // \nList of houses rented in the period"; //landlord, house id, address
+        return "";
+    }
 }
