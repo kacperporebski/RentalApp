@@ -40,6 +40,7 @@ public class RPMSController
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
+        view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getLandlordScreen().getRegPropertyScreen().getRegisterPropertyButton().addActionListener(new RegisterProperty());
     }
@@ -184,6 +185,7 @@ public class RPMSController
             {
                 criteria = createCriteria(view.getRenterScreen().getSearchCriteriaScreen());
                 ((RegisteredRenter)currentUser.get()).setSearchCriteria(criteria);
+                view.getRegRenterScreen().getSearchCriteriaScreen().setVisible(false);
             }
             //If Regular Renter:
             else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
@@ -192,6 +194,7 @@ public class RPMSController
                 System.out.println("Must first register\n");
                 view.getRegUserScreen().setVisible(true);
                 view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(3);
+                view.getRenterScreen().getSearchCriteriaScreen().setVisible(false);
             }
         }
     }
@@ -206,6 +209,7 @@ public class RPMSController
             {
                 criteria = createCriteria(view.getRegRenterScreen().getSearchCriteriaScreen());
                 displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getMatchingProperties(criteria));
+                view.getRegRenterScreen().getSearchCriteriaScreen().setVisible(false);
             }
             //If Regular Renter:
             else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getEnterButton())
@@ -213,7 +217,9 @@ public class RPMSController
                 //Todo figure out how to convert renter into a registered renter
                 criteria = createCriteria(view.getRenterScreen().getSearchCriteriaScreen());
                 displayProperties(view.getRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getMatchingProperties(criteria));
+                view.getRenterScreen().getSearchCriteriaScreen().setVisible(false);
             }
+
         }
     }
 
@@ -223,6 +229,7 @@ public class RPMSController
         ArrayList<Integer> bedrooms = new ArrayList<>();
         ArrayList<Integer> bathrooms = new ArrayList<>();
         boolean furnished;
+        boolean unfurnished;
         ArrayList<CityQuadrants> cityQuadrants = new ArrayList<>();
 
         if(frame.getApartmentCheckBox().isSelected())
@@ -264,6 +271,11 @@ public class RPMSController
         else
             furnished = false;
 
+        if(frame.getUnfurnishedCheckBox().isSelected())
+            unfurnished = true;
+        else
+            unfurnished = false;
+
         if(frame.getSWCheckBox().isSelected())
             cityQuadrants.add(CityQuadrants.SW);
         if(frame.getNWCheckBox().isSelected())
@@ -274,7 +286,7 @@ public class RPMSController
             cityQuadrants.add(CityQuadrants.NE);
 
 
-        SearchCriteria criteria = new SearchCriteria(propertyTypes, bedrooms, bathrooms, furnished, cityQuadrants);
+        SearchCriteria criteria = new SearchCriteria(propertyTypes, bedrooms, bathrooms, furnished, unfurnished, cityQuadrants);
         return criteria;
     }
 
@@ -305,7 +317,7 @@ public class RPMSController
             else
                 furnished = false;
 
-            renterWebsite.propertyRepo.addProperty(new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType));
+            renterWebsite.propertyRepo.addProperty(new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType, quadrant));
 
         }
     }
