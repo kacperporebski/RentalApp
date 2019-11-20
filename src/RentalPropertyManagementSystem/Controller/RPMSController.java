@@ -186,6 +186,7 @@ public class RPMSController
             else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
             {
                 //Todo figure out how to convert renter into a registered renter
+                System.out.println("Must first register\n");
                 view.getRegUserScreen().setVisible(true);
                 view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(3);
             }

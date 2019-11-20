@@ -13,6 +13,7 @@ public class RegRenterScreen extends JFrame
     private JList propertyList;
     private JButton logoutButton;
     private JButton displayNotificationsButton;
+    private JButton emailButton;
     private SearchCriteriaScreen searchCriteriaScreen;
 
 
