@@ -3,6 +3,7 @@ package RentalPropertyManagementSystem.Controller;
 import Client.RenterWebsite;
 import RentalPropertyManagementSystem.Client.Container.*;
 import RentalPropertyManagementSystem.GUI.GUI;
+import RentalPropertyManagementSystem.GUI.RegisterPropertyScreen;
 import RentalPropertyManagementSystem.GUI.SearchCriteriaScreen;
 import RentalPropertyManagementSystem.Users.AccountHolder;
 import RentalPropertyManagementSystem.Users.Landlord;
@@ -40,6 +41,7 @@ public class RPMSController
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
+        view.getLandlordScreen().getRegPropertyScreen().getRegisterPropertyButton().addActionListener(new RegisterProperty());
     }
 
     /**
@@ -274,6 +276,37 @@ public class RPMSController
         return criteria;
     }
 
+    public class RegisterProperty implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent)
+        {
+            RegisterPropertyScreen currentScreen = view.getLandlordScreen().getRegPropertyScreen();
+            PropertyType propertyType = PropertyType.valueOf(currentScreen.getPropertyTypeComboBox().getSelectedItem().toString());
+            int bedrooms = 0;
+            int bathrooms = 0;
+            double rentalFee = Double.parseDouble(currentScreen.getCostTextField().getText());
+            boolean furnished;
+            String address = currentScreen.getAddressTextField().getText();
+            CityQuadrants quadrant = CityQuadrants.valueOf(currentScreen.getCityQuadrantComboBox().getSelectedItem().toString());
+
+            try{
+                bedrooms = Integer.parseInt(currentScreen.getBedroomTextField().getText());
+                bathrooms = Integer.parseInt(currentScreen.getBathroomTextField().getText());
+            }catch(NumberFormatException e)
+            {
+                e.printStackTrace();
+            }
+
+            if(currentScreen.getFurnishedComboBox().getSelectedItem().toString().compareTo("Furnished") == 0)
+                furnished = true;
+            else
+                furnished = false;
+
+            renterWebsite.propertyRepo.addProperty(new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType));
+
+        }
+    }
 
 
 
