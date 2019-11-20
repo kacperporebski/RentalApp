@@ -217,7 +217,18 @@ public class RPMSController
     public class RequestSummaryReportActionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            SummaryReport sum = new SummaryReport();
+            int active = 0;
+            int listed = 0;
+            int rented = 0;
+            for(Property p : renterWebsite.propertyRepo.getAllProperties()){
+                if(p.getState() == STATE.ACTIVE)
+                    active++;
+                //if(p.getState() == STATE.)
+            }
+
+            ArrayList<Property> housesRented = new ArrayList<>();
+            Period period = new Period();
+            SummaryReport sum = new SummaryReport(listed,rented,active,housesRented, period);
             view.getManagerScreen().getSummaryScreen().getSummaryInfo().setText(sum.numbersToString());
             displaySummaryProperties(view.getManagerScreen().getSummaryScreen().getPropertyList(), sum.getListedHouses());
             System.out.println("Displaying summary report");

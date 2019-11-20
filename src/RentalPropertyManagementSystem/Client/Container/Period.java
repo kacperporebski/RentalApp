@@ -6,6 +6,7 @@ public class Period
     private Date endDate;
 
 
+
     public Date getEndDate() {
         return endDate;
     }

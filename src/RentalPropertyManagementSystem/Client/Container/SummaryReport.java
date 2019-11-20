@@ -10,6 +10,14 @@ public class SummaryReport {
     private ArrayList<Property> listedHouses;
     private Period periodOfTime;
 
+    public SummaryReport(int numL, int numR, int numA, ArrayList<Property> listedH, Period p){
+        numOfListed = numL;
+        numOfRented = numR;
+        numOfActive = numA;
+        listedHouses = listedH;
+        periodOfTime = p;
+    }
+
     //Getters
     public ArrayList<Property> getListedHouses() {
         return listedHouses;
@@ -28,12 +36,7 @@ public class SummaryReport {
     }
 
     public String numbersToString() {
-        return "Total number of houses listed in period: " + numOfListed + "\nTotal number of houses rented in the period: "
+        return "For Period: " + periodOfTime.toString() + "\n\nTotal number of houses listed in period: " + numOfListed + "\nTotal number of houses rented in the period: "
                 + numOfRented + "\nTotal number of active listings: " + numOfActive;
-    }
-
-    public String listToString(){
-       // \nList of houses rented in the period"; //landlord, house id, address
-        return "";
     }
 }
