@@ -17,7 +17,7 @@ public class Fee {
         period = new Period();
         period.setStartDate(paymentDate);
         Date endDate = getPaymentDate();
-        endDate.set_month(getPaymentDate().get_month() + 2);
+        endDate.setMonth(getPaymentDate().getMonth() + 2);
         period.setEndDate(endDate);
     }
 
