@@ -53,6 +53,7 @@ public class RPMSController
         view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
         view.getManagerScreen().getChangeRegistrationFeeButton().addActionListener(new ChangeRegFeeActionListener());
         view.getManagerScreen().getRequestSummaryReportButton().addActionListener(new RequestSummaryReportActionListener());
+        view.getManagerScreen().getChangePropertyListingButton().addActionListener(new ManagePropertiesActionListener());
     }
 
     /**
@@ -104,6 +105,7 @@ public class RPMSController
         {
             view.getLandlordScreen().setVisible(false);
             view.getRegRenterScreen().setVisible(false);
+            view.getManagerScreen().setVisible(false);
 
             currentUser.equals(Optional.empty());
             System.out.println("Logged out");
@@ -185,6 +187,7 @@ public class RPMSController
                 fee.setPeriod(p.getRegistrationFee().getPeriod());
                 p.setRegistrationFee(fee);
             }
+            view.getManagerScreen().getChangeFeeScreen().setVisible(false);
         }
     }
 
@@ -194,9 +197,17 @@ public class RPMSController
         public void actionPerformed(ActionEvent e)
         {
             if(e.getSource() == view.getRenterScreen().getRefreshButton())
-                 displayProperties(view.getRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllProperties());
+                 displayProperties(view.getRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
             else if(e.getSource() == view.getRegRenterScreen().getRefreshButton())
-                displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllProperties());
+                displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
+        }
+    }
+
+    public class ManagePropertiesActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            displayProperties(view.getManagerScreen().getPropertiesScreen().getProperties(),renterWebsite.propertyRepo.getAllProperties());
+            view.getManagerScreen().getPropertiesScreen().setVisible(true);
         }
     }
 
