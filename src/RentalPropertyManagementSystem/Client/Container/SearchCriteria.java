@@ -8,9 +8,10 @@ public class SearchCriteria
     private ArrayList<Integer> rangeOfBedrooms;
     private ArrayList<Integer> rangeOfBathrooms;
     private boolean furnished;
+    private boolean unfurnished;
     private ArrayList<CityQuadrants> cityQuadrants;
 
-    public SearchCriteria(ArrayList<PropertyType> type, ArrayList<Integer> bedrooms, ArrayList<Integer> bathrooms, boolean furnished, ArrayList<CityQuadrants> cityQuadrants)
+    public SearchCriteria(ArrayList<PropertyType> type, ArrayList<Integer> bedrooms, ArrayList<Integer> bathrooms, boolean furnished, boolean unfurnished, ArrayList<CityQuadrants> cityQuadrants)
     {
         if(bedrooms.get(0) > bedrooms.get(1))
         {
@@ -26,13 +27,19 @@ public class SearchCriteria
         rangeOfBedrooms = bedrooms;
         rangeOfBathrooms = bathrooms;
         this.furnished = furnished;
+        this.unfurnished = unfurnished;
         this.cityQuadrants = cityQuadrants;
 
     }
 
     public boolean matchingProperty(Property p)
     {
-        boolean returnValue = (matchingPropertyType(p) && matchingBedroomRange(p) && matchingBathroomRange(p) && matchingFurnish(p)&& matchingCityQuadrant(p) );
+        System.out.println(p.toString());
+
+        boolean returnValue = (matchingPropertyType(p) && matchingBedroomRange(p) && matchingBathroomRange(p) && matchingFurnish(p) && matchingCityQuadrant(p) );
+
+        System.out.println(" type: " + matchingPropertyType(p) + " bed: " + matchingBedroomRange(p) + " bath: " + matchingBathroomRange(p) + " f: " + matchingFurnish(p)
+                + " cq: " + matchingCityQuadrant(p) + " value: " + returnValue);
         return returnValue;
     }
 
@@ -70,8 +77,12 @@ public class SearchCriteria
 
     boolean matchingFurnish(Property p)
     {
-        return p.isFurnished() == furnished;
+        boolean returnValue = false;
+        if(((p.isFurnished()) && furnished) || ((!p.isFurnished()) && unfurnished))
+            returnValue = true;
+        return returnValue;
     }
+
 
     boolean matchingCityQuadrant(Property p)
     {

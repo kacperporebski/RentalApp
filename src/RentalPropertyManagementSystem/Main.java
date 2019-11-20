@@ -16,8 +16,8 @@ public class Main
         RPMSController controller = new RPMSController(gui, model);
         model.printAllData();
         Database d = new Database();
-        d.getPropertyDatabase().createPropertyTable();
-        d.getUserDatabase().createUserTable();
+        //d.getPropertyDatabase().createPropertyTable();
+        //d.getUserDatabase().createUserTable();
     }
 
 }

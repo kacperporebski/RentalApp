@@ -18,7 +18,7 @@ public class Property
     private static int ID = 0;
 
 
-    public Property(Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType type)
+    public Property(Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType type, CityQuadrants cq)
     {
         ID ++;
         myLandlord = l;
@@ -28,14 +28,14 @@ public class Property
         this.furnished = furnished;
         rent = rentfee;
         propertyType = type;
-
+        cityQuadrant = cq;
     }
 
     public String toString()
     {
         return address + "\t Num of bedrooms and bathrooms : " +
-                numberOfBedrooms + " ,\t " + numberOfBathrooms +
-                "\tLandlord info: " + myLandlord.getName().toString();
+                numberOfBedrooms + " , " + numberOfBathrooms +
+                " \tFurnished: " + furnished + " \tProperty Type:" + propertyType.toString() + " \tLandlord info: " + myLandlord.getName().toString();
     }
 
     public Landlord getMyLandlord()

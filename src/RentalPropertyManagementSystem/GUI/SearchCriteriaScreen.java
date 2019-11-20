@@ -1,6 +1,8 @@
 package RentalPropertyManagementSystem.GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SearchCriteriaScreen extends JFrame
 {
@@ -29,6 +31,21 @@ public class SearchCriteriaScreen extends JFrame
     {
         this.setContentPane(panel);
         this.pack();
+
+        cancelButton.addActionListener(new CancelActionListener(this));
+    }
+
+
+    public class CancelActionListener implements ActionListener{
+        SearchCriteriaScreen search;
+        public CancelActionListener(SearchCriteriaScreen s){
+            search = s;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e){
+            search.setVisible(false);
+        }
     }
 
     public JCheckBox getApartmentCheckBox()
