@@ -30,4 +30,12 @@ public class Fee {
     public Period getPeriod() {
         return period;
     }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
 }
