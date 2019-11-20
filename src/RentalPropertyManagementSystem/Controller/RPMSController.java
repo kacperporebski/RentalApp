@@ -218,11 +218,6 @@ public class RPMSController
             int active = 0;
             int listed = 0;
             int rented = 0;
-            for(Property p : renterWebsite.propertyRepo.getAllProperties()){
-                if(p.getState() == STATE.ACTIVE)
-                    active++;
-                //if(p.getState() == STATE.)
-            }
 
             ArrayList<Property> housesRented = new ArrayList<>();
 
@@ -230,6 +225,17 @@ public class RPMSController
             int currentMonth = currentDate.getMonthValue();
             int currentYear = currentDate.getYear();
             Period period = new Period(currentMonth, currentYear);
+
+            for(Property p : renterWebsite.propertyRepo.getAllProperties()){
+                if(p.getState() == STATE.ACTIVE)
+                    active++;
+                if(p.getDateRegistered().getMonth() == currentMonth && p.getDateRegistered().getYear() == currentYear)
+                    listed++;
+                if(p.getDateRented() != null && p.getDateRented().getMonth() == currentMonth && p.getDateRented().getYear() == currentYear) {
+                    rented++;
+                    housesRented.add(p);
+                }
+            }
 
             SummaryReport sum = new SummaryReport(listed,rented,active,housesRented, period);
             view.getManagerScreen().getSummaryScreen().getSummaryInfo().setText(sum.numbersToString());

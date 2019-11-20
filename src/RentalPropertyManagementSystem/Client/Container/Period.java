@@ -11,6 +11,9 @@ public class Period
     }
 
     public Period(int m, int y){
+        startDate = new Date();
+        endDate = new Date();
+
         startDate.setDay(1);
         startDate.setMonth(m);
         startDate.setYear(y);

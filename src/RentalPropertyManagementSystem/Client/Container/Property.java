@@ -34,7 +34,7 @@ public class Property
         state = STATE.ACTIVE;
         cityQuadrant = cq;
         dateRegistered = new Date();
-
+        dateRented = null;
     }
 
     public Date getDateRegistered() {
