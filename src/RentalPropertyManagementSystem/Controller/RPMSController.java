@@ -28,24 +28,33 @@ public class RPMSController
     Optional<AccountHolder> currentUser;
 
 
-    public RPMSController(GUI view, RenterWebsite website)
-    {
+    public RPMSController(GUI view, RenterWebsite website) {
         this.view = view;
         renterWebsite = website;
 
         //TODO add ActionListeners to view...
         view.getLoginScreen().getLoginButton().addActionListener(new LoginActionListener());
+
         view.getRegUserScreen().getRegisterButton().addActionListener(new RegisterUserActionListener());
+
         view.getRegRenterScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getRegRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
-        view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
+
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
+        view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
+
         view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getLandlordScreen().getRegPropertyScreen().getRegisterPropertyButton().addActionListener(new RegisterProperty());
+<<<<<<< HEAD
         view.getLandlordScreen().getUnpaidFeeScreen().getRefreshButton().addActionListener(new DisplayUnpaidFees());
+=======
+
+        view.getManagerScreen().getLogoutButton().addActionListener(new LogoutActionListener());
+        view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
+>>>>>>> origin/master
     }
 
     /**
@@ -73,6 +82,7 @@ public class RPMSController
                         view.getLandlordScreen().setVisible(true);
                         break;
                     case MANAGER:
+                        view.getManagerScreen().setVisible(true);
                         break;
                     case REGRENTER:
                         view.getRegRenterScreen().setVisible(true);
@@ -158,6 +168,20 @@ public class RPMSController
         }
     }
 
+    //Todo
+    public class ChangeFeeActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            for(Property p : renterWebsite.propertyRepo.getAllProperties()) {
+                Fee fee = new Fee(Double.parseDouble(view.getManagerScreen().getChangeFeeScreen().getNewFee().getText()));
+                fee.setPaymentDate(p.getRegistrationFee().getPaymentDate());
+                fee.setPeriod(p.getRegistrationFee().getPeriod());
+                p.setRegistrationFee(fee);
+            }
+        }
+    }
 
     public class ListPropertiesActionListener implements ActionListener
     {
