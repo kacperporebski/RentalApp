@@ -11,9 +11,9 @@ public class Period
     }
 
     public Period(int m, int y){
-        startDate.set_day(1);
-        startDate.set_month(m);
-        startDate.set_year(y);
+        startDate.setDay(1);
+        startDate.setMonth(m);
+        startDate.setYear(y);
 
         int d = 30;
         if(m == 2) {
@@ -22,14 +22,14 @@ public class Period
             d = 31;
         }
 
-        endDate.set_day(d);
-        endDate.set_month(m);
-        endDate.set_month(y);
+        endDate.setDay(d);
+        endDate.setMonth(m);
+        endDate.setYear(y);
     }
 
     public String toString() {
         String month = "";
-        switch(startDate.get_month()) {
+        switch(startDate.getMonth()) {
             case 1:
                 month = "January";
                 break;
@@ -67,7 +67,7 @@ public class Period
                 month = "December";
                 break;
         }
-       return month + ", " + startDate.get_year();
+       return month + ", " + startDate.getYear();
     }
 
     public Date getEndDate() {
