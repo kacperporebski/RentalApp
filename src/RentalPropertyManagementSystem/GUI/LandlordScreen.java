@@ -14,10 +14,10 @@ public class LandlordScreen extends JFrame
     private JButton logoutButton;
 
     public LandlordScreen(){
-        landlordPanel = new JPanel();
         this.setName("Landlord Screen");
         this.setContentPane(landlordPanel);
         this.pack();
+        this.setVisible(true);
 
         registerNewPropertyButton.addActionListener(new registerNewPropertyActionListener());
         viewUnpaidFeesButton.addActionListener(new viewUnpaidFeesActionListener());
