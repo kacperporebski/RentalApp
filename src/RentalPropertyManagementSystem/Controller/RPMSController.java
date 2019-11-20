@@ -39,7 +39,6 @@ public class RPMSController
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
-
         view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
     }
 
