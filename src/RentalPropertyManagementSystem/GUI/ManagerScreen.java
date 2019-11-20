@@ -23,6 +23,7 @@ public class ManagerScreen extends JFrame
         this.setContentPane(panel);
         this.pack();
 
+        changeFeeScreen = new ChangeFeeScreen();
         summaryScreen = new SummaryReportScreen();
 
         requestSummaryReportButton.addActionListener(new SummaryReportActionListener());
