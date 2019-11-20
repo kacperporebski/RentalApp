@@ -4,6 +4,7 @@ import RentalPropertyManagementSystem.Client.Container.*;
 import RentalPropertyManagementSystem.Users.Landlord;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -60,6 +61,15 @@ public class PropertyRepository implements Subject
     public ArrayList<Property> getAllProperties()
     {
         return properties;
+    }
+
+    public ArrayList<Property> getAllActiveProperties() {
+        ArrayList<Property> props = new ArrayList<>();
+        for(Property p : properties){
+            if(p.getState() == STATE.ACTIVE)
+                props.add(p);
+        }
+        return props;
     }
 
     public ArrayList<Property> getLandlordProperties(Landlord landlord)
