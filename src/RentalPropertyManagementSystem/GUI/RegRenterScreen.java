@@ -13,12 +13,13 @@ public class RegRenterScreen extends JFrame
     private JList propertyList;
     private JButton logoutButton;
     private JButton displayNotificationsButton;
+    private JPanel regPanel;
     private SearchCriteriaScreen searchCriteriaScreen;
 
 
     public RegRenterScreen()
     {
-        this.setContentPane(panel);
+        this.setContentPane(regPanel);
         this.pack();
         searchCriteriaScreen = new SearchCriteriaScreen();
 
