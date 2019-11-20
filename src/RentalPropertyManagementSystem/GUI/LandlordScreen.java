@@ -11,6 +11,7 @@ public class LandlordScreen extends JFrame
     private JButton registerNewPropertyButton;
     private JButton viewUnpaidFeesButton;
     private JButton logoutButton;
+    private JButton refreshButton;
 
     private RegisterPropertyScreen regPropertyScreen;
     private UnpaidFeeScreen unpaidFeeScreen;
@@ -84,5 +85,50 @@ public class LandlordScreen extends JFrame
     public UnpaidFeeScreen getUnpaidFeeScreen()
     {
         return unpaidFeeScreen;
+    }
+
+    public void setLandlordPanel(JPanel landlordPanel)
+    {
+        this.landlordPanel = landlordPanel;
+    }
+
+    public void setPropertyList(JList propertyList)
+    {
+        this.propertyList = propertyList;
+    }
+
+    public void setRegisterNewPropertyButton(JButton registerNewPropertyButton)
+    {
+        this.registerNewPropertyButton = registerNewPropertyButton;
+    }
+
+    public void setViewUnpaidFeesButton(JButton viewUnpaidFeesButton)
+    {
+        this.viewUnpaidFeesButton = viewUnpaidFeesButton;
+    }
+
+    public void setLogoutButton(JButton logoutButton)
+    {
+        this.logoutButton = logoutButton;
+    }
+
+    public JButton getRefreshButton()
+    {
+        return refreshButton;
+    }
+
+    public void setRefreshButton(JButton refreshButton)
+    {
+        this.refreshButton = refreshButton;
+    }
+
+    public void setRegPropertyScreen(RegisterPropertyScreen regPropertyScreen)
+    {
+        this.regPropertyScreen = regPropertyScreen;
+    }
+
+    public void setUnpaidFeeScreen(UnpaidFeeScreen unpaidFeeScreen)
+    {
+        this.unpaidFeeScreen = unpaidFeeScreen;
     }
 }

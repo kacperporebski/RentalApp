@@ -403,8 +403,21 @@ public class RPMSController
         {
             if(e.getClickCount() == 2)
             {
+                ArrayList<Property> unpaidProperties = renterWebsite.propertyRepo.getLandlordUnpaidProperties((Landlord)currentUser.get());
+                int index = view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList().getSelectedIndex();
                 view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().setVisible(true);
+                view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().getTextArea1().setText(unpaidProperties.get(index).getRegistrationFee().toString());
             }
+        }
+    }
+
+    public class PayFeeButtonListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent)
+        {
+            ArrayList<Property> unpaidProperties = renterWebsite.propertyRepo.getLandlordUnpaidProperties((Landlord)currentUser.get());
+            int index = view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList().getSelectedIndex();
         }
     }
 

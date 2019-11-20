@@ -22,4 +22,34 @@ public class PayFeeScreen extends JFrame{
 
         }
     }
+
+    public JTextArea getTextArea1()
+    {
+        return textArea1;
+    }
+
+    public void setTextArea1(JTextArea textArea1)
+    {
+        this.textArea1 = textArea1;
+    }
+
+    public JButton getPayFeeButton()
+    {
+        return payFeeButton;
+    }
+
+    public void setPayFeeButton(JButton payFeeButton)
+    {
+        this.payFeeButton = payFeeButton;
+    }
+
+    public JPanel getPanel()
+    {
+        return panel;
+    }
+
+    public void setPanel(JPanel panel)
+    {
+        this.panel = panel;
+    }
 }

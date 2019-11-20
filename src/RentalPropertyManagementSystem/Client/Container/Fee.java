@@ -21,6 +21,12 @@ public class Fee {
         period.setEndDate(endDate);
     }
 
+    @Override
+    public String toString()
+    {
+        return "$" + paymentAmount;
+    }
+
     public void setPaymentDate(Date paymentDate)
     {
         this.paymentDate = paymentDate;
