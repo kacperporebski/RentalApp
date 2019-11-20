@@ -30,6 +30,15 @@ public abstract class AccountHolder
     public Name getName() {
         return name;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     //TODO DO I NEED ANYTHING EXTRA HERE?
 
 

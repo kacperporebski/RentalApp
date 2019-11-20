@@ -6,18 +6,16 @@ import RentalPropertyManagementSystem.Client.RenterWebsite;
 import RentalPropertyManagementSystem.Controller.RPMSController;
 import RentalPropertyManagementSystem.GUI.GUI;
 
+import java.sql.SQLException;
+
 
 public class Main
 {
-    public static void main(String args[])
-    {
+    public static void main(String args[]) throws SQLException {
         GUI gui = new GUI();
         RenterWebsite model = new RenterWebsite();
         RPMSController controller = new RPMSController(gui, model);
-        model.printAllData();
-        Database d = new Database();
-        d.getPropertyDatabase().createPropertyTable();
-        d.getUserDatabase().createUserTable();
+       // model.printAllData();
     }
 
 }

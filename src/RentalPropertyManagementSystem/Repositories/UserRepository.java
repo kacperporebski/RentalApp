@@ -39,6 +39,25 @@ public class UserRepository
         return null;
     }
 
+    public Landlord findLandlordUsername(String username){
+        for(AccountHolder x : users){
+            if(( x.getUsername().compareTo(username) == 0 ))
+            {
+                System.out.println(x.toString());
+                if(x instanceof Landlord)
+                {
+                    System.out.println("FOUND LANDLORD");
+                    System.out.println(x.toString());
+                }
+                return (Landlord) x;
+            }
+
+        }
+
+
+        return null;
+    }
+
     public boolean addUser(AccountHolder user)
     {
         //Todo link users arraylist to that of LoginService or maybe change this to Registration

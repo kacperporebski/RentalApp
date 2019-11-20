@@ -1,6 +1,10 @@
 package Database;
 
+import RentalPropertyManagementSystem.Client.Container.Account;
+import RentalPropertyManagementSystem.Client.Container.UserType;
+import RentalPropertyManagementSystem.Repositories.UserRepository;
 import RentalPropertyManagementSystem.Users.AccountHolder;
+import RentalPropertyManagementSystem.Users.Landlord;
 
 import java.sql.*;
 import java.util.Calendar;
@@ -17,24 +21,29 @@ public class UsersSQL extends MySQL {
      */
     public void addUser(AccountHolder u){
         try{
-            String query  = "INSERT INTO users (date, orderid, toolname, quantity) values (?,?,?,?)";
+            // String sql = "CREATE TABLE RentalUsers" + "(first VARCHAR(255), " + "last VARCHAR(255), " + "email VARCHAR(255), " + "accountType VARCHAR(255), " +
+            //                        "username VARCHAR(255), " + "password VARCHAR(255), " + "PRIMARY KEY (username))";
+            String query  = "INSERT INTO RentalUsers (first, last, email, accountType, username, password) values (?,?,?,?,?,?)";
             PreparedStatement pState = conn.prepareStatement(query);
-            pState.setString(1, Calendar.getInstance().getTime().toString() );
-            pState.setInt(2,  (int)(Math.random() * (99999) + 1));
-            pState.setString(3,u.getUsername());
-            pState.setInt(4,40);
+            pState.setString(1, u.getName().getFname() );
+            pState.setString(2,  u.getName().getLname());
+            pState.setString(3,u.getEmail());
+            pState.setString(4, u.getAccountType().toString());
+            pState.setString(5,u.getUsername());
+            pState.setString(6,u.getPassword());
             int rowCount = pState.executeUpdate();
-            System.out.println("Order made");
+            System.out.println("User added");
             pState.close();
 
         }catch (SQLException e){
-
+            System.out.println("Failed to add user");
+            e.printStackTrace();
         }
 
     }
 
     /**
-     * Creates order table
+     * Creates user table
      */
     public void createUserTable(){
         try{
@@ -60,26 +69,37 @@ public class UsersSQL extends MySQL {
      * Prints order
      * @return order
      */
-    public String printOrder(){
-        String s = "";
+    public void readIntoRepo(UserRepository uRepo){
+        //String s = "";
         try{
             Statement stmt = conn.createStatement();
-            String query = "SELECT * FROM toolorder";
+            String query = "SELECT * FROM RentalUsers";
             rs=stmt.executeQuery(query);
             while(rs.next()){
-                s+= "Date: " + rs.getString(1) + "\n\n" + rs.getString(2) + ":  " + rs.getString(3)
-                        + " " + rs.getString(4) + "\n ----------------------------------- \n";
+
+                //public Landlord(String fname, String lname, String mail, Account account)
+              Landlord temp = new Landlord(rs.getString(1), rs.getString(2) , rs.getString(3),
+                      new Account(rs.getString(5), rs.getString(6), UserType.valueOf(rs.getString(4))));
+                uRepo.addUser( temp );
+
             }
             stmt.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
-        if(s.equals("")){
-            return "There are currently no orderlines made";
-        }
-        return s;
+
     }
 
+
+    public boolean tableCreated() throws SQLException {
+        DatabaseMetaData meta = conn.getMetaData();
+        ResultSet rs = meta.getTables(null, null, "RentalUsers", null );
+        if(rs.next()==false){
+            return false;
+        }
+        else
+            return true;
+    }
 
 
 }

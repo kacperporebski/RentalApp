@@ -27,7 +27,9 @@ public class Property
         numberOfBathrooms = bathroom;
         this.furnished = furnished;
         rent = rentfee;
+        registrationFee = new Fee ( 60);
         propertyType = type;
+        state = STATE.ACTIVE;
 
     }
 
@@ -36,6 +38,10 @@ public class Property
         return address + "\t Num of bedrooms and bathrooms : " +
                 numberOfBedrooms + " ,\t " + numberOfBathrooms +
                 "\tLandlord info: " + myLandlord.getName().toString();
+    }
+
+    public boolean furnished(){
+        return furnished;
     }
 
     public Landlord getMyLandlord()

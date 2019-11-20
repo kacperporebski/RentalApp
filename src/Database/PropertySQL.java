@@ -1,6 +1,11 @@
 package Database;
 
 
+import RentalPropertyManagementSystem.Client.Container.*;
+import RentalPropertyManagementSystem.Repositories.PropertyRepository;
+import RentalPropertyManagementSystem.Repositories.UserRepository;
+import RentalPropertyManagementSystem.Users.Landlord;
+
 import java.sql.*;
 
 /**
@@ -23,7 +28,7 @@ public class PropertySQL extends MySQL {
                 String sql = "CREATE TABLE property " + "(id INTEGER not NULL, " + "address VARCHAR(255), " +
                         "cityQuadrant VARCHAR(255), " +"state VARCHAR(255), " + "rent_fee DOUBLE, " +
                         "reg_fee DOUBLE, " + "bedrooms INTEGER not NULL, " + "bathrooms INTEGER not NULL," +
-                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," + "PRIMARY KEY (id))";
+                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," + "landLordUsername VARCHAR(255)," + "PRIMARY KEY (id))";
 
                 Statement st = conn.createStatement();
                 st.executeUpdate(sql);
@@ -38,19 +43,30 @@ public class PropertySQL extends MySQL {
     }
 
 
-    public void insertPropertyPrepared(int id, String name, String location , double price, int supplierID){
+    public void addProperty(Property addThisProperty){
         try{
-            String query  = "INSERT INTO PROPERTY (ID, name, location, price, propertyid) values (?,?,?,?,?)";
+            String query  = "INSERT INTO property (ID, address, cityQuadrant, state, " +
+                    "rent_fee, reg_fee, bedrooms, bathrooms, furnished , type, landLordUsername) values (?,?,?,?,?,?,?,?,?,?,?)";
+
             PreparedStatement pState = conn.prepareStatement(query);
-            pState.setInt(1,id);
-            pState.setString(2,name);
-            pState.setString(3,location);
-            pState.setDouble(4,price);
-            pState.setInt(5,supplierID);
+            pState.setInt(1, addThisProperty.getID());
+            pState.setString(2,addThisProperty.getAddress());
+            //temp fix for the below
+            pState.setString(3, "SE");
+           // TODO FIX pState.setString(3,addThisProperty.getCityQuadrant().toString());
+            pState.setString(4,addThisProperty.getState().toString());
+            pState.setDouble(5, addThisProperty.getRent().getPaymentAmount());
+            pState.setDouble(6, addThisProperty.getRegistrationFee().getPaymentAmount());
+            pState.setInt(7, addThisProperty.getNumberOfBedrooms());
+            pState.setInt(8,addThisProperty.getNumberOfBathrooms());
+            int val = (addThisProperty.furnished()) ? 1 : 0;
+            pState.setInt(9,val);
+            pState.setString(10,addThisProperty.getPropertyType().toString());
+            pState.setString(11, addThisProperty.getMyLandlord().getUsername());
             int rowCount = pState.executeUpdate();
             pState.close();
         }catch (SQLException e){
-
+                e.printStackTrace();
         }
     }
 
@@ -88,6 +104,43 @@ public class PropertySQL extends MySQL {
             e.printStackTrace();
         }
         return s;
+    }
+
+    public boolean tableCreated() throws SQLException {
+        DatabaseMetaData meta = conn.getMetaData();
+        ResultSet rs = meta.getTables(null, null, "property", null );
+        if(rs.next()==false){
+            return false;
+        }
+        else
+            return true;
+    }
+
+
+    public void readIntoRepo(PropertyRepository pRepo, UserRepository uRepo){
+        try{
+            Statement stmt = conn.createStatement();
+            String query = "SELECT * FROM property";
+            rs=stmt.executeQuery(query);
+            while(rs.next()){
+
+              //  public Property(Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType
+              //   type)
+                //public Landlord(String fname, String lname, String mail, Account account)
+                boolean furnished = (rs.getInt(9) == 0) ? true : false;
+                Property temp = new Property(uRepo.findLandlordUsername(rs.getString(11)), rs.getString(2), rs.getInt(7),
+                rs.getInt(8), furnished , new Fee(rs.getDouble(5)), PropertyType.valueOf(rs.getString(10)));
+                uRepo.findLandlordUsername(rs.getString(11));
+
+               // Property temp = new Property();
+                pRepo.addProperty(temp);
+
+            }
+            stmt.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
 
