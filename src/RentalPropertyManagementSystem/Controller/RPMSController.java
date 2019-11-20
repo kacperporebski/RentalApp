@@ -166,7 +166,6 @@ public class RPMSController
 
     public void displayProperties(JList list, ArrayList<Property> propertyList)
     {
-        ArrayList<Property> propertyList = renterWebsite.propertyRepo.getAllProperties();
         list.setModel(renterWebsite.propertyRepo.toStringList(propertyList));
         System.out.println("Displaying properties");
     }
