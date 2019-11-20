@@ -9,11 +9,14 @@ public class UnpaidFeeScreen extends JFrame
     private JScrollBar scrollBar1;
     private JButton refreshButton;
 
+    private PayFeeScreen payFeeScreen;
+
     public UnpaidFeeScreen()
     {
         this.setName("Unpaid Fees");
-        this.pack();
         this.setContentPane(panel1);
+        this.pack();
+        payFeeScreen = new PayFeeScreen();
     }
 
     public JList getUnpaidFeesList()
@@ -54,5 +57,15 @@ public class UnpaidFeeScreen extends JFrame
     public void setRefreshButton(JButton refreshButton)
     {
         this.refreshButton = refreshButton;
+    }
+
+    public PayFeeScreen getPayFeeScreen()
+    {
+        return payFeeScreen;
+    }
+
+    public void setPayFeeScreen(PayFeeScreen payFeeScreen)
+    {
+        this.payFeeScreen = payFeeScreen;
     }
 }

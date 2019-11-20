@@ -11,10 +11,7 @@ import RentalPropertyManagementSystem.Users.Manager;
 import RentalPropertyManagementSystem.Users.RegisteredRenter;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -48,6 +45,8 @@ public class RPMSController
 
         view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getLandlordScreen().getRegPropertyScreen().getRegisterPropertyButton().addActionListener(new RegisterProperty());
+        view.getLandlordScreen().getUnpaidFeeScreen().getRefreshButton().addActionListener(new DisplayUnpaidFees());
+        view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList().addMouseListener(new PayUnpaidFees());
 
         view.getManagerScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
@@ -385,7 +384,13 @@ public class RPMSController
 
     public class PayUnpaidFees extends MouseAdapter
     {
-
+        public void mouseClicked(MouseEvent e)
+        {
+            if(e.getClickCount() == 2)
+            {
+                view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().setVisible(true);
+            }
+        }
     }
 
 
