@@ -84,6 +84,18 @@ public class PropertyRepository implements Subject
         return matchingProperties;
     }
 
+    public ArrayList<Property> getLandlordUnpaidProperties(Landlord landlord)
+    {
+        ArrayList<Property> landlordProperties = getLandlordProperties(landlord);
+        ArrayList<Property> unpaidProperties = new ArrayList<>();
+        for(Property p : landlordProperties)
+        {
+            if(p.getRegistrationFee().isPaid() == false)
+                unpaidProperties.add(p);
+        }
+        return unpaidProperties;
+    }
+
 
     @Override
     public void registerObserver(Observer obs)
@@ -128,6 +140,16 @@ public class PropertyRepository implements Subject
         for(Property p : pList)
         {
             dlm.addElement(p.toString());
+        }
+        return dlm;
+    }
+
+    public DefaultListModel<String> toStringSummaryList(ArrayList<Property> pList)
+    {
+        DefaultListModel<String> dlm = new DefaultListModel<String>();
+        for(Property p : pList)
+        {
+            dlm.addElement(p.toStringSummary());
         }
         return dlm;
     }

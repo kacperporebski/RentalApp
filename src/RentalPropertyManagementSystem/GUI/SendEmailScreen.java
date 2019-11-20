@@ -14,14 +14,19 @@ public class SendEmailScreen extends JFrame{
         this.setContentPane(panel1);
         this.pack();
 
-        sendButton.addActionListener(new SendEmailActionListener());
+        sendButton.addActionListener(new SendEmailActionListener(this));
     }
 
     public class SendEmailActionListener implements ActionListener {
+        SendEmailScreen screen;
+
+        public SendEmailActionListener(SendEmailScreen s){
+            screen = s;
+        }
         @Override
         public void actionPerformed(ActionEvent e){
             //email is sent through the email website, not through the rental app
-           // panel1.setVisible(false);
+            screen.setVisible(false);
         }
     }
 

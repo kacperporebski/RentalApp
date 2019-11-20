@@ -1,9 +1,61 @@
 package RentalPropertyManagementSystem.GUI;
 
-import javax.swing.*;
+import RentalPropertyManagementSystem.Users.Manager;
 
-public class ManagerScreen
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ManagerScreen extends JFrame
 {
     private JPanel panel;
-    private JList list1;
+    private JButton requestSummaryReportButton;
+    private JButton viewRentersButton;
+    private JButton logoutButton;
+    private JButton viewLandlordsButton;
+    private JButton changeRegistrationFeeButton;
+    private JButton changePropertyListingButton;
+
+    private SummaryReportScreen summaryScreen;
+    private ChangeFeeScreen changeFeeScreen;
+
+    public ManagerScreen(){
+        this.setContentPane(panel);
+        this.pack();
+
+        changeFeeScreen = new ChangeFeeScreen();
+        summaryScreen = new SummaryReportScreen();
+    }
+
+    public JButton getLogoutButton() {
+        return logoutButton;
+    }
+
+    public JButton getChangePropertyListingButton() {
+        return changePropertyListingButton;
+    }
+
+    public JButton getChangeRegistrationFeeButton() {
+        return changeRegistrationFeeButton;
+    }
+
+    public JButton getRequestSummaryReportButton() {
+        return requestSummaryReportButton;
+    }
+
+    public JButton getViewLandlordsButton() {
+        return viewLandlordsButton;
+    }
+
+    public JButton getViewRentersButton() {
+        return viewRentersButton;
+    }
+
+    public ChangeFeeScreen getChangeFeeScreen() {
+        return changeFeeScreen;
+    }
+
+    public SummaryReportScreen getSummaryScreen() {
+        return summaryScreen;
+    }
 }

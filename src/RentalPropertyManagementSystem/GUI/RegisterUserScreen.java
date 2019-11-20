@@ -24,10 +24,10 @@ public class RegisterUserScreen extends JFrame
         this.setContentPane(panel);
         this.pack();
 
-        cancelButton.addActionListener(new cancelButtonActionListener());
+        cancelButton.addActionListener(new CancelButtonActionListener());
     }
 
-    public class cancelButtonActionListener implements ActionListener
+    public class CancelButtonActionListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)

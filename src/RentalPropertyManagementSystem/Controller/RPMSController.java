@@ -13,6 +13,8 @@ import RentalPropertyManagementSystem.Users.RegisteredRenter;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -26,22 +28,31 @@ public class RPMSController
     Optional<AccountHolder> currentUser;
 
 
-    public RPMSController(GUI view, RenterWebsite website)
-    {
+    public RPMSController(GUI view, RenterWebsite website) {
         this.view = view;
         renterWebsite = website;
 
         //TODO add ActionListeners to view...
         view.getLoginScreen().getLoginButton().addActionListener(new LoginActionListener());
+
         view.getRegUserScreen().getRegisterButton().addActionListener(new RegisterUserActionListener());
+
         view.getRegRenterScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getRegRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
-        view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
+
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
+        view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
+        view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
+
         view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getLandlordScreen().getRegPropertyScreen().getRegisterPropertyButton().addActionListener(new RegisterProperty());
+
+        view.getManagerScreen().getLogoutButton().addActionListener(new LogoutActionListener());
+        view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
+        view.getManagerScreen().getChangeRegistrationFeeButton().addActionListener(new ChangeRegFeeActionListener());
+        view.getManagerScreen().getRequestSummaryReportButton().addActionListener(new RequestSummaryReportActionListener());
     }
 
     /**
@@ -69,6 +80,7 @@ public class RPMSController
                         view.getLandlordScreen().setVisible(true);
                         break;
                     case MANAGER:
+                        view.getManagerScreen().setVisible(true);
                         break;
                     case REGRENTER:
                         view.getRegRenterScreen().setVisible(true);
@@ -154,6 +166,29 @@ public class RPMSController
         }
     }
 
+    public class ChangeRegFeeActionListener implements  ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            view.getManagerScreen().getChangeFeeScreen().getOldFee().setText(renterWebsite.propertyRepo.getAllProperties().get(0).getRegistrationFee().toString());
+            view.getManagerScreen().getChangeFeeScreen().setVisible(true);
+        }
+    }
+
+
+
+    public class ChangeFeeActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            for(Property p : renterWebsite.propertyRepo.getAllProperties()) {
+                Fee fee = new Fee(Double.parseDouble(view.getManagerScreen().getChangeFeeScreen().getNewFee().getText()));
+                fee.setPaymentDate(p.getRegistrationFee().getPaymentDate());
+                fee.setPeriod(p.getRegistrationFee().getPeriod());
+                p.setRegistrationFee(fee);
+            }
+        }
+    }
 
     public class ListPropertiesActionListener implements ActionListener
     {
@@ -173,6 +208,24 @@ public class RPMSController
         System.out.println("Displaying properties");
     }
 
+    public void displaySummaryProperties(JList list, ArrayList<Property> propertyList)
+    {
+        list.setModel(renterWebsite.propertyRepo.toStringSummaryList(propertyList));
+        System.out.println("Displaying properties");
+    }
+
+    public class RequestSummaryReportActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            SummaryReport sum = new SummaryReport();
+            view.getManagerScreen().getSummaryScreen().getSummaryInfo().setText(sum.numbersToString());
+            displaySummaryProperties(view.getManagerScreen().getSummaryScreen().getPropertyList(), sum.getListedHouses());
+            System.out.println("Displaying summary report");
+
+            view.getManagerScreen().getSummaryScreen().setVisible(true);
+        }
+    }
+
     public class SubscribeSearchCriteria implements ActionListener
     {
         @Override
@@ -184,6 +237,7 @@ public class RPMSController
             {
                 criteria = createCriteria(view.getRenterScreen().getSearchCriteriaScreen());
                 ((RegisteredRenter)currentUser.get()).setSearchCriteria(criteria);
+                view.getRegRenterScreen().getSearchCriteriaScreen().setVisible(false);
             }
             //If Regular Renter:
             else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
@@ -192,6 +246,7 @@ public class RPMSController
                 System.out.println("Must first register\n");
                 view.getRegUserScreen().setVisible(true);
                 view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(3);
+                view.getRenterScreen().getSearchCriteriaScreen().setVisible(false);
             }
         }
     }
@@ -206,6 +261,7 @@ public class RPMSController
             {
                 criteria = createCriteria(view.getRegRenterScreen().getSearchCriteriaScreen());
                 displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getMatchingProperties(criteria));
+                view.getRegRenterScreen().getSearchCriteriaScreen().setVisible(false);
             }
             //If Regular Renter:
             else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getEnterButton())
@@ -213,7 +269,9 @@ public class RPMSController
                 //Todo figure out how to convert renter into a registered renter
                 criteria = createCriteria(view.getRenterScreen().getSearchCriteriaScreen());
                 displayProperties(view.getRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getMatchingProperties(criteria));
+                view.getRenterScreen().getSearchCriteriaScreen().setVisible(false);
             }
+
         }
     }
 
@@ -223,6 +281,7 @@ public class RPMSController
         ArrayList<Integer> bedrooms = new ArrayList<>();
         ArrayList<Integer> bathrooms = new ArrayList<>();
         boolean furnished;
+        boolean unfurnished;
         ArrayList<CityQuadrants> cityQuadrants = new ArrayList<>();
 
         if(frame.getApartmentCheckBox().isSelected())
@@ -264,6 +323,11 @@ public class RPMSController
         else
             furnished = false;
 
+        if(frame.getUnfurnishedCheckBox().isSelected())
+            unfurnished = true;
+        else
+            unfurnished = false;
+
         if(frame.getSWCheckBox().isSelected())
             cityQuadrants.add(CityQuadrants.SW);
         if(frame.getNWCheckBox().isSelected())
@@ -274,7 +338,7 @@ public class RPMSController
             cityQuadrants.add(CityQuadrants.NE);
 
 
-        SearchCriteria criteria = new SearchCriteria(propertyTypes, bedrooms, bathrooms, furnished, cityQuadrants);
+        SearchCriteria criteria = new SearchCriteria(propertyTypes, bedrooms, bathrooms, furnished, unfurnished, cityQuadrants);
         return criteria;
     }
 
@@ -305,10 +369,25 @@ public class RPMSController
             else
                 furnished = false;
 
-            renterWebsite.propertyRepo.addProperty(new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType));
-
+            renterWebsite.propertyRepo.addProperty(new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType, quadrant));
         }
     }
+
+    public class DisplayUnpaidFees implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            ArrayList<Property> unpaidProperties = renterWebsite.propertyRepo.getLandlordUnpaidProperties((Landlord)currentUser.get());
+            displayProperties(view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList(), unpaidProperties);
+        }
+    }
+
+    public class PayUnpaidFees extends MouseAdapter
+    {
+
+    }
+
 
 
 
