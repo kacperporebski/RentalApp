@@ -17,8 +17,8 @@ public class RegisterPropertyScreen extends JFrame
     public RegisterPropertyScreen()
     {
         this.setName("Register Property");
-        this.pack();
         this.setContentPane(panel);
+        this.pack();
     }
 
     public JComboBox getPropertyTypeComboBox()
