@@ -36,24 +36,20 @@ public class Date {
         year = y;
 
     }
-    int get_day() {
-        return day;
+
+    public void setDay(int day) {
+        this.day = day;
     }
 
-    int get_month() {
-        return month;
-    }
-    int get_year()  {
-        return year;
-    }
-
-    void set_day(int d) {day = d;}
-    void set_month(int  m) {
+    void setMonth(int  m) {
         if(m > 12)
-            set_year(get_year()+1);
+            setYear(getYear()+1);
         month = m % 12;
     }
-    void set_year(int y) {year = y;}
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 
     public String toString()
     {
