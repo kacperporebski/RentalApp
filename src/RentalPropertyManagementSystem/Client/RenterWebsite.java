@@ -16,6 +16,7 @@ import java.util.Random;
 
 public class RenterWebsite
 {
+
      private Database myDatabase;
 
     public UserRepository userRepo;
@@ -96,7 +97,7 @@ public class RenterWebsite
 
 */
     public void serverReadUserData() throws SQLException {
-        if (myDatabase.getUserDatabase().tableCreated() == true) {
+        if (myDatabase.getUserDatabase().tableCreated() == true ) {
             myDatabase.getUserDatabase().readIntoRepo(userRepo);
         } else {
             //IF TABLES NOT CREATED MAKE DATABASE FROM .TXT FILES

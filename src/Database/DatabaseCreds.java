@@ -11,7 +11,7 @@ public interface DatabaseCreds {
     /**
      * the URL of mySQL
      */
-    static final String DB_URL = "jdbc:mysql://localhost/mydb?useSSL=false";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";
     /**
      * username for mySQL
      */
@@ -19,5 +19,5 @@ public interface DatabaseCreds {
     /**
      * password for mySQL
      */
-    static final String PASSWORD = "whitened";
+    static final String PASSWORD = "Milkduds.7";
 }

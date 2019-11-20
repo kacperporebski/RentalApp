@@ -104,9 +104,9 @@
         </constraints>
         <properties>
           <model>
-            <item value="LANDLORD"/>
-            <item value="MANAGER"/>
-            <item value="REGRENTER"/>
+            <item value="Landlord"/>
+            <item value="Manager"/>
+            <item value="RegRenter"/>
           </model>
         </properties>
       </component>

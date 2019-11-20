@@ -12,6 +12,7 @@ import RentalPropertyManagementSystem.Users.RegisteredRenter;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -130,13 +131,13 @@ public class RPMSController
             AccountHolder user;
             switch(account.getAccountType())
             {
-                case MANAGER:
+                case Manager:
                     user = new Manager(firstname, lastname, email, account);
                     break;
-                case LANDLORD:
+                case Landlord:
                     user = new Landlord(firstname, lastname, email, account);
                     break;
-                case REGRENTER:
+                case RegRenter:
                     user = new RegisteredRenter(firstname, lastname, email, account);
                     break;
                 default:
@@ -172,8 +173,6 @@ public class RPMSController
             view.getManagerScreen().getChangeFeeScreen().setVisible(true);
         }
     }
-
-
 
     public class ChangeFeeActionListener implements ActionListener
     {
@@ -226,7 +225,12 @@ public class RPMSController
             }
 
             ArrayList<Property> housesRented = new ArrayList<>();
-            Period period = new Period();
+
+            LocalDate currentDate = LocalDate.now();
+            int currentMonth = currentDate.getMonthValue();
+            int currentYear = currentDate.getYear();
+            Period period = new Period(currentMonth, currentYear);
+
             SummaryReport sum = new SummaryReport(listed,rented,active,housesRented, period);
             view.getManagerScreen().getSummaryScreen().getSummaryInfo().setText(sum.numbersToString());
             displaySummaryProperties(view.getManagerScreen().getSummaryScreen().getPropertyList(), sum.getListedHouses());
