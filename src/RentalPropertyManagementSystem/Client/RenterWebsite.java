@@ -1,6 +1,7 @@
-package Client;
+package RentalPropertyManagementSystem.Client;
 
 
+import Database.Database;
 import RentalPropertyManagementSystem.Client.Container.*;
 import RentalPropertyManagementSystem.Repositories.PropertyRepository;
 import RentalPropertyManagementSystem.Repositories.UserRepository;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class RenterWebsite
 {
-    //TODO private Database myDatabase; ... Maybe add to Repo?
+     private Database myDatabase;
 
     public UserRepository userRepo;
     public PropertyRepository propertyRepo;

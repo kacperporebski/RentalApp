@@ -1,7 +1,8 @@
 package RentalPropertyManagementSystem;
 
-import Client.RenterWebsite;
+
 import Database.Database;
+import RentalPropertyManagementSystem.Client.RenterWebsite;
 import RentalPropertyManagementSystem.Controller.RPMSController;
 import RentalPropertyManagementSystem.GUI.GUI;
 

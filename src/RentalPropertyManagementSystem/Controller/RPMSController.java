@@ -1,7 +1,7 @@
 package RentalPropertyManagementSystem.Controller;
 
-import Client.RenterWebsite;
 import RentalPropertyManagementSystem.Client.Container.*;
+import RentalPropertyManagementSystem.Client.RenterWebsite;
 import RentalPropertyManagementSystem.GUI.GUI;
 import RentalPropertyManagementSystem.GUI.SearchCriteriaScreen;
 import RentalPropertyManagementSystem.Users.AccountHolder;

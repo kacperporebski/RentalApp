@@ -1,7 +1,7 @@
 Apartment;John;Mikeson;788 30th St., SE, Calgary;3;2;furnished;1500
 AttachedHouse;Mike;Johnson;749 Dufferin Blvd., SE, Calgary;3;1;furnished;2000
 DetachedHouse;Paul;Hapon;26 40th St., SE, Calgary;4;6;furnished;2500
-TownHouse;Frank;156 51st Ave., SE, Calgary;3;5;furnished;1700
+TownHouse;Fred;Frank;156 51st Ave., SE, Calgary;3;5;furnished;1700
 Condo;Paula;Pot;138 42nd Ave., NE, Calgary;7;6;furnished;1900
 Duplex;Howdy;Sir;311 McCall Way, NE, Calgary;9;2;furnished;2500
 Apartment;Love;This;966 Smed Lane, SE, Calgary;4;2;furnished;3000
