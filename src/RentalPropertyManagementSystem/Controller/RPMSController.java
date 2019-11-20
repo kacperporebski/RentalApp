@@ -37,6 +37,8 @@ public class RPMSController
         view.getRegRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
+        view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
+        view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
 
     }
 
@@ -150,15 +152,14 @@ public class RPMSController
         public void actionPerformed(ActionEvent e)
         {
             if(e.getSource() == view.getRenterScreen().getRefreshButton())
-                 displayProperties(view.getRenterScreen().getPropertyList());
+                 displayProperties(view.getRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllProperties());
             else if(e.getSource() == view.getRegRenterScreen().getRefreshButton())
-                displayProperties(view.getRegRenterScreen().getPropertyList());
+                displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllProperties());
         }
     }
 
-    public void displayProperties(JList list)
+    public void displayProperties(JList list, ArrayList<Property> propertyList)
     {
-        ArrayList<Property> propertyList = renterWebsite.propertyRepo.getAllProperties();
         list.setModel(renterWebsite.propertyRepo.toStringList(propertyList));
         System.out.println("Displaying properties");
     }
@@ -169,12 +170,14 @@ public class RPMSController
         public void actionPerformed(ActionEvent e)
         {
             SearchCriteria criteria;
-            if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
+            //If Registered Renter:
+            if(e.getSource() == view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
             {
                 criteria = createCriteria(view.getRenterScreen().getSearchCriteriaScreen());
                 ((RegisteredRenter)currentUser.get()).setSearchCriteria(criteria);
             }
-            else if(e.getSource() == view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
+            //If Regular Renter:
+            else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
             {
                 //Todo figure out how to convert renter into a registered renter
                 view.getRegUserScreen().setVisible(true);
@@ -183,11 +186,32 @@ public class RPMSController
         }
     }
 
+    public class EnterSearchCriteria implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SearchCriteria criteria;
+            if(e.getSource() == view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton())
+            {
+                criteria = createCriteria(view.getRegRenterScreen().getSearchCriteriaScreen());
+                displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getMatchingProperties(criteria));
+            }
+            //If Regular Renter:
+            else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getEnterButton())
+            {
+                //Todo figure out how to convert renter into a registered renter
+                criteria = createCriteria(view.getRenterScreen().getSearchCriteriaScreen());
+                displayProperties(view.getRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getMatchingProperties(criteria));
+            }
+        }
+    }
+
     public SearchCriteria createCriteria(SearchCriteriaScreen frame)
     {
         ArrayList<PropertyType> propertyTypes = new ArrayList<>();
-        ArrayList<Integer> bedrooms = new ArrayList<Integer>();
-        ArrayList<Integer> bathrooms = new ArrayList<Integer>();
+        ArrayList<Integer> bedrooms = new ArrayList<>();
+        ArrayList<Integer> bathrooms = new ArrayList<>();
         boolean furnished;
         ArrayList<CityQuadrants> cityQuadrants = new ArrayList<>();
 
@@ -204,22 +228,26 @@ public class RPMSController
         if(frame.getDuplexCheckBox().isSelected())
             propertyTypes.add(PropertyType.Duplex);
 
+        Integer lowerBedrooms = 0;
+        Integer upperBedrooms = 0;
+        Integer lowerBathrooms = 0;
+        Integer upperBathrooms = 0;
         try
         {
-            int lowerBedrooms = Integer.parseInt(frame.getBedroomLowerTextField().getText());
-            int upperBedrooms = Integer.parseInt(frame.getBedroomUpperTextField().getText());
-            int lowerBathrooms = Integer.parseInt(frame.getBathroomLowerTextField().getText());
-            int upperBathrooms = Integer.parseInt(frame.getBathroomUpperTextField().getText());
-
-            bedrooms.add(lowerBedrooms);
-            bedrooms.add(upperBedrooms);
-            bathrooms.add(lowerBathrooms);
-            bathrooms.add(upperBathrooms);
+             lowerBedrooms = Integer.parseInt(frame.getBedroomLowerTextField().getText());
+             upperBedrooms = Integer.parseInt(frame.getBedroomUpperTextField().getText());
+             lowerBathrooms = Integer.parseInt(frame.getBathroomLowerTextField().getText());
+             upperBathrooms = Integer.parseInt(frame.getBathroomUpperTextField().getText());
 
         }catch(NumberFormatException e)
         {
             e.printStackTrace();
         }
+
+        bedrooms.add(lowerBedrooms);
+        bedrooms.add(upperBedrooms);
+        bathrooms.add(lowerBathrooms);
+        bathrooms.add(upperBathrooms);
 
         if(frame.getFurnishedCheckBox().isSelected())
             furnished = true;

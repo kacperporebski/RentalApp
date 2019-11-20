@@ -8,13 +8,13 @@ public class Property
     private Landlord myLandlord;
     private Fee rent;
     private Fee registrationFee;
-    private String type; //whats this?
     private STATE state;
     private int numberOfBedrooms;
     private int numberOfBathrooms;
     private boolean furnished;
     private String address;
     private CityQuadrants cityQuadrant;
+    private PropertyType propertyType;
     private int ID;
 
 
@@ -50,11 +50,6 @@ public class Property
     public Fee getRegistrationFee()
     {
         return registrationFee;
-    }
-
-    public String getType()
-    {
-        return type;
     }
 
     public STATE getState()
@@ -102,11 +97,6 @@ public class Property
         this.registrationFee = registrationFee;
     }
 
-    public void setType(String type)
-    {
-        this.type = type;
-    }
-
     public void setState(STATE state)
     {
         this.state = state;
@@ -140,5 +130,20 @@ public class Property
     public void setID(int ID)
     {
         this.ID = ID;
+    }
+
+    public PropertyType getPropertyType()
+    {
+        return propertyType;
+    }
+
+    public void setPropertyType(PropertyType propertyType)
+    {
+        this.propertyType = propertyType;
+    }
+
+    public int getID()
+    {
+        return ID;
     }
 }

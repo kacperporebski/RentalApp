@@ -12,12 +12,12 @@ public class SearchCriteria
 
     public SearchCriteria(ArrayList<PropertyType> type, ArrayList<Integer> bedrooms, ArrayList<Integer> bathrooms, boolean furnished, ArrayList<CityQuadrants> cityQuadrants)
     {
-        if(rangeOfBathrooms.get(0) > rangeOfBathrooms.get(1))
+        if(bedrooms.get(0) > bedrooms.get(1))
         {
             System.out.println("Invalid Input");
             return;
         }
-        if(rangeOfBedrooms.get(0) > rangeOfBedrooms.get(1))
+        if(bathrooms.get(0) > bathrooms.get(1))
         {
             System.out.println("Invalid Input");
             return;
@@ -32,7 +32,8 @@ public class SearchCriteria
 
     public boolean matchingProperty(Property p)
     {
-        return (matchingPropertyType(p) && matchingBedroomRange(p) && matchingBathroomRange(p) && matchingFurnish(p)&& matchingCityQuadrant(p) );
+        boolean returnValue = (matchingPropertyType(p) && matchingBedroomRange(p) && matchingBathroomRange(p) && matchingFurnish(p)&& matchingCityQuadrant(p) );
+        return returnValue;
     }
 
     boolean matchingPropertyType(Property p)
@@ -41,7 +42,7 @@ public class SearchCriteria
 
         for(PropertyType type : propertyType)
         {
-            if(type.equals(p.getType()) == false)
+            if(type.equals(p.getPropertyType()) == false)
                 matching = false;
             else
             {

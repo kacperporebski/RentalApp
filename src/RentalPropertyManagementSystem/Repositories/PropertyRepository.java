@@ -1,9 +1,6 @@
 package RentalPropertyManagementSystem.Repositories;
 
-import RentalPropertyManagementSystem.Client.Container.Observer;
-import RentalPropertyManagementSystem.Client.Container.Property;
-import RentalPropertyManagementSystem.Client.Container.STATE;
-import RentalPropertyManagementSystem.Client.Container.Subject;
+import RentalPropertyManagementSystem.Client.Container.*;
 import RentalPropertyManagementSystem.Users.Landlord;
 
 import javax.swing.*;
@@ -74,6 +71,17 @@ public class PropertyRepository implements Subject
                 landlordProperties.add(p);
         }
         return landlordProperties;
+    }
+
+    public ArrayList<Property> getMatchingProperties(SearchCriteria criteria)
+    {
+        ArrayList<Property> matchingProperties = new ArrayList<>();
+        for(Property p: properties)
+        {
+            if(criteria.matchingProperty(p) == true)
+                matchingProperties.add(p);
+        }
+        return matchingProperties;
     }
 
 
