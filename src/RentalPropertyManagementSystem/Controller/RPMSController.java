@@ -62,6 +62,7 @@ public class RPMSController
                 switch (user.get().getAccountType())
                 {
                     case LANDLORD:
+                        view.getLandlordScreen().setVisible(true);
                         break;
                     case MANAGER:
                         break;
