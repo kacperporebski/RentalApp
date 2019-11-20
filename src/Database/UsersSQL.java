@@ -1,4 +1,4 @@
-package RentalPropertyManagementSystem.Database;
+package Database;
 
 import RentalPropertyManagementSystem.Users.AccountHolder;
 
@@ -39,17 +39,17 @@ public class UsersSQL extends MySQL {
     public void createUserTable(){
         try{
             DatabaseMetaData meta = conn.getMetaData();
-            ResultSet rs = meta.getTables(null, null, "toolorder", null );
+            ResultSet rs = meta.getTables(null, null, "RentalUsers", null );
             if(rs.next()==false) {
-                String sql = "CREATE TABLE users " + "(date VARCHAR(255), " + "accountid INTEGER not NULL, " +
-                        "username VARCHAR(255), " + "password VARCHAR(255), " + "PRIMARY KEY (accountid))";
+                String sql = "CREATE TABLE RentalUsers" + "(first VARCHAR(255), " + "last VARCHAR(255), " + "email VARCHAR(255), " + "accountType VARCHAR(255), " +
+                        "username VARCHAR(255), " + "password VARCHAR(255), " + "PRIMARY KEY (username))";
                 Statement st = conn.createStatement();
                 st.executeUpdate(sql);
                 st.close();
                 System.out.println("User table created");
             }
             else
-                System.out.println("User tool already exists");
+                System.out.println("User table already exists");
         }catch (SQLException e){
             System.out.println("Cant create user table");
             e.printStackTrace();

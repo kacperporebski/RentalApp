@@ -1,6 +1,5 @@
 package Database;
 
-import RentalPropertyManagementSystem.Database.MySQL;
 
 import java.sql.*;
 
@@ -12,16 +11,19 @@ public class PropertySQL extends MySQL {
     //TODO FIX MY COPY PASTE
 
     /**
-     * Creates table of tools
+     * Creates table of property
      */
+
     public void createPropertyTable(){
         try{
             DatabaseMetaData meta = conn.getMetaData();
-            ResultSet rs = meta.getTables(null, null, "tool", null );
+            ResultSet rs = meta.getTables(null, null, "property", null );
             if(rs.next()==false) {
 
-                String sql = "CREATE TABLE tool " + "(id INTEGER not NULL, " + "name VARCHAR(255), " +
-                        "location VARCHAR(255), " + "price DOUBLE, " + "supplierid INTEGER not NULL, " + "PRIMARY KEY (id))";
+                String sql = "CREATE TABLE property " + "(id INTEGER not NULL, " + "address VARCHAR(255), " +
+                        "cityQuadrant VARCHAR(255), " +"state VARCHAR(255), " + "rent_fee DOUBLE, " +
+                        "reg_fee DOUBLE, " + "bedrooms INTEGER not NULL, " + "bathrooms INTEGER not NULL," +
+                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," + "PRIMARY KEY (id))";
 
                 Statement st = conn.createStatement();
                 st.executeUpdate(sql);

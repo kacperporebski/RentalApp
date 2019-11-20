@@ -1,6 +1,7 @@
 package RentalPropertyManagementSystem;
 
 import Client.RenterWebsite;
+import Database.Database;
 import RentalPropertyManagementSystem.Controller.RPMSController;
 import RentalPropertyManagementSystem.GUI.GUI;
 
@@ -13,6 +14,9 @@ public class Main
         RenterWebsite model = new RenterWebsite();
         RPMSController controller = new RPMSController(gui, model);
         model.printAllData();
+        Database d = new Database();
+        d.getPropertyDatabase().createPropertyTable();
+        d.getUserDatabase().createUserTable();
     }
 
 }
