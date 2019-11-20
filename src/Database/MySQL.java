@@ -1,4 +1,4 @@
-package RentalPropertyManagementSystem.Database;
+package Database;
 
 import java.sql.*;
 

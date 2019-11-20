@@ -1,4 +1,4 @@
-package RentalPropertyManagementSystem.Database;
+package Database;
 
 /**
  * MySQL values
@@ -11,7 +11,7 @@ public interface DatabaseCreds {
     /**
      * the URL of mySQL
      */
-    static final String DB_URL = "jdbc:mysql://localhost/mydb";
+    static final String DB_URL = "jdbc:mysql://localhost/mydb?useSSL=false";
     /**
      * username for mySQL
      */

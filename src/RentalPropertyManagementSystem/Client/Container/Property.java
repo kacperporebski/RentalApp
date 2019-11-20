@@ -15,18 +15,19 @@ public class Property
     private String address;
     private CityQuadrants cityQuadrant;
     private PropertyType propertyType;
-    private int ID;
+    private static int ID = 0;
 
 
-    public Property(int idnum, Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee)
+    public Property(Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType type)
     {
-        ID = idnum;
+        ID ++;
         myLandlord = l;
         address = addr;
         numberOfBedrooms = bedroom;
         numberOfBathrooms = bathroom;
         this.furnished = furnished;
         rent = rentfee;
+        propertyType = type;
 
     }
 
