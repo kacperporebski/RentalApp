@@ -13,7 +13,7 @@ public class PayFeeScreen extends JFrame{
         this.setContentPane(panel);
         this.pack();
 
-        payFeeButton.addActionListener(new PayFeeActionListener);
+        payFeeButton.addActionListener(new PayFeeActionListener());
     }
 
     public class PayFeeActionListener implements ActionListener{
