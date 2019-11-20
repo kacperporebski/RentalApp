@@ -18,7 +18,7 @@ public class Property
     private static int ID = 0;
 
 
-    public Property(Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType type)
+    public Property(Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType type, CityQuadrants cq)
     {
         ID ++;
         myLandlord = l;
@@ -30,6 +30,7 @@ public class Property
         registrationFee = new Fee ( 60);
         propertyType = type;
         state = STATE.ACTIVE;
+        cityQuadrant = cq;
 
     }
 
@@ -38,6 +39,10 @@ public class Property
         return address + "\t Num of bedrooms and bathrooms : " +
                 numberOfBedrooms + " ,\t " + numberOfBathrooms +
                 "\tLandlord info: " + myLandlord.getName().toString();
+    }
+
+    public String toStringSummary() {
+        return "Landlord: " + myLandlord + "\tHouse ID: " + getID() + "\tAddress: " + address;
     }
 
     public boolean furnished(){
