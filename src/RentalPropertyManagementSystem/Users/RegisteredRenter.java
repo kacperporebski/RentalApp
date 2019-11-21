@@ -12,6 +12,7 @@ public class RegisteredRenter extends AccountHolder implements Observer
     public RegisteredRenter(String fname, String lname, String mail, Account account)
     {
         super(fname, lname, mail, account);
+        renter = new Renter();
     }
 
 
@@ -34,7 +35,7 @@ public class RegisteredRenter extends AccountHolder implements Observer
 
     public void setSearchCriteria(SearchCriteria criteria)
     {
-        renter.searchCriteria = new SearchCriteria(criteria);
+        renter.setSearchCriteria(new SearchCriteria(criteria));
     }
 
     @Override
