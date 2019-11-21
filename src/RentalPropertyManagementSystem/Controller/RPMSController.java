@@ -58,6 +58,8 @@ public class RPMSController
         view.getManagerScreen().getChangePropertyListingButton().addActionListener(new ManagePropertiesActionListener());
         view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
         view.getManagerScreen().getPropertiesScreen().getProperties().addMouseListener(new DoubleClickDisplayChangeListing());
+        view.getManagerScreen().getViewRentersButton().addActionListener(new ViewRentersActionListener());
+        view.getManagerScreen().getViewLandlordsButton().addActionListener(new ViewLandlordsActionListener());
     }
 
     /**
@@ -225,6 +227,12 @@ public class RPMSController
     {
         list.setModel(renterWebsite.propertyRepo.toStringSummaryList(propertyList));
         System.out.println("Displaying properties");
+    }
+
+    public void displayUsers(JList list, ArrayList<AccountHolder> renterList)
+    {
+        list.setModel(renterWebsite.userRepo.toStringList(renterList));
+        System.out.println("Displaying users");
     }
 
     public class RequestSummaryReportActionListener implements ActionListener{
@@ -526,22 +534,29 @@ public class RPMSController
         }
         @Override
         public void actionPerformed(ActionEvent e){
-           // int i = 0;
             STATE changeState = STATE.valueOf(view.getManagerScreen().getPropertiesScreen().getChangeListing().getComboBox1().getSelectedItem().toString());
             renterWebsite.propertyRepo.getAllProperties().get(index).setState(changeState);
 
-/*            for(Property p : renterWebsite.propertyRepo.getAllProperties()){
-                if(i == index) {
-                    p.setState(STATE.valueOf(view.getManagerScreen().getPropertiesScreen().getChangeListing().getComboBox1().getSelectedItem().toString()));
-                    System.out.println(i);
-                    break;
-                }
-                i++;
-            }*/
+
             displayProperties(view.getManagerScreen().getPropertiesScreen().getProperties(), renterWebsite.propertyRepo.getAllProperties());
             view.getManagerScreen().getPropertiesScreen().setVisible(true);
             view.getManagerScreen().getPropertiesScreen().getChangeListing().setVisible(false);
         }
     }
 
+    public class ViewRentersActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            displayUsers(view.getManagerScreen().getRenterList().getRenters(), renterWebsite.userRepo.getAllRenters());
+            view.getManagerScreen().getRenterList().setVisible(true);
+        }
+    }
+
+    public class ViewLandlordsActionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            displayUsers(view.getManagerScreen().getLandlordList().getLandlords(), renterWebsite.userRepo.getAllLandlords());
+            view.getManagerScreen().getLandlordList().setVisible(true);
+        }
+    }
 }

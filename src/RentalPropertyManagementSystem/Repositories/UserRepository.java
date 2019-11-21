@@ -1,9 +1,13 @@
 package RentalPropertyManagementSystem.Repositories;
 
 import RentalPropertyManagementSystem.Client.Container.Account;
+import RentalPropertyManagementSystem.Client.Container.Property;
+import RentalPropertyManagementSystem.Client.Container.UserType;
 import RentalPropertyManagementSystem.Users.AccountHolder;
 import RentalPropertyManagementSystem.Users.Landlord;
+import RentalPropertyManagementSystem.Users.RegisteredRenter;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -106,4 +110,32 @@ public class UserRepository
 
     }
 
+    public ArrayList<AccountHolder> getAllRenters(){
+        ArrayList<AccountHolder> renters = new ArrayList<>();
+        for(AccountHolder a : users){
+            if (a.getAccountType() == UserType.RegRenter)
+                renters.add(a);
+        }
+        return renters;
+    }
+
+    public ArrayList<AccountHolder> getAllLandlords(){
+        ArrayList<AccountHolder> renters = new ArrayList<>();
+        for(AccountHolder a : users){
+            if (a.getAccountType() == UserType.Landlord)
+                renters.add(a);
+        }
+        return renters;
+    }
+
+
+    public DefaultListModel<String> toStringList(ArrayList<AccountHolder> userList)
+    {
+        DefaultListModel<String> dlm = new DefaultListModel<String>();
+        for(AccountHolder a : userList)
+        {
+            dlm.addElement(a.toString());
+        }
+        return dlm;
+    }
 }
