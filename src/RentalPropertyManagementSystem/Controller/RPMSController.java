@@ -46,6 +46,7 @@ public class RPMSController
 
         view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getLandlordScreen().getRegPropertyScreen().getRegisterPropertyButton().addActionListener(new RegisterProperty());
+        view.getLandlordScreen().getRefreshButton().addActionListener(new DisplayLandlordProperties());
         view.getLandlordScreen().getUnpaidFeeScreen().getRefreshButton().addActionListener(new DisplayUnpaidFees());
         view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList().addMouseListener(new PayUnpaidFees());
         view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new PayFeeButtonListener());
@@ -424,6 +425,16 @@ public class RPMSController
     {
         ArrayList<Property> unpaidProperties = renterWebsite.propertyRepo.getLandlordUnpaidProperties((Landlord)currentUser.get());
         displayProperties(view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList(), unpaidProperties);
+    }
+
+    public class DisplayLandlordProperties implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            ArrayList<Property> properties = renterWebsite.propertyRepo.getLandlordProperties((Landlord)currentUser.get());
+            displayProperties(view.getLandlordScreen().getPropertyList(), properties);
+        }
     }
 
     public class PayUnpaidFees extends MouseAdapter
