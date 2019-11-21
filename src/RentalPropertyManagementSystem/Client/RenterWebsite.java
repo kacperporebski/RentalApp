@@ -160,9 +160,12 @@ public class RenterWebsite
 
         }
 
+    public Database getMyDatabase()
+    {
+        return myDatabase;
+    }
 
-
-    //TODO FUNCTIONS HELLO?
+//TODO FUNCTIONS HELLO?
 
 
 }

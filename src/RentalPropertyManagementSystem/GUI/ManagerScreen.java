@@ -19,6 +19,7 @@ public class ManagerScreen extends JFrame
     private SummaryReportScreen summaryScreen;
     private ChangeFeeScreen changeFeeScreen;
     private PropertiesScreen propertiesScreen;
+    private ChangeListingScreen changeListingScreen;
 
     public ManagerScreen(){
         this.setContentPane(panel);
@@ -27,6 +28,7 @@ public class ManagerScreen extends JFrame
         changeFeeScreen = new ChangeFeeScreen();
         summaryScreen = new SummaryReportScreen();
         propertiesScreen = new PropertiesScreen();
+        changeListingScreen = new ChangeListingScreen();
     }
 
     public JButton getLogoutButton() {
@@ -63,5 +65,15 @@ public class ManagerScreen extends JFrame
 
     public PropertiesScreen getPropertiesScreen() {
         return propertiesScreen;
+    }
+
+    public JPanel getPanel()
+    {
+        return panel;
+    }
+
+    public ChangeListingScreen getChangeListingScreen()
+    {
+        return changeListingScreen;
     }
 }

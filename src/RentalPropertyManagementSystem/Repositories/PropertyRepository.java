@@ -24,6 +24,7 @@ public class PropertyRepository implements Subject
 
     public void addProperty(Property property)
     {
+        System.out.println("Added property " + property.toString());
         properties.add(property);
         notifyObserver();
     }

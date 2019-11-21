@@ -50,12 +50,12 @@ public class RPMSController
         view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList().addMouseListener(new PayUnpaidFees());
         view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new PayFeeButtonListener());
 
-
         view.getManagerScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
         view.getManagerScreen().getChangeRegistrationFeeButton().addActionListener(new ChangeRegFeeActionListener());
         view.getManagerScreen().getRequestSummaryReportButton().addActionListener(new RequestSummaryReportActionListener());
         view.getManagerScreen().getChangePropertyListingButton().addActionListener(new ManagePropertiesActionListener());
+        view.getManagerScreen().getPropertiesScreen().getProperties().addMouseListener(new DoubleClickDisplayChangeListing());
     }
 
     /**
@@ -402,7 +402,12 @@ public class RPMSController
             else
                 furnished = false;
 
-            renterWebsite.propertyRepo.addProperty(new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType, quadrant));
+            Property p = new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType, quadrant);
+            renterWebsite.propertyRepo.addProperty(p);
+            renterWebsite.getMyDatabase().getPropertyDatabase().addProperty(p);
+
+            currentScreen.setVisible(false);
+
         }
     }
 
@@ -448,35 +453,15 @@ public class RPMSController
         }
     }
 
-    public class RegisterNewProperty implements ActionListener
+    public class DoubleClickDisplayChangeListing extends MouseAdapter
     {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        public void mouseClicked(MouseEvent e)
         {
-            RegisterPropertyScreen currentScreen = view.getLandlordScreen().getRegPropertyScreen();
-            PropertyType type = PropertyType.valueOf(currentScreen.getPropertyTypeComboBox().getSelectedItem().toString());
-            int bedrooms = 0;
-            int bathrooms = 0;
-            double cost = 0;
-
-            try
+            if(e.getClickCount() == 2)
             {
-                bedrooms = Integer.parseInt(currentScreen.getBedroomTextField().getText());
-                bathrooms = Integer.parseInt(currentScreen.getBathroomTextField().getText());
-                cost = Double.parseDouble(currentScreen.getCostTextField().getText());
-            }catch(NumberFormatException a)
-            {
-                a.printStackTrace();
+                view.getManagerScreen().getChangeListingScreen().setVisible(true);
             }
-
-            String furnish = currentScreen.getFurnishedComboBox().getSelectedItem().toString();
-            boolean furnished = (furnish.compareTo("Furnished") == 0);
-            String address = currentScreen.getAddressTextField().getText();
-            CityQuadrants quadrant = CityQuadrants.valueOf(currentScreen.getCityQuadrantComboBox().getSelectedItem().toString());
-
         }
     }
-
-
 
 }
