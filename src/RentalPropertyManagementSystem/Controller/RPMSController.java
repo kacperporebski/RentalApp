@@ -52,10 +52,10 @@ public class RPMSController
         view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new PayFeeButtonListener());
 
         view.getManagerScreen().getLogoutButton().addActionListener(new LogoutActionListener());
-        view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
         view.getManagerScreen().getChangeRegistrationFeeButton().addActionListener(new ChangeRegFeeActionListener());
         view.getManagerScreen().getRequestSummaryReportButton().addActionListener(new RequestSummaryReportActionListener());
         view.getManagerScreen().getChangePropertyListingButton().addActionListener(new ManagePropertiesActionListener());
+        view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
         view.getManagerScreen().getPropertiesScreen().getProperties().addMouseListener(new DoubleClickDisplayChangeListing());
     }
 
@@ -468,10 +468,35 @@ public class RPMSController
     {
         public void mouseClicked(MouseEvent e)
         {
-            if(e.getClickCount() == 2)
-            {
-                view.getManagerScreen().getChangeListingScreen().setVisible(true);
+
+            if(e.getClickCount() == 2) {
+                int index = view.getManagerScreen().getPropertiesScreen().getProperties().getSelectedIndex();
+                view.getManagerScreen().getPropertiesScreen().getChangeListing().getChangeStateButton().addActionListener(new ChangeListingActionListener(index));
+                view.getManagerScreen().getPropertiesScreen().getChangeListing().setVisible(true);
             }
+        }
+    }
+
+    public class ChangeListingActionListener implements ActionListener{
+        int index;
+
+        public ChangeListingActionListener(int i){
+            index = i;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e){
+            int i = 0;
+            for(Property p : renterWebsite.propertyRepo.getAllProperties()){
+                if(i == index) {
+                    p.setState(STATE.valueOf(view.getManagerScreen().getPropertiesScreen().getChangeListing().getComboBox1().getSelectedItem().toString()));
+                    System.out.println(i);
+                    break;
+                }
+                i++;
+            }
+            displayProperties(view.getManagerScreen().getPropertiesScreen().getProperties(),renterWebsite.propertyRepo.getAllProperties());
+            view.getManagerScreen().getPropertiesScreen().setVisible(true);
+            view.getManagerScreen().getPropertiesScreen().getChangeListing().setVisible(false);
         }
     }
 

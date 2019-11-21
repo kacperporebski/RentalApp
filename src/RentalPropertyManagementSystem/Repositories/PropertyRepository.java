@@ -160,7 +160,7 @@ public class PropertyRepository implements Subject
         DefaultListModel<String> dlm = new DefaultListModel<String>();
         for(Property p : pList)
         {
-           // dlm.addElement(p.toStringSummary());
+           dlm.addElement(p.toStringSummary());
         }
         return dlm;
     }

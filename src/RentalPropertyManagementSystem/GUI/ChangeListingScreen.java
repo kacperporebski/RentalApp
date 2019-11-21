@@ -1,6 +1,8 @@
 package RentalPropertyManagementSystem.GUI;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ChangeListingScreen extends JFrame
 {
@@ -9,12 +11,27 @@ public class ChangeListingScreen extends JFrame
     private JComboBox comboBox1;
     private JButton cancelButton;
 
-    public ChangeListingScreen()
-    {
+    public ChangeListingScreen() {
         this.setName("Change Listing");
         this.setContentPane(panel);
         this.pack();
+
+        cancelButton.addActionListener(new CancelActionListener(this));
     }
+
+    public class CancelActionListener implements ActionListener{
+        ChangeListingScreen screen;
+
+        public CancelActionListener(ChangeListingScreen s){
+            screen = s;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e){
+            screen.setVisible(false);
+        }
+    }
+
 
     public JPanel getPanel()
     {

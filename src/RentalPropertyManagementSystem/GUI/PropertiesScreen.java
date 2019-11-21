@@ -9,9 +9,13 @@ public class PropertiesScreen extends JFrame{
     private JList properties;
     private JButton cancelButton;
 
+    private ChangeListingScreen changeListing;
+
     public PropertiesScreen(){
         this.setContentPane(panel);
         this.pack();
+
+        changeListing = new ChangeListingScreen();
 
         cancelButton.addActionListener(new CancelActionListener(this));
     }
@@ -31,5 +35,13 @@ public class PropertiesScreen extends JFrame{
 
     public JList getProperties() {
         return properties;
+    }
+
+    public ChangeListingScreen getChangeListing() {
+        return changeListing;
+    }
+
+    public void setProperties(JList properties) {
+        this.properties = properties;
     }
 }
