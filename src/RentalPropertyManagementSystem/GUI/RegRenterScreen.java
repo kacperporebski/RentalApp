@@ -16,12 +16,15 @@ public class RegRenterScreen extends JFrame
     private JPanel regPanel;
     private SearchCriteriaScreen searchCriteriaScreen;
 
+    private PayFeeScreen payFeeScreen;
+
 
     public RegRenterScreen()
     {
         this.setContentPane(regPanel);
         this.pack();
         searchCriteriaScreen = new SearchCriteriaScreen();
+        payFeeScreen = new PayFeeScreen();
 
         enterSearchCriteriaButton.addActionListener(new ShowSearchCriteriaScreenActionListener());
     }
@@ -68,6 +71,21 @@ public class RegRenterScreen extends JFrame
     public SearchCriteriaScreen getSearchCriteriaScreen()
     {
         return searchCriteriaScreen;
+    }
+
+    public JButton getDisplayNotificationsButton()
+    {
+        return displayNotificationsButton;
+    }
+
+    public JPanel getRegPanel()
+    {
+        return regPanel;
+    }
+
+    public PayFeeScreen getPayFeeScreen()
+    {
+        return payFeeScreen;
     }
 }
 

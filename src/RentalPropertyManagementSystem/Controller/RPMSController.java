@@ -39,6 +39,7 @@ public class RPMSController
         view.getRegRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
+        view.getRegRenterScreen().getPropertyList().addMouseListener(new DoubleClickRentProperty());
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
@@ -285,6 +286,26 @@ public class RPMSController
         }
     }
 
+    public class DoubleClickRentProperty extends MouseAdapter
+    {
+        public void mouseClicked(MouseEvent e)
+        {
+            if(e.getClickCount() == 2)
+            {
+                view.getRegRenterScreen().getPayFeeScreen().setVisible(true);
+            }
+        }
+    }
+
+    public class RegRenterPayProperty implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            view.getRegRenterScreen().getPropertyList();
+        }
+    }
+
     public class EnterSearchCriteria implements ActionListener
     {
         @Override
@@ -469,8 +490,14 @@ public class RPMSController
         public void mouseClicked(MouseEvent e)
         {
 
-            if(e.getClickCount() == 2) {
+            if(e.getClickCount() == 2)
+            {
                 int index = view.getManagerScreen().getPropertiesScreen().getProperties().getSelectedIndex();
+
+                for(ActionListener t : view.getManagerScreen().getPropertiesScreen().getChangeListing().getChangeStateButton().getActionListeners())
+                {
+                    view.getManagerScreen().getPropertiesScreen().getChangeListing().getChangeStateButton().removeActionListener(t);
+                }
                 view.getManagerScreen().getPropertiesScreen().getChangeListing().getChangeStateButton().addActionListener(new ChangeListingActionListener(index));
                 view.getManagerScreen().getPropertiesScreen().getChangeListing().setVisible(true);
             }
@@ -485,16 +512,19 @@ public class RPMSController
         }
         @Override
         public void actionPerformed(ActionEvent e){
-            int i = 0;
-            for(Property p : renterWebsite.propertyRepo.getAllProperties()){
+           // int i = 0;
+            STATE changeState = STATE.valueOf(view.getManagerScreen().getPropertiesScreen().getChangeListing().getComboBox1().getSelectedItem().toString());
+            renterWebsite.propertyRepo.getAllProperties().get(index).setState(changeState);
+
+/*            for(Property p : renterWebsite.propertyRepo.getAllProperties()){
                 if(i == index) {
                     p.setState(STATE.valueOf(view.getManagerScreen().getPropertiesScreen().getChangeListing().getComboBox1().getSelectedItem().toString()));
                     System.out.println(i);
                     break;
                 }
                 i++;
-            }
-            displayProperties(view.getManagerScreen().getPropertiesScreen().getProperties(),renterWebsite.propertyRepo.getAllProperties());
+            }*/
+            displayProperties(view.getManagerScreen().getPropertiesScreen().getProperties(), renterWebsite.propertyRepo.getAllProperties());
             view.getManagerScreen().getPropertiesScreen().setVisible(true);
             view.getManagerScreen().getPropertiesScreen().getChangeListing().setVisible(false);
         }
