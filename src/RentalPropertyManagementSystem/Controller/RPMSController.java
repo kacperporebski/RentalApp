@@ -323,6 +323,7 @@ public class RPMSController
         {
             renterWebsite.propertyRepo.getAllActiveProperties().get(index).getRent().isPaid();
             renterWebsite.propertyRepo.getAllActiveProperties().get(index).setState(STATE.RENTED);
+            renterWebsite.propertyRepo.getAllActiveProperties().get(index).setDateRented(new Date());
             displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
             view.getRegRenterScreen().getPayFeeScreen().setVisible(false);
         }
