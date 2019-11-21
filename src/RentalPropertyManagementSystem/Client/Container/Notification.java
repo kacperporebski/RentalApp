@@ -15,4 +15,9 @@ public class Notification
         //TODO Where we displaying this dog? Displayed in GUI, not even sure if we need this... We will see
     }
 
+    public String toString()
+    {
+        return date.toString() + "  Property: " + newProperty.toString() +"\n";
+    }
+
 }

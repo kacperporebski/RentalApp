@@ -1,6 +1,7 @@
 package RentalPropertyManagementSystem.Repositories;
 
 import RentalPropertyManagementSystem.Client.Container.Account;
+import RentalPropertyManagementSystem.Client.Container.Notification;
 import RentalPropertyManagementSystem.Client.Container.Property;
 import RentalPropertyManagementSystem.Client.Container.UserType;
 import RentalPropertyManagementSystem.Users.AccountHolder;
@@ -145,6 +146,16 @@ public class UserRepository
         for(AccountHolder a : userList)
         {
             dlm.addElement(a.toString());
+        }
+        return dlm;
+    }
+
+    public DefaultListModel<String> toStringNotificationList(ArrayList<Notification> notificationList)
+    {
+        DefaultListModel<String> dlm = new DefaultListModel<>();
+        for(Notification n : notificationList)
+        {
+            dlm.addElement(n.toString());
         }
         return dlm;
     }

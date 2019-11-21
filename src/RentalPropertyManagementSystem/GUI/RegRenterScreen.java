@@ -17,6 +17,7 @@ public class RegRenterScreen extends JFrame
     private SearchCriteriaScreen searchCriteriaScreen;
 
     private PayFeeScreen payFeeScreen;
+    private NotificationScreen notificationScreen;
 
 
     public RegRenterScreen()
@@ -86,6 +87,66 @@ public class RegRenterScreen extends JFrame
     public PayFeeScreen getPayFeeScreen()
     {
         return payFeeScreen;
+    }
+
+    public void setPanel(JPanel panel)
+    {
+        this.panel = panel;
+    }
+
+    public void setRefreshButton(JButton refreshButton)
+    {
+        this.refreshButton = refreshButton;
+    }
+
+    public void setEnterSearchCriteriaButton(JButton enterSearchCriteriaButton)
+    {
+        this.enterSearchCriteriaButton = enterSearchCriteriaButton;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane)
+    {
+        this.scrollPane = scrollPane;
+    }
+
+    public void setPropertyList(JList propertyList)
+    {
+        this.propertyList = propertyList;
+    }
+
+    public void setLogoutButton(JButton logoutButton)
+    {
+        this.logoutButton = logoutButton;
+    }
+
+    public void setDisplayNotificationsButton(JButton displayNotificationsButton)
+    {
+        this.displayNotificationsButton = displayNotificationsButton;
+    }
+
+    public void setRegPanel(JPanel regPanel)
+    {
+        this.regPanel = regPanel;
+    }
+
+    public void setSearchCriteriaScreen(SearchCriteriaScreen searchCriteriaScreen)
+    {
+        this.searchCriteriaScreen = searchCriteriaScreen;
+    }
+
+    public void setPayFeeScreen(PayFeeScreen payFeeScreen)
+    {
+        this.payFeeScreen = payFeeScreen;
+    }
+
+    public NotificationScreen getNotificationScreen()
+    {
+        return notificationScreen;
+    }
+
+    public void setNotificationScreen(NotificationScreen notificationScreen)
+    {
+        this.notificationScreen = notificationScreen;
     }
 }
 

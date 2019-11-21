@@ -18,6 +18,7 @@ public class RegisteredRenter extends AccountHolder implements Observer
     @Override
     public void update(ArrayList<Property> properties)
     {
+        System.out.println("Updating registerRenter notifications\n");
         //Todo Currently this function recreates notifications for already added properties. Fix so that it only creates new ones for new properties.
         for(Property p : properties)
         {
@@ -33,7 +34,7 @@ public class RegisteredRenter extends AccountHolder implements Observer
 
     public void setSearchCriteria(SearchCriteria criteria)
     {
-        renter.searchCriteria = criteria;
+        renter.searchCriteria = new SearchCriteria(criteria);
     }
 
     @Override

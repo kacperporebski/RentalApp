@@ -11,6 +11,16 @@ public class SearchCriteria
     private boolean unfurnished;
     private ArrayList<CityQuadrants> cityQuadrants;
 
+    public SearchCriteria(SearchCriteria s)
+    {
+        propertyType = s.propertyType;
+        rangeOfBedrooms = s.rangeOfBedrooms;
+        rangeOfBathrooms = s.rangeOfBathrooms;
+        furnished = s.furnished;
+        unfurnished = s.unfurnished;
+        cityQuadrants = s.cityQuadrants;
+    }
+
     public SearchCriteria(ArrayList<PropertyType> type, ArrayList<Integer> bedrooms, ArrayList<Integer> bathrooms, boolean furnished, boolean unfurnished, ArrayList<CityQuadrants> cityQuadrants)
     {
         if(bedrooms.get(0) > bedrooms.get(1))
@@ -98,5 +108,25 @@ public class SearchCriteria
             }
         }
         return matching;
+    }
+
+    public String toString()
+    {
+        String s = "Property Types: ";
+        for(PropertyType p: propertyType)
+        {
+            s += " " + p.toString();
+        }
+        s += "\n Bedrooms: " + rangeOfBedrooms.get(0) + " to " + rangeOfBedrooms.get(1);
+        s += "\n Bathrooms: " + rangeOfBathrooms.get(0) + " to " + rangeOfBathrooms.get(1);
+        s += "\n Furnished: " + furnished + " Unfurnished: " + unfurnished + "\n";
+
+        s += "City Quadrants: ";
+        for(CityQuadrants c : cityQuadrants)
+        {
+            s += c.toString() + " ";
+        }
+        s += "\n";
+        return s;
     }
 }

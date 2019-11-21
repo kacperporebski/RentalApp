@@ -40,6 +40,7 @@ public class RPMSController
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRegRenterScreen().getPropertyList().addMouseListener(new DoubleClickRentProperty());
+        view.getRegRenterScreen().getDisplayNotificationsButton().addActionListener(new DisplayNotifications());
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
@@ -223,6 +224,12 @@ public class RPMSController
         System.out.println("Displaying properties");
     }
 
+    public void displayNotifications(JList list, ArrayList<Notification> notificationList)
+    {
+        list.setModel(renterWebsite.userRepo.toStringNotificationList(notificationList));
+        System.out.println("Displaying properties");
+    }
+
     public void displaySummaryProperties(JList list, ArrayList<Property> propertyList)
     {
         list.setModel(renterWebsite.propertyRepo.toStringSummaryList(propertyList));
@@ -278,9 +285,11 @@ public class RPMSController
             //If Registered Renter:
             if(e.getSource() == view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
             {
-                criteria = createCriteria(view.getRenterScreen().getSearchCriteriaScreen());
+                criteria = createCriteria(view.getRegRenterScreen().getSearchCriteriaScreen());
+                System.out.printf("Search Criteria " + criteria.toString());
                 ((RegisteredRenter)currentUser.get()).setSearchCriteria(criteria);
                 view.getRegRenterScreen().getSearchCriteriaScreen().setVisible(false);
+                renterWebsite.propertyRepo.registerObserver(((RegisteredRenter)currentUser.get()));
             }
             //If Regular Renter:
             else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
@@ -288,8 +297,9 @@ public class RPMSController
                 //Todo figure out how to convert renter into a registered renter
                 System.out.println("Must first register\n");
                 view.getRegUserScreen().setVisible(true);
-                view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(3);
+                view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(2);
                 view.getRenterScreen().getSearchCriteriaScreen().setVisible(false);
+                view.getRenterScreen().setVisible(false);
             }
         }
     }
@@ -326,6 +336,17 @@ public class RPMSController
             renterWebsite.propertyRepo.getAllActiveProperties().get(index).setDateRented(new Date());
             displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
             view.getRegRenterScreen().getPayFeeScreen().setVisible(false);
+        }
+    }
+
+    public class DisplayNotifications implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            view.getRegRenterScreen().getNotificationScreen().setVisible(true);
+            ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
+            displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
         }
     }
 
@@ -537,7 +558,8 @@ public class RPMSController
         public void actionPerformed(ActionEvent e){
             STATE changeState = STATE.valueOf(view.getManagerScreen().getPropertiesScreen().getChangeListing().getComboBox1().getSelectedItem().toString());
             renterWebsite.propertyRepo.getAllProperties().get(index).setState(changeState);
-
+            if(changeState == STATE.RENTED)
+                renterWebsite.propertyRepo.getAllProperties().get(index).setDateRented(new Date());
 
             displayProperties(view.getManagerScreen().getPropertiesScreen().getProperties(), renterWebsite.propertyRepo.getAllProperties());
             view.getManagerScreen().getPropertiesScreen().setVisible(true);
