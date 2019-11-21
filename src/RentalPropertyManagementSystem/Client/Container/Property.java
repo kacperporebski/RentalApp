@@ -61,7 +61,7 @@ public class Property
     }
 
     public String toStringSummary() {
-        return "Landlord: " + myLandlord + "\tHouse ID: " + getID() + "\tAddress: " + address;
+        return "Landlord: " + myLandlord.getName() + "\t House ID: " + getID() + "\t Address: " + address;
     }
 
     public boolean furnished(){
@@ -131,6 +131,10 @@ public class Property
     public void setState(STATE state)
     {
         this.state = state;
+
+        if(state == STATE.RENTED)
+            this.setDateRented(new Date());
+
     }
 
     public void setNumberOfBedrooms(int numberOfBedrooms)

@@ -447,33 +447,37 @@ public class RPMSController
         public void actionPerformed(ActionEvent actionEvent)
         {
             RegisterPropertyScreen currentScreen = view.getLandlordScreen().getRegPropertyScreen();
-            PropertyType propertyType = PropertyType.valueOf(currentScreen.getPropertyTypeComboBox().getSelectedItem().toString());
-            int bedrooms = 0;
-            int bathrooms = 0;
-            double rentalFee = Double.parseDouble(currentScreen.getCostTextField().getText());
-            boolean furnished;
-            String address = currentScreen.getAddressTextField().getText();
-            CityQuadrants quadrant = CityQuadrants.valueOf(currentScreen.getCityQuadrantComboBox().getSelectedItem().toString());
+            Property p;
+            try {
+                PropertyType propertyType = PropertyType.valueOf(currentScreen.getPropertyTypeComboBox().getSelectedItem().toString());
+                int bedrooms = 0;
+                int bathrooms = 0;
+                double rentalFee = Double.parseDouble(currentScreen.getCostTextField().getText());
+                boolean furnished;
+                String address = currentScreen.getAddressTextField().getText();
+                CityQuadrants quadrant = CityQuadrants.valueOf(currentScreen.getCityQuadrantComboBox().getSelectedItem().toString());
 
-            try{
-                bedrooms = Integer.parseInt(currentScreen.getBedroomTextField().getText());
-                bathrooms = Integer.parseInt(currentScreen.getBathroomTextField().getText());
-            }catch(NumberFormatException e)
-            {
-                e.printStackTrace();
+                try {
+                    bedrooms = Integer.parseInt(currentScreen.getBedroomTextField().getText());
+                    bathrooms = Integer.parseInt(currentScreen.getBathroomTextField().getText());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+
+                if (currentScreen.getFurnishedComboBox().getSelectedItem().toString().compareTo("Furnished") == 0)
+                    furnished = true;
+                else
+                    furnished = false;
+
+                p = new Property((Landlord) currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType, quadrant);
+            }catch (Exception e){
+                view.getLandlordScreen().getRegPropertyScreen().getError().setVisible(true);
+                return;
             }
-
-            if(currentScreen.getFurnishedComboBox().getSelectedItem().toString().compareTo("Furnished") == 0)
-                furnished = true;
-            else
-                furnished = false;
-
-            Property p = new Property((Landlord)currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType, quadrant);
             renterWebsite.propertyRepo.addProperty(p);
             renterWebsite.getMyDatabase().getPropertyDatabase().addProperty(p);
 
             currentScreen.setVisible(false);
-
         }
     }
 
@@ -526,6 +530,8 @@ public class RPMSController
 
             unpaidProperties.get(index).getRegistrationFee().setPaid(true);
             refreshUnpaidFees();
+
+            view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().setVisible(false);
         }
     }
 
@@ -558,8 +564,6 @@ public class RPMSController
         public void actionPerformed(ActionEvent e){
             STATE changeState = STATE.valueOf(view.getManagerScreen().getPropertiesScreen().getChangeListing().getComboBox1().getSelectedItem().toString());
             renterWebsite.propertyRepo.getAllProperties().get(index).setState(changeState);
-            if(changeState == STATE.RENTED)
-                renterWebsite.propertyRepo.getAllProperties().get(index).setDateRented(new Date());
 
             displayProperties(view.getManagerScreen().getPropertiesScreen().getProperties(), renterWebsite.propertyRepo.getAllProperties());
             view.getManagerScreen().getPropertiesScreen().setVisible(true);

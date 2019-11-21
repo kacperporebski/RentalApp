@@ -14,11 +14,15 @@ public class RegisterPropertyScreen extends JFrame
     private JTextField costTextField;
     private JTextField addressTextField;
 
+    private PropertyErrorScreen error;
+
     public RegisterPropertyScreen()
     {
         this.setName("Register Property");
         this.setContentPane(panel);
         this.pack();
+
+        error = new PropertyErrorScreen();
     }
 
     public JComboBox getPropertyTypeComboBox()
@@ -109,5 +113,9 @@ public class RegisterPropertyScreen extends JFrame
     public void setAddressTextField(JTextField addressTextField)
     {
         this.addressTextField = addressTextField;
+    }
+
+    public PropertyErrorScreen getError() {
+        return error;
     }
 }
