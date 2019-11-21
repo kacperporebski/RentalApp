@@ -48,6 +48,8 @@ public class RPMSController
         view.getLandlordScreen().getRegPropertyScreen().getRegisterPropertyButton().addActionListener(new RegisterProperty());
         view.getLandlordScreen().getUnpaidFeeScreen().getRefreshButton().addActionListener(new DisplayUnpaidFees());
         view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList().addMouseListener(new PayUnpaidFees());
+        view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new PayFeeButtonListener());
+
 
         view.getManagerScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getManagerScreen().getChangeFeeScreen().getChangeFeeButton().addActionListener(new ChangeFeeActionListener());
@@ -409,9 +411,14 @@ public class RPMSController
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            ArrayList<Property> unpaidProperties = renterWebsite.propertyRepo.getLandlordUnpaidProperties((Landlord)currentUser.get());
-            displayProperties(view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList(), unpaidProperties);
+            refreshUnpaidFees();
         }
+    }
+
+    public void refreshUnpaidFees()
+    {
+        ArrayList<Property> unpaidProperties = renterWebsite.propertyRepo.getLandlordUnpaidProperties((Landlord)currentUser.get());
+        displayProperties(view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList(), unpaidProperties);
     }
 
     public class PayUnpaidFees extends MouseAdapter
@@ -435,6 +442,38 @@ public class RPMSController
         {
             ArrayList<Property> unpaidProperties = renterWebsite.propertyRepo.getLandlordUnpaidProperties((Landlord)currentUser.get());
             int index = view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList().getSelectedIndex();
+
+            unpaidProperties.get(index).getRegistrationFee().setPaid(true);
+            refreshUnpaidFees();
+        }
+    }
+
+    public class RegisterNewProperty implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            RegisterPropertyScreen currentScreen = view.getLandlordScreen().getRegPropertyScreen();
+            PropertyType type = PropertyType.valueOf(currentScreen.getPropertyTypeComboBox().getSelectedItem().toString());
+            int bedrooms = 0;
+            int bathrooms = 0;
+            double cost = 0;
+
+            try
+            {
+                bedrooms = Integer.parseInt(currentScreen.getBedroomTextField().getText());
+                bathrooms = Integer.parseInt(currentScreen.getBathroomTextField().getText());
+                cost = Double.parseDouble(currentScreen.getCostTextField().getText());
+            }catch(NumberFormatException a)
+            {
+                a.printStackTrace();
+            }
+
+            String furnish = currentScreen.getFurnishedComboBox().getSelectedItem().toString();
+            boolean furnished = (furnish.compareTo("Furnished") == 0);
+            String address = currentScreen.getAddressTextField().getText();
+            CityQuadrants quadrant = CityQuadrants.valueOf(currentScreen.getCityQuadrantComboBox().getSelectedItem().toString());
+
         }
     }
 

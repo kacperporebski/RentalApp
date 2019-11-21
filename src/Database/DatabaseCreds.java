@@ -15,9 +15,9 @@ public interface DatabaseCreds {
     /**
      * username for mySQL
      */
-    static final String USERNAME = "root";
+    static final String USERNAME = "newuser";
     /**
      * password for mySQL
      */
-    static final String PASSWORD = "Milkduds.7";
+    static final String PASSWORD = "password";
 }

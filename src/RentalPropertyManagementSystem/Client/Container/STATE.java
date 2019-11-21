@@ -4,5 +4,5 @@ public enum STATE {
     RENTED,
     ACTIVE,
     CANCELLED,
-    SUSPENED
+    SUSPENDED
 }
