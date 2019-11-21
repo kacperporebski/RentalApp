@@ -292,17 +292,31 @@ public class RPMSController
         {
             if(e.getClickCount() == 2)
             {
+                for(ActionListener t:  view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners())
+                {
+                    view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().removeActionListener(t);
+                }
+                int index = view.getRegRenterScreen().getPropertyList().getSelectedIndex();
+
+                view.getRegRenterScreen().getPayFeeScreen().getTextArea1().setText( renterWebsite.propertyRepo.getAllActiveProperties().get(index).getRent().toString());
                 view.getRegRenterScreen().getPayFeeScreen().setVisible(true);
+                view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
+
             }
         }
     }
 
     public class RegRenterPayProperty implements ActionListener
     {
+        int index;
+        public RegRenterPayProperty(int index){this.index = index;}
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            view.getRegRenterScreen().getPropertyList();
+            renterWebsite.propertyRepo.getAllActiveProperties().get(index).getRent().isPaid();
+            renterWebsite.propertyRepo.getAllActiveProperties().get(index).setState(STATE.RENTED);
+            displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
+            view.getRegRenterScreen().getPayFeeScreen().setVisible(false);
         }
     }
 
