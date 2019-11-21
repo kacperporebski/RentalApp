@@ -20,4 +20,7 @@ public class Notification
         return date.toString() + "  Property: " + newProperty.toString() +"\n";
     }
 
+    public Property getNewProperty() {
+        return newProperty;
+    }
 }
