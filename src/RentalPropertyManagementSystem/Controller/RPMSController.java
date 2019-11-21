@@ -285,7 +285,9 @@ public class RPMSController
             //If Registered Renter:
             if(e.getSource() == view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
             {
+
                 criteria = createCriteria(view.getRegRenterScreen().getSearchCriteriaScreen());
+
                 System.out.printf("Search Criteria " + criteria.toString());
                 ((RegisteredRenter)currentUser.get()).setSearchCriteria(criteria);
                 view.getRegRenterScreen().getSearchCriteriaScreen().setVisible(false);
@@ -395,21 +397,40 @@ public class RPMSController
             propertyTypes.add(PropertyType.Condo);
         if(frame.getDuplexCheckBox().isSelected())
             propertyTypes.add(PropertyType.Duplex);
+        if(propertyTypes.isEmpty()){
+            propertyTypes.add(PropertyType.Apartment);
+            propertyTypes.add(PropertyType.AttachedHouse);
+            propertyTypes.add(PropertyType.DetachedHouse);
+            propertyTypes.add(PropertyType.TownHouse);
+            propertyTypes.add(PropertyType.Condo);
+            propertyTypes.add(PropertyType.Duplex);
+        }
 
-        Integer lowerBedrooms = 0;
-        Integer upperBedrooms = 0;
-        Integer lowerBathrooms = 0;
-        Integer upperBathrooms = 0;
-        try
-        {
+        Integer lowerBedrooms;
+        Integer upperBedrooms;
+        Integer lowerBathrooms;
+        Integer upperBathrooms;
+        try {
              lowerBedrooms = Integer.parseInt(frame.getBedroomLowerTextField().getText());
-             upperBedrooms = Integer.parseInt(frame.getBedroomUpperTextField().getText());
-             lowerBathrooms = Integer.parseInt(frame.getBathroomLowerTextField().getText());
-             upperBathrooms = Integer.parseInt(frame.getBathroomUpperTextField().getText());
+        } catch(NumberFormatException e) {
+            lowerBedrooms = 0;
+        }
+        try{
+            upperBedrooms = Integer.parseInt(frame.getBedroomUpperTextField().getText());
+        } catch(NumberFormatException e){
+            upperBedrooms = 100;
+        }
 
-        }catch(NumberFormatException e)
-        {
-            e.printStackTrace();
+        try{
+            lowerBathrooms = Integer.parseInt(frame.getBathroomLowerTextField().getText());
+        } catch(NumberFormatException e){
+            lowerBathrooms = 0;
+        }
+
+        try{
+            upperBathrooms = Integer.parseInt(frame.getBathroomUpperTextField().getText());
+        } catch(NumberFormatException e){
+            upperBathrooms = 100;
         }
 
         bedrooms.add(lowerBedrooms);
@@ -427,6 +448,11 @@ public class RPMSController
         else
             unfurnished = false;
 
+        if(!unfurnished && !furnished) {
+            furnished = true;
+            unfurnished = true;
+        }
+
         if(frame.getSWCheckBox().isSelected())
             cityQuadrants.add(CityQuadrants.SW);
         if(frame.getNWCheckBox().isSelected())
@@ -435,6 +461,12 @@ public class RPMSController
             cityQuadrants.add(CityQuadrants.SE);
         if(frame.getNECheckBox().isSelected())
             cityQuadrants.add(CityQuadrants.NE);
+        if(cityQuadrants.isEmpty()){
+            cityQuadrants.add(CityQuadrants.SW);
+            cityQuadrants.add(CityQuadrants.SE);
+            cityQuadrants.add(CityQuadrants.NW);
+            cityQuadrants.add(CityQuadrants.NE);
+        }
 
 
         SearchCriteria criteria = new SearchCriteria(propertyTypes, bedrooms, bathrooms, furnished, unfurnished, cityQuadrants);

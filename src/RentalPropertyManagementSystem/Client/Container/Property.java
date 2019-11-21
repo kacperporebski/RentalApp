@@ -55,9 +55,8 @@ public class Property
 
     public String toString()
     {
-        return state + " " + address + "\t Num of bedrooms and bathrooms : " +
-                numberOfBedrooms + " ,\t " + numberOfBathrooms +
-                "\tLandlord info: " + myLandlord.getName().toString();
+        return state + "\t Monthly Fee: " + rent + "\t Type: " + propertyType + "\t Address: " + address + "\t Bedrooms: " +
+                numberOfBedrooms + "\t Bathrooms: " + numberOfBathrooms;
     }
 
     public String toStringSummary() {
