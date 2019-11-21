@@ -66,7 +66,7 @@ public class UserRepository
     {
         //Todo link users arraylist to that of LoginService or maybe change this to Registration
         Optional<AccountHolder> accountHolder = validate(user.getUsername(), user.getPassword());
-        if(!accountHolder.isPresent())
+        if(!accountHolder.isPresent() && !sameUsername(user.getUsername()))
         {
             users.add(user);
             return true;
@@ -77,6 +77,16 @@ public class UserRepository
     public Optional<AccountHolder> login(String username, String password)
     {
         return validate(username, password);
+    }
+
+    public boolean sameUsername(String username)
+    {
+        for (AccountHolder a : users)
+        {
+            if(a.getUsername().equals(username))
+                return true;
+        }
+        return false;
     }
 
     /**
