@@ -15,4 +15,11 @@ public class Renter
         searchCriteria = new SearchCriteria(type, bedrooms, bathrooms, furnished, unfurnished, cityQuadrants);
     }
 
+    public void setSearchCriteria(SearchCriteria searchCriteria) {
+        this.searchCriteria = searchCriteria;
+    }
+
+    public SearchCriteria getSearchCriteria() {
+        return searchCriteria;
+    }
 }

@@ -5,10 +5,7 @@ import RentalPropertyManagementSystem.Client.RenterWebsite;
 import RentalPropertyManagementSystem.GUI.GUI;
 import RentalPropertyManagementSystem.GUI.RegisterPropertyScreen;
 import RentalPropertyManagementSystem.GUI.SearchCriteriaScreen;
-import RentalPropertyManagementSystem.Users.AccountHolder;
-import RentalPropertyManagementSystem.Users.Landlord;
-import RentalPropertyManagementSystem.Users.Manager;
-import RentalPropertyManagementSystem.Users.RegisteredRenter;
+import RentalPropertyManagementSystem.Users.*;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -25,10 +22,13 @@ public class RPMSController
     RenterWebsite renterWebsite;
     Optional<AccountHolder> currentUser;
 
+    Renter renter;
 
     public RPMSController(GUI view, RenterWebsite website) {
         this.view = view;
         renterWebsite = website;
+
+        renter = new Renter();
 
         //TODO add ActionListeners to view...
         view.getLoginScreen().getLoginButton().addActionListener(new LoginActionListener());
@@ -127,8 +127,7 @@ public class RPMSController
     public class RegisterUserActionListener implements ActionListener
     {
         @Override
-        public void actionPerformed(ActionEvent e)
-        {
+        public void actionPerformed(ActionEvent e) {
             String username = view.getRegUserScreen().getUsernameTextField().getText();
             String password = view.getRegUserScreen().getPasswordTextField().getText();
             UserType type = UserType.valueOf(view.getRegUserScreen().getAccountTypeBox().getSelectedItem().toString());
@@ -156,10 +155,20 @@ public class RPMSController
             if(added) {
                 System.out.println("Added user " + user.toString());
                 view.getRegUserScreen().setVisible(false);
+
+                if(renter.getSearchCriteria() != null) {
+                    System.out.printf("Search Criteria " + renter.getSearchCriteria().toString());
+                    ((RegisteredRenter) user).setSearchCriteria(renter.getSearchCriteria());
+                    view.getRenterScreen().getSearchCriteriaScreen().setVisible(false);
+                    renterWebsite.propertyRepo.registerObserver(((RegisteredRenter) user));
+                }
+
+                view.getLoginScreen().setVisible(true);
             }
             else
                 System.out.println("User already exists " + user.toString());
-            view.getLoginScreen().setVisible(true);
+
+            renter.setSearchCriteria(null);
         }
     }
 
@@ -285,7 +294,6 @@ public class RPMSController
             //If Registered Renter:
             if(e.getSource() == view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
             {
-
                 criteria = createCriteria(view.getRegRenterScreen().getSearchCriteriaScreen());
 
                 System.out.printf("Search Criteria " + criteria.toString());
@@ -297,6 +305,10 @@ public class RPMSController
             else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
             {
                 //Todo figure out how to convert renter into a registered renter
+
+                criteria = new SearchCriteria(createCriteria(view.getRenterScreen().getSearchCriteriaScreen()));
+                renter.setSearchCriteria(criteria);
+
                 System.out.println("Must first register\n");
                 view.getRegUserScreen().setVisible(true);
                 view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(2);
