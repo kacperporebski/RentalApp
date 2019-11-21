@@ -39,7 +39,7 @@ public class RPMSController
         view.getRegRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
-        view.getRegRenterScreen().getPropertyList().addMouseListener(new DoubleClickRentProperty());
+        view.getRegRenterScreen().getPropertyList().addMouseListener(new DoubleClickRentRentOrEmail());
         view.getRegRenterScreen().getDisplayNotificationsButton().addActionListener(new DisplayNotifications());
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
@@ -318,7 +318,7 @@ public class RPMSController
         }
     }
 
-    public class DoubleClickRentProperty extends MouseAdapter
+    public class DoubleClickRentRentOrEmail extends MouseAdapter
     {
         public void mouseClicked(MouseEvent e)
         {
@@ -330,10 +330,12 @@ public class RPMSController
                 }
                 int index = view.getRegRenterScreen().getPropertyList().getSelectedIndex();
 
+                view.getRegRenterScreen().getPayOrEmailScreen().getPropertyInfoTextArea().setText(renterWebsite.propertyRepo.getAllActiveProperties().get(index).toString());
                 view.getRegRenterScreen().getPayFeeScreen().getTextArea1().setText( renterWebsite.propertyRepo.getAllActiveProperties().get(index).getRent().toString());
-                view.getRegRenterScreen().getPayFeeScreen().setVisible(true);
-                view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
+                view.getRegRenterScreen().getPayOrEmailScreen().setVisible(true);
 
+                view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
+                view.getRegRenterScreen().getSendEmailScreen().getSender().setText(currentUser.get().getEmail());
             }
         }
     }
@@ -350,6 +352,7 @@ public class RPMSController
             renterWebsite.propertyRepo.getAllActiveProperties().get(index).setDateRented(new Date());
             displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
             view.getRegRenterScreen().getPayFeeScreen().setVisible(false);
+            view.getRegRenterScreen().getPayOrEmailScreen().setVisible(false);
         }
     }
 

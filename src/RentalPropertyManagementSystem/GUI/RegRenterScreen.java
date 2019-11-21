@@ -18,6 +18,8 @@ public class RegRenterScreen extends JFrame
 
     private PayFeeScreen payFeeScreen;
     private NotificationScreen notificationScreen;
+    private RegRenterPayOrEmailScreen payOrEmailScreen;
+    private SendEmailScreen sendEmailScreen;
 
 
     public RegRenterScreen()
@@ -26,8 +28,13 @@ public class RegRenterScreen extends JFrame
         this.pack();
         searchCriteriaScreen = new SearchCriteriaScreen();
         payFeeScreen = new PayFeeScreen();
+        payOrEmailScreen = new RegRenterPayOrEmailScreen();
+        sendEmailScreen = new SendEmailScreen();
 
         enterSearchCriteriaButton.addActionListener(new ShowSearchCriteriaScreenActionListener());
+        payOrEmailScreen.getRentPropertyButton().addActionListener(new ShowPayFeeScreenActionListener());
+        payOrEmailScreen.getEmailLandlordButton().addActionListener(new ShowEmailScreenActionListener());
+
     }
 
     public class ShowSearchCriteriaScreenActionListener implements ActionListener
@@ -36,6 +43,24 @@ public class RegRenterScreen extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             searchCriteriaScreen.setVisible(true);
+        }
+    }
+
+    public class ShowEmailScreenActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            sendEmailScreen.setVisible(true);
+        }
+    }
+
+    public class ShowPayFeeScreenActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            payFeeScreen.setVisible(true);
         }
     }
 
@@ -147,6 +172,26 @@ public class RegRenterScreen extends JFrame
     public void setNotificationScreen(NotificationScreen notificationScreen)
     {
         this.notificationScreen = notificationScreen;
+    }
+
+    public RegRenterPayOrEmailScreen getPayOrEmailScreen()
+    {
+        return payOrEmailScreen;
+    }
+
+    public void setPayOrEmailScreen(RegRenterPayOrEmailScreen payOrEmailScreen)
+    {
+        this.payOrEmailScreen = payOrEmailScreen;
+    }
+
+    public SendEmailScreen getSendEmailScreen()
+    {
+        return sendEmailScreen;
+    }
+
+    public void setSendEmailScreen(SendEmailScreen sendEmailScreen)
+    {
+        this.sendEmailScreen = sendEmailScreen;
     }
 }
 
