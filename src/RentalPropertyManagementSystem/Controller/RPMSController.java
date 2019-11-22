@@ -523,9 +523,10 @@ public class RPMSController
                 int bathrooms = 0;
                 double rentalFee = Double.parseDouble(currentScreen.getCostTextField().getText());
                 boolean furnished;
-                Address address = new Address(currentScreen.getAddressTextField().getText(),currentScreen.getAddressTextField().getText(),
-                        currentScreen.getAddressTextField().getText(), currentScreen.getAddressTextField().getText());
-                CityQuadrants quadrant = CityQuadrants.valueOf(currentScreen.getCityQuadrantComboBox().getSelectedItem().toString());
+               // Address address = new Address(currentScreen.getAddressTextField().getText(),currentScreen.getAddressTextField().getText(),
+                     //   currentScreen.getAddressTextField().getText(), currentScreen.getAddressTextField().getText());
+                Address address = new Address(currentScreen.getHouseNumTextField().getText(),currentScreen.getStreetTextField().getText(),
+                        currentScreen.getCityTextField().getText(), currentScreen.getCityQuadrantComboBox().getSelectedItem().toString());
 
                 try {
                     bedrooms = Integer.parseInt(currentScreen.getBedroomTextField().getText());

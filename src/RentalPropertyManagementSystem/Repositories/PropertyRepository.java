@@ -31,8 +31,8 @@ public class PropertyRepository implements Subject
 
     public void removeProperty(Property property)
     {
-        notifyObserver();
         properties.remove(property);
+        notifyObserver();
     }
 
     public void updatePropertyState(Property property, STATE state)
@@ -45,6 +45,7 @@ public class PropertyRepository implements Subject
                 break;
             }
         }
+        notifyObserver();
     }
 
     public void updateProperty(Property oldProperty, Property newProperty)
@@ -57,6 +58,7 @@ public class PropertyRepository implements Subject
                 break;
             }
         }
+        notifyObserver();
     }
 
     public ArrayList<Property> getAllProperties()
