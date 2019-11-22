@@ -40,7 +40,7 @@ public class RPMSController
         view.getRegRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRegRenterScreen().getPropertyList().addMouseListener(new DoubleClickRentRentOrEmail());
-        view.getRegRenterScreen().getDisplayNotificationsButton().addActionListener(new DisplayNotifications());
+        view.getRegRenterScreen().getDisplayNotificationsButton().addActionListener(new DisplayNotificationsActionListener());
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
@@ -356,14 +356,14 @@ public class RPMSController
         }
     }
 
-    public class DisplayNotifications implements ActionListener
+    public class DisplayNotificationsActionListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            view.getRegRenterScreen().getNotificationScreen().setVisible(true);
             ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
             displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
+            view.getRegRenterScreen().getNotificationScreen().setVisible(true);
         }
     }
 

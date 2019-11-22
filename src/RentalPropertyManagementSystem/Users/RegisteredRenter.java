@@ -22,10 +22,18 @@ public class RegisteredRenter extends AccountHolder implements Observer
     {
         System.out.println("Updating registerRenter notifications\n");
         //Todo Currently this function recreates notifications for already added properties. Fix so that it only creates new ones for new properties.
-        for(Property p : properties)
-        {
-            if(renter.searchCriteria.matchingProperty(p))
+
+        for(Property p : properties) {
+            int check = 0;
+            for (Notification n : notifications) {
+                if (n.getNewProperty() == p) {
+                    check = 1;
+                }
+            }
+
+            if (renter.searchCriteria.matchingProperty(p) && check == 0)
                 notify(p, new Date());
+
         }
     }
 
