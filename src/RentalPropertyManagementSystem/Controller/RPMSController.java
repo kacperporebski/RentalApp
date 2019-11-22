@@ -523,7 +523,8 @@ public class RPMSController
                 int bathrooms = 0;
                 double rentalFee = Double.parseDouble(currentScreen.getCostTextField().getText());
                 boolean furnished;
-                String address = currentScreen.getAddressTextField().getText();
+                Address address = new Address(currentScreen.getAddressTextField().getText(),currentScreen.getAddressTextField().getText(),
+                        currentScreen.getAddressTextField().getText(), currentScreen.getAddressTextField().getText());
                 CityQuadrants quadrant = CityQuadrants.valueOf(currentScreen.getCityQuadrantComboBox().getSelectedItem().toString());
 
                 try {
@@ -538,7 +539,7 @@ public class RPMSController
                 else
                     furnished = false;
 
-                p = new Property((Landlord) currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType, quadrant);
+                p = new Property((Landlord) currentUser.get(), address, bedrooms, bathrooms, furnished, new Fee(rentalFee), propertyType);
             }catch (Exception e){
                 view.getLandlordScreen().getRegPropertyScreen().getError().setVisible(true);
                 return;

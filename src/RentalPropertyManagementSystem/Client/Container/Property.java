@@ -14,13 +14,14 @@ public class Property
     private int numberOfBedrooms;
     private int numberOfBathrooms;
     private boolean furnished;
-    private String address;
-    private CityQuadrants cityQuadrant;
+    private Address address;
+  //  private String address;
+  //private CityQuadrants cityQuadrant;
     private PropertyType propertyType;
     private static int ID = 0;
 
 
-    public Property(Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType type, CityQuadrants cq)
+    public Property(Landlord l, Address addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType type)
     {
         ID ++;
         myLandlord = l;
@@ -32,7 +33,6 @@ public class Property
         registrationFee = new Fee ( 60);
         propertyType = type;
         state = STATE.ACTIVE;
-        cityQuadrant = cq;
         dateRegistered = new Date();
         dateRented = null;
     }
@@ -102,14 +102,14 @@ public class Property
         return furnished;
     }
 
-    public String getAddress()
+    public Address getAddress()
     {
         return address;
     }
 
     public CityQuadrants getCityQuadrant()
     {
-        return cityQuadrant;
+        return address.getCityQuadrant();
     }
 
     public void setMyLandlord(Landlord myLandlord)
@@ -149,16 +149,6 @@ public class Property
     public void setFurnished(boolean furnished)
     {
         this.furnished = furnished;
-    }
-
-    public void setAddress(String address)
-    {
-        this.address = address;
-    }
-
-    public void setCityQuadrant(CityQuadrants cityQuadrant)
-    {
-        this.cityQuadrant = cityQuadrant;
     }
 
     public void setID(int ID)
