@@ -158,8 +158,6 @@ public class RPMSController
                     throw new IllegalStateException("Unexpected value: " + account.getAccountType());
             }
 
-
-
             boolean added = renterWebsite.userRepo.addUser(user);
             if(added) {
                 System.out.println("Added user " + user.toString());
