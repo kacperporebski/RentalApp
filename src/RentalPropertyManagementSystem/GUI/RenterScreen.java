@@ -13,13 +13,24 @@ public class RenterScreen extends JFrame
     private JButton enterSearchCriteriaButton;
     private SearchCriteriaScreen searchCriteriaScreen;
 
+    private PayFeeScreen payFeeScreen;
+    private SendEmailScreen sendEmailScreen;
+    private RegRenterPayOrEmailScreen payOrEmailScreen;
+
     public RenterScreen()
     {
         this.setContentPane(renterPanel);
         this.pack();
         searchCriteriaScreen = new SearchCriteriaScreen();
 
+        payOrEmailScreen = new RegRenterPayOrEmailScreen();
+        payFeeScreen = new PayFeeScreen();
+        sendEmailScreen = new SendEmailScreen();
+
         enterSearchCriteriaButton.addActionListener(new ShowSearchCriteriaScreenActionListener());
+
+        payOrEmailScreen.getRentPropertyButton().addActionListener(new ShowPayFeeScreenActionListener());
+        payOrEmailScreen.getEmailLandlordButton().addActionListener(new ShowEmailScreenActionListener());
     }
 
     public class ShowSearchCriteriaScreenActionListener implements ActionListener
@@ -28,6 +39,23 @@ public class RenterScreen extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             searchCriteriaScreen.setVisible(true);
+        }
+    }
+    public class ShowEmailScreenActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            sendEmailScreen.setVisible(true);
+        }
+    }
+
+    public class ShowPayFeeScreenActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            payFeeScreen.setVisible(true);
         }
     }
 
@@ -49,5 +77,17 @@ public class RenterScreen extends JFrame
     public SearchCriteriaScreen getSearchCriteriaScreen()
     {
         return searchCriteriaScreen;
+    }
+
+    public PayFeeScreen getPayFeeScreen() {
+        return payFeeScreen;
+    }
+
+    public RegRenterPayOrEmailScreen getPayOrEmailScreen() {
+        return payOrEmailScreen;
+    }
+
+    public SendEmailScreen getSendEmailScreen() {
+        return sendEmailScreen;
     }
 }

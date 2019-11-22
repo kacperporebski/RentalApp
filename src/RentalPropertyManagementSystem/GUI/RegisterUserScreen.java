@@ -18,11 +18,15 @@ public class RegisterUserScreen extends JFrame
     private JButton cancelButton;
     private JPanel panel;
 
+    private InvalidRegisterScreen error;
+
     public RegisterUserScreen()
     {
         this.setName("Register");
         this.setContentPane(panel);
         this.pack();
+
+        error = new InvalidRegisterScreen();
 
         cancelButton.addActionListener(new CancelButtonActionListener());
     }
@@ -146,5 +150,9 @@ public class RegisterUserScreen extends JFrame
     public void setPanel(JPanel panel)
     {
         this.panel = panel;
+    }
+
+    public InvalidRegisterScreen getError() {
+        return error;
     }
 }

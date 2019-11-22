@@ -45,6 +45,7 @@ public class RPMSController
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
         view.getRenterScreen().getRefreshButton().addActionListener(new ListPropertiesActionListener());
+        view.getRenterScreen().getPropertyList().addMouseListener(new DoubleClickRentRentOrEmail());
 
         view.getLandlordScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getLandlordScreen().getRegPropertyScreen().getRegisterPropertyButton().addActionListener(new RegisterProperty());
@@ -136,6 +137,11 @@ public class RPMSController
             String lastname = view.getRegUserScreen().getLastNameTextField().getText();
             String email = view.getRegUserScreen().getEmailTextField().getText();
 
+            if(username.equals("") || password.equals("") || firstname.equals("") || lastname.equals("") || email.equals("")) {
+                view.getRegUserScreen().getError().setVisible(true);
+                return;
+            }
+
             AccountHolder user;
             switch(account.getAccountType())
             {
@@ -151,6 +157,9 @@ public class RPMSController
                 default:
                     throw new IllegalStateException("Unexpected value: " + account.getAccountType());
             }
+
+
+
             boolean added = renterWebsite.userRepo.addUser(user);
             if(added) {
                 System.out.println("Added user " + user.toString());
@@ -324,18 +333,31 @@ public class RPMSController
         {
             if(e.getClickCount() == 2)
             {
-                for(ActionListener t:  view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners())
-                {
-                    view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().removeActionListener(t);
+
+                if(e.getSource() == view.getRegRenterScreen().getPropertyList()) {
+                    for (ActionListener t : view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners()) {
+                        view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().removeActionListener(t);
+                    }
+                    int index = view.getRegRenterScreen().getPropertyList().getSelectedIndex();
+
+                    view.getRegRenterScreen().getPayOrEmailScreen().getPropertyInfoTextArea().setText(renterWebsite.propertyRepo.getAllActiveProperties().get(index).toString());
+                    view.getRegRenterScreen().getPayFeeScreen().getTextArea1().setText(renterWebsite.propertyRepo.getAllActiveProperties().get(index).getRent().toString());
+                    view.getRegRenterScreen().getPayOrEmailScreen().setVisible(true);
+
+                    view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
+                    view.getRegRenterScreen().getSendEmailScreen().getSender().setText(currentUser.get().getEmail());
+                } else if (e.getSource() == view.getRenterScreen().getPropertyList()){
+                    for (ActionListener t : view.getRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners()) {
+                        view.getRenterScreen().getPayFeeScreen().getPayFeeButton().removeActionListener(t);
+                    }
+                    int index = view.getRenterScreen().getPropertyList().getSelectedIndex();
+
+                    view.getRenterScreen().getPayOrEmailScreen().getPropertyInfoTextArea().setText(renterWebsite.propertyRepo.getAllActiveProperties().get(index).toString());
+                    view.getRenterScreen().getPayFeeScreen().getTextArea1().setText(renterWebsite.propertyRepo.getAllActiveProperties().get(index).getRent().toString());
+                    view.getRenterScreen().getPayOrEmailScreen().setVisible(true);
+
+                    view.getRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
                 }
-                int index = view.getRegRenterScreen().getPropertyList().getSelectedIndex();
-
-                view.getRegRenterScreen().getPayOrEmailScreen().getPropertyInfoTextArea().setText(renterWebsite.propertyRepo.getAllActiveProperties().get(index).toString());
-                view.getRegRenterScreen().getPayFeeScreen().getTextArea1().setText( renterWebsite.propertyRepo.getAllActiveProperties().get(index).getRent().toString());
-                view.getRegRenterScreen().getPayOrEmailScreen().setVisible(true);
-
-                view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
-                view.getRegRenterScreen().getSendEmailScreen().getSender().setText(currentUser.get().getEmail());
             }
         }
     }
