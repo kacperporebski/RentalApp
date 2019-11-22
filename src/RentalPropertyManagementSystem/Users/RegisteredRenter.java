@@ -12,6 +12,8 @@ public class RegisteredRenter extends AccountHolder implements Observer
     public RegisteredRenter(String fname, String lname, String mail, Account account)
     {
         super(fname, lname, mail, account);
+        renter = new Renter();
+        notifications = new ArrayList<>();
     }
 
 

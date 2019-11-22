@@ -30,6 +30,7 @@ public class RegRenterScreen extends JFrame
         payFeeScreen = new PayFeeScreen();
         payOrEmailScreen = new RegRenterPayOrEmailScreen();
         sendEmailScreen = new SendEmailScreen();
+        notificationScreen = new NotificationScreen();
 
         enterSearchCriteriaButton.addActionListener(new ShowSearchCriteriaScreenActionListener());
         payOrEmailScreen.getRentPropertyButton().addActionListener(new ShowPayFeeScreenActionListener());
