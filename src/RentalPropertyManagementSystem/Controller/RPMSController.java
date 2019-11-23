@@ -163,6 +163,8 @@ public class RPMSController
             boolean added = renterWebsite.userRepo.addUser(user);
             if(added) {
                 System.out.println("Added user " + user.toString());
+                System.out.println("Adding user to database");
+                renterWebsite.getMyDatabase().getUserDatabase().addUser(user);
                 view.getRegUserScreen().setVisible(false);
 
                 if(renter.getSearchCriteria() != null) {
@@ -309,6 +311,7 @@ public class RPMSController
                 ((RegisteredRenter)currentUser.get()).setSearchCriteria(criteria);
                 view.getRegRenterScreen().getSearchCriteriaScreen().setVisible(false);
                 renterWebsite.propertyRepo.registerObserver(((RegisteredRenter)currentUser.get()));
+                renterWebsite.getMyDatabase().getSearchCriteriaDatabase().addSearchCriteria((RegisteredRenter)currentUser.get());
             }
             //If Regular Renter:
             else if(e.getSource() == view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton())
