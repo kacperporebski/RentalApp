@@ -1,13 +1,13 @@
-Apartment;John;Mikeson;788 30th St., SE, Calgary;3;2;furnished;1500;SE
-AttachedHouse;Mike;Johnson;749 Dufferin Blvd., SE, Calgary;3;1;furnished;2000;SE
-DetachedHouse;Paul;Hapon;26 40th St., SE, Calgary;4;6;furnished;2500;SE
-TownHouse;Fred;Frank;156 51st Ave., SE, Calgary;3;5;furnished;1700;SE
-Condo;Paula;Pot;138 42nd Ave., NE, Calgary;7;6;furnished;1900;NE
-Duplex;Howdy;Sir;311 McCall Way, NE, Calgary;9;2;furnished;2500;NE
-Apartment;Love;This;966 Smed Lane, SE, Calgary;4;2;furnished;3000;SE
-TownHouse;Waston;Smith;879 37th Ave., NE, Calgary;5;3;furnished;2300;NE
-Condo;Frankenstein;Junior;472 Ogden Dale Rd., SE, Calgary;3;1;furnished;1200;SE
-Duplex;Nikola;Tesla;754 Sunridge Way, NE, Calgary;5;4;furnished;2500;NE
-Apartment;Thomas;Eddison;690 19th St., NE, Calgary;3;6;furnished;2340;NE
-Condo;Barack;Obama;318 29th St.,NE, Calgary;15;7;furnished;3760;NE
-AttachedHouse;Britney;Spears;238 112th Ave., NE, Calgary;5;3;furnished;2200;NE
+Apartment;John;Mikeson;78;30th St.;SE;Calgary;3;2;furnished;1500;SE
+AttachedHouse;Mike;Johnson;749;Dufferin Blvd.;SE;Calgary;3;1;furnished;2000;SE
+DetachedHouse;Paul;Hapon;26;40th St.;SE;Calgary;4;6;furnished;2500;SE
+TownHouse;Fred;Frank;156;51st Ave.;SE;Calgary;3;5;furnished;1700;SE
+Condo;Paula;Pot;138;42nd Ave.;NE;Calgary;7;6;furnished;1900;NE
+Duplex;Howdy;Sir;311;McCall Way;NE;Calgary;9;2;furnished;2500;NE
+Apartment;Love;This;966;Smed Lane;SE;Calgary;4;2;furnished;3000;SE
+TownHouse;Waston;Smith;879;37th Ave.;NE;Calgary;5;3;furnished;2300;NE
+Condo;Frankenstein;Junior;472;Ogden Dale Rd.;SE;Calgary;3;1;furnished;1200;SE
+Duplex;Nikola;Tesla;754;Sunridge Way;NE;Calgary;5;4;furnished;2500;NE
+Apartment;Thomas;Eddison;690;19th St.;NE;Calgary;3;6;furnished;2340;NE
+Condo;Barack;Obama;318;29th St.;NE;Calgary;15;7;furnished;3760;NE
+AttachedHouse;Britney;Spears;238;112th Ave.;NE;Calgary;5;3;furnished;2200;NE

@@ -12,7 +12,9 @@ public class RegisterPropertyScreen extends JFrame
     private JButton registerPropertyButton;
     private JPanel panel;
     private JTextField costTextField;
-    private JTextField addressTextField;
+    private JTextField houseNumTextField;
+    private JTextField streetTextField;
+    private JTextField cityTextField;
 
     private PropertyErrorScreen error;
 
@@ -105,17 +107,22 @@ public class RegisterPropertyScreen extends JFrame
         this.costTextField = costTextField;
     }
 
-    public JTextField getAddressTextField()
-    {
-        return addressTextField;
-    }
-
-    public void setAddressTextField(JTextField addressTextField)
-    {
-        this.addressTextField = addressTextField;
-    }
-
     public PropertyErrorScreen getError() {
         return error;
+    }
+
+    public JTextField getHouseNumTextField()
+    {
+        return houseNumTextField;
+    }
+
+    public JTextField getStreetTextField()
+    {
+        return streetTextField;
+    }
+
+    public JTextField getCityTextField()
+    {
+        return cityTextField;
     }
 }

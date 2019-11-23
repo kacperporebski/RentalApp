@@ -139,13 +139,14 @@ public class RenterWebsite
                         String[] temp = line.split(";");
                         //int idnum, Landlord l, String addr,int bedroom, int bathroom, boolean furnished, Fee rentfee
                         Landlord tempMyL = userRepo.getInstance().findLandlord(temp[1], temp[2]);
+                        Address tempAddr = new Address(temp[3], temp[4], temp[6], temp[5]);
                         System.out.println(tempMyL.getUsername());
                         boolean furnished = false;
-                        if (temp[6] == "furnished")
+                        if (temp[9] == "furnished")
                             furnished = true;
-                        Fee tempFee = new Fee(Double.parseDouble(temp[7]));
-                        Property p = new Property(tempMyL, temp[3],
-                                Integer.parseInt(temp[4]), Integer.parseInt(temp[5]), furnished, tempFee, PropertyType.valueOf(temp[0]), CityQuadrants.valueOf(temp[8]));
+                        Fee tempFee = new Fee(Double.parseDouble(temp[10]));
+                        Property p = new Property(tempMyL, tempAddr,
+                                Integer.parseInt(temp[7]), Integer.parseInt(temp[8]), furnished, tempFee, PropertyType.valueOf(temp[0]));
                         Random r = new Random();
                         p.setDateRegistered(new Date(r.nextInt(30), r.nextInt(12), r.nextInt(19)+2000));
                         myDatabase.getPropertyDatabase().addProperty(p);

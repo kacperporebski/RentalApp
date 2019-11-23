@@ -26,10 +26,11 @@ public class PropertySQL extends MySQL {
             ResultSet rs = meta.getTables(null, null, "property", null );
             if(rs.next()==false) {
 
-                String sql = "CREATE TABLE property " + "(id INTEGER not NULL, " + "address VARCHAR(255), " +
+                String sql = "CREATE TABLE property " + "(id INTEGER not NULL, " + "housenum INTEGER not NULL," +
+                        "street VARCHAR(255), " + "city VARCHAR(255)," +
                         "cityQuadrant VARCHAR(255), " +"state VARCHAR(255), " + "rent_fee DOUBLE, " +
                         "reg_fee DOUBLE, " + "bedrooms INTEGER not NULL, " + "bathrooms INTEGER not NULL," +
-                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," +  "cityQuad VARCHAR(255)," + "landLordUsername VARCHAR(255),"
+                        "furnished INTEGER not NULL," + "Type VARCHAR(255)," + "landLordUsername VARCHAR(255),"
                         + "day INTEGER not NULL," + "month INTEGER not NULL," + "year INTEGER not NULL," + "PRIMARY KEY (id))";
 
                 Statement st = conn.createStatement();
@@ -47,28 +48,28 @@ public class PropertySQL extends MySQL {
 
     public void addProperty(Property addThisProperty){
         try{
-            String query  = "INSERT INTO property (ID, address, cityQuadrant, state, " +
-                    "rent_fee, reg_fee, bedrooms, bathrooms, furnished , type, cityQuad, landLordUsername, day, month, year) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String query  = "INSERT INTO property (ID, houseNum, street, city, cityQuadrant, state, " +
+                    "rent_fee, reg_fee, bedrooms, bathrooms, furnished , type," +
+                    " landLordUsername, day, month, year) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement pState = conn.prepareStatement(query);
             pState.setInt(1, addThisProperty.getID());
-            pState.setString(2,addThisProperty.getAddress());
-            //temp fix for the below
-            pState.setString(3, "SE");
-           // TODO FIX pState.setString(3,addThisProperty.getCityQuadrant().toString());
-            pState.setString(4,addThisProperty.getState().toString());
-            pState.setDouble(5, addThisProperty.getRent().getPaymentAmount());
-            pState.setDouble(6, addThisProperty.getRegistrationFee().getPaymentAmount());
-            pState.setInt(7, addThisProperty.getNumberOfBedrooms());
-            pState.setInt(8,addThisProperty.getNumberOfBathrooms());
+            pState.setInt(2,addThisProperty.getAddress().getHouseNum());
+            pState.setString(3,addThisProperty.getAddress().getStreet());
+            pState.setString(4,addThisProperty.getAddress().getCity());
+            pState.setString(5, addThisProperty.getAddress().getCityQuadrant().toString());
+            pState.setString(6,addThisProperty.getState().toString());
+            pState.setDouble(7, addThisProperty.getRent().getPaymentAmount());
+            pState.setDouble(8, addThisProperty.getRegistrationFee().getPaymentAmount());
+            pState.setInt(9, addThisProperty.getNumberOfBedrooms());
+            pState.setInt(10,addThisProperty.getNumberOfBathrooms());
             int val = (addThisProperty.furnished()) ? 1 : 0;
-            pState.setInt(9,val);
-            pState.setString(10,addThisProperty.getPropertyType().toString());
-            pState.setString(12, addThisProperty.getMyLandlord().getUsername());
-            pState.setString(11, addThisProperty.getCityQuadrant().toString());
-            pState.setInt(13, addThisProperty.getDateRegistered().getDay());
-            pState.setInt(14, addThisProperty.getDateRegistered().getMonth());
-            pState.setInt(15,addThisProperty.getDateRegistered().getYear());
+            pState.setInt(11,val);
+            pState.setString(12,addThisProperty.getPropertyType().toString());
+            pState.setString(13, addThisProperty.getMyLandlord().getUsername());
+            pState.setInt(14, addThisProperty.getDateRegistered().getDay());
+            pState.setInt(15, addThisProperty.getDateRegistered().getMonth());
+            pState.setInt(16,addThisProperty.getDateRegistered().getYear());
             int rowCount = pState.executeUpdate();
             pState.close();
         }catch (SQLException e){
@@ -130,16 +131,15 @@ public class PropertySQL extends MySQL {
             rs=stmt.executeQuery(query);
             while(rs.next()){
 
-              //  public Property(Landlord l, String addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType
+              //  public Property(Landlord l, Address addr, int bedroom, int bathroom, boolean furnished, Fee rentfee, PropertyType
               //   type)
                 //public Landlord(String fname, String lname, String mail, Account account)
-                boolean furnished = (rs.getInt(9) == 0) ? true : false;
-                Property temp = new Property(uRepo.findLandlordUsername(rs.getString(12)), rs.getString(2), rs.getInt(7),
-                rs.getInt(8), furnished , new Fee(rs.getDouble(5)), PropertyType.valueOf(rs.getString(10)),
-                        CityQuadrants.valueOf(rs.getString(11)));
-                uRepo.findLandlordUsername(rs.getString(11));
+                boolean furnished = (rs.getInt(11) == 0) ? true : false;
+                Address address = new Address(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5) );
+                Property temp = new Property(uRepo.findLandlordUsername(rs.getString(13)),  address, rs.getInt(9),
+                rs.getInt(10), furnished , new Fee(rs.getDouble(7)), PropertyType.valueOf(rs.getString(12)));
                 temp.getRegistrationFee().setPaid(true);
-                temp.setDateRegistered(new Date(rs.getInt(13), rs.getInt(14), rs.getInt(15)));
+                temp.setDateRegistered(new Date(rs.getInt(14), rs.getInt(15), rs.getInt(16)));
                // Property temp = new Property();
                 pRepo.addProperty(temp);
 
@@ -150,8 +150,6 @@ public class PropertySQL extends MySQL {
         }
 
     }
-
-
 
 
 }
