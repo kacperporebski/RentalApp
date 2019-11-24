@@ -8,6 +8,7 @@ public class NotificationScreen extends JFrame
     private JButton clearNotificationsButton;
     private JList notificationList;
     private JPanel panel;
+    private JButton removeSelectedButton;
 
     public NotificationScreen()
     {
