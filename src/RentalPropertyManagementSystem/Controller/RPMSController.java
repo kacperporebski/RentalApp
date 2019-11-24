@@ -45,6 +45,8 @@ public class RPMSController
         view.getRegRenterScreen().getNotificationScreen().getRefreshButton().addActionListener(new DisplayNotificationsActionListener());
         view.getRegRenterScreen().getNotificationScreen().getNotificationList().addMouseListener(new DoubleClickRentRentOrEmail());
         view.getRegRenterScreen().getNotificationScreen().getRemoveSelectedButton().addActionListener(new RemoveSelectedNotificationActionListener());
+        view.getRegRenterScreen().getUnsubscribeButton().addActionListener(new UnsubscribeRegRenterActionListener());
+        view.getRegRenterScreen().getUnsubscribeButton().addActionListener(new LogoutActionListener());
 
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
@@ -189,15 +191,12 @@ public class RPMSController
         }
     }
 
-
-
-    //Todo implement registration class and call from here
-    public class RegisterRenterActionListener implements ActionListener
+    public class UnsubscribeRegRenterActionListener implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-
+            renterWebsite.userRepo.removeUser(currentUser.get());
         }
     }
 

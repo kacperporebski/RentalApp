@@ -85,7 +85,6 @@ public class UserRepository
 
     public boolean addUser(AccountHolder user)
     {
-        //Todo link users arraylist to that of LoginService or maybe change this to Registration
         Optional<AccountHolder> accountHolder = validate(user.getUsername(), user.getPassword());
         if(!accountHolder.isPresent() && !sameUsername(user.getUsername()))
         {
@@ -93,6 +92,11 @@ public class UserRepository
             return true;
         }
         return false;
+    }
+
+    public void removeUser(AccountHolder user)
+    {
+        users.remove(user);
     }
 
     public Optional<AccountHolder> login(String username, String password)
