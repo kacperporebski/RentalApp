@@ -125,13 +125,13 @@ public class SearchSQL extends MySQL {
                 if(rs.getInt(12)==1)
                     furnished=true;
 
-                if(rs.getInt(14) == 1)
+                if(rs.getInt(13) == 1)
                     quads.add(CityQuadrants.valueOf("SE"));
-                if(rs.getInt(15) == 1)
+                if(rs.getInt(14) == 1)
                     quads.add(CityQuadrants.valueOf("NE"));
-                if(rs.getInt(16) == 1)
+                if(rs.getInt(15) == 1)
                     quads.add(CityQuadrants.valueOf("NW"));
-                if(rs.getInt(17) == 1)
+                if(rs.getInt(16) == 1)
                     quads.add(CityQuadrants.valueOf("SW"));
 
 

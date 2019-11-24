@@ -41,6 +41,9 @@ public class RPMSController
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRegRenterScreen().getPropertyList().addMouseListener(new DoubleClickRentRentOrEmail());
         view.getRegRenterScreen().getDisplayNotificationsButton().addActionListener(new DisplayNotificationsActionListener());
+        view.getRegRenterScreen().getNotificationScreen().getClearNotificationsButton().addActionListener(new ClearNotificationsActionListener());
+        view.getRegRenterScreen().getNotificationScreen().getRefreshButton().addActionListener(new DisplayNotificationsActionListener());
+        view.getRegRenterScreen().getNotificationScreen().getNotificationList().addMouseListener(new DoubleClickRentRentOrEmail());
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
@@ -93,6 +96,7 @@ public class RPMSController
                         break;
                     case RegRenter:
                         view.getRegRenterScreen().setVisible(true);
+                        displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
                         break;
                 }
 
@@ -332,11 +336,12 @@ public class RPMSController
     {
         public void mouseClicked(MouseEvent e)
         {
-            if(e.getClickCount() == 2)
+            if (e.getClickCount() == 2)
             {
-
-                if(e.getSource() == view.getRegRenterScreen().getPropertyList()) {
-                    for (ActionListener t : view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners()) {
+                if (e.getSource() == view.getRegRenterScreen().getPropertyList())
+                {
+                    for (ActionListener t : view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners())
+                    {
                         view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().removeActionListener(t);
                     }
                     int index = view.getRegRenterScreen().getPropertyList().getSelectedIndex();
@@ -347,8 +352,10 @@ public class RPMSController
 
                     view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
                     view.getRegRenterScreen().getSendEmailScreen().getSender().setText(currentUser.get().getEmail());
-                } else if (e.getSource() == view.getRenterScreen().getPropertyList()){
-                    for (ActionListener t : view.getRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners()) {
+                } else if (e.getSource() == view.getRenterScreen().getPropertyList())
+                {
+                    for (ActionListener t : view.getRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners())
+                    {
                         view.getRenterScreen().getPayFeeScreen().getPayFeeButton().removeActionListener(t);
                     }
                     int index = view.getRenterScreen().getPropertyList().getSelectedIndex();
@@ -358,6 +365,18 @@ public class RPMSController
                     view.getRenterScreen().getPayOrEmailScreen().setVisible(true);
 
                     view.getRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
+                } else if (e.getSource() == view.getRegRenterScreen().getNotificationScreen().getNotificationList())
+                {
+                    for (ActionListener t : view.getRenterScreen().getPayFeeScreen().getPayFeeButton().getActionListeners())
+                    {
+                        view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().removeActionListener(t);
+                    }
+                    int index = view.getRegRenterScreen().getNotificationScreen().getNotificationList().getSelectedIndex();
+                    view.getRegRenterScreen().getPayOrEmailScreen().getPropertyInfoTextArea().setText(((RegisteredRenter)currentUser.get()).getNotifications().get(index).getNewProperty().toString());
+
+                    view.getRegRenterScreen().getPayFeeScreen().getTextArea1().setText(((RegisteredRenter)currentUser.get()).getNotifications().get(index).getNewProperty().getRent().toString());
+                    view.getRegRenterScreen().getPayOrEmailScreen().setVisible(true);
+                    view.getRegRenterScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new RegRenterPayProperty(index));
                 }
             }
         }
@@ -372,8 +391,11 @@ public class RPMSController
         {
             renterWebsite.propertyRepo.getAllActiveProperties().get(index).getRent().isPaid();
             renterWebsite.propertyRepo.getAllActiveProperties().get(index).setState(STATE.RENTED);
-            renterWebsite.propertyRepo.getAllActiveProperties().get(index).setDateRented(new Date());
+            //renterWebsite.propertyRepo.getAllActiveProperties().get(index).setDateRented(new Date());
             displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
+            ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
+            displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
+
             view.getRegRenterScreen().getPayFeeScreen().setVisible(false);
             view.getRegRenterScreen().getPayOrEmailScreen().setVisible(false);
         }
@@ -387,6 +409,17 @@ public class RPMSController
             ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
             displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
             view.getRegRenterScreen().getNotificationScreen().setVisible(true);
+        }
+    }
+
+    public class ClearNotificationsActionListener implements  ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            ((RegisteredRenter)currentUser.get()).clearNotifications();
+            ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
+            displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
         }
     }
 

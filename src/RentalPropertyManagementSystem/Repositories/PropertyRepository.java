@@ -114,6 +114,7 @@ public class PropertyRepository implements Subject
     public void registerObserver(Observer obs)
     {
         observerList.add(obs);
+        obs.update(properties);
     }
 
     @Override
@@ -127,7 +128,7 @@ public class PropertyRepository implements Subject
     {
         for(Observer o : observerList)
         {
-            o.update(properties);
+            o.update(getAllActiveProperties());
         }
     }
 
