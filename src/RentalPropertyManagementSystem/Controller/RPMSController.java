@@ -44,6 +44,8 @@ public class RPMSController
         view.getRegRenterScreen().getNotificationScreen().getClearNotificationsButton().addActionListener(new ClearNotificationsActionListener());
         view.getRegRenterScreen().getNotificationScreen().getRefreshButton().addActionListener(new DisplayNotificationsActionListener());
         view.getRegRenterScreen().getNotificationScreen().getNotificationList().addMouseListener(new DoubleClickRentRentOrEmail());
+        view.getRegRenterScreen().getNotificationScreen().getRemoveSelectedButton().addActionListener(new RemoveSelectedNotificationActionListener());
+
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
@@ -420,6 +422,18 @@ public class RPMSController
         public void actionPerformed(ActionEvent e)
         {
             ((RegisteredRenter)currentUser.get()).clearNotifications();
+            ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
+            displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
+        }
+    }
+
+    public class RemoveSelectedNotificationActionListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            int index = view.getRegRenterScreen().getNotificationScreen().getNotificationList().getSelectedIndex();
+            ((RegisteredRenter)currentUser.get()).removeNotification(index);
             ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
             displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
         }

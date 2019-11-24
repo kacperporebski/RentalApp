@@ -65,20 +65,23 @@ public class RegisteredRenter extends AccountHolder implements Observer
         notifications.removeAll(notifications);
     }
 
-    public void unsubscribe()
-    {
-        notifications = new ArrayList<>();
-        clearedNotifications = new ArrayList<>();
-    }
-
     public void removeNotification(Notification notification)
     {
+        clearedNotifications.add(notification);
         notifications.remove(notification);
+    }
+
+    public void removeNotification(int index)
+    {
+        clearedNotifications.add(notifications.get(index));
+        notifications.remove(index);
     }
 
     public void setSearchCriteria(SearchCriteria criteria)
     {
         renter.searchCriteria = new SearchCriteria(criteria);
+        notifications = new ArrayList<>();
+        clearedNotifications = new ArrayList<>();
     }
 
     @Override
