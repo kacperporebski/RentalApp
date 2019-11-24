@@ -129,4 +129,106 @@ public class SearchCriteria
         s += "\n";
         return s;
     }
+
+    public ArrayList<CityQuadrants> getCityQuadrants() {
+        return cityQuadrants;
+    }
+
+    public ArrayList<Integer> getRangeOfBathrooms() {
+        return rangeOfBathrooms;
+    }
+
+    public ArrayList<Integer> getRangeOfBedrooms() {
+        return rangeOfBedrooms;
+    }
+
+    public ArrayList<PropertyType> getPropertyType() {
+        return propertyType;
+    }
+
+    public int isSE(){
+        for(CityQuadrants x : cityQuadrants){
+            if(x.toString().compareTo("SE")==0)
+                return 1;
+        }
+        return 0;
+    }
+
+    public int isNE(){
+        for(CityQuadrants x : cityQuadrants){
+            if(x.toString().compareTo("NE")==0)
+                return 1;
+        }
+        return 0;
+    }
+    public int isSW(){
+        for(CityQuadrants x : cityQuadrants){
+            if(x.toString().compareTo("SW")==0)
+                return 1;
+        }
+        return 0;
+    }
+    public int isNW(){
+    for(CityQuadrants x : cityQuadrants){
+        if(x.toString().compareTo("NW")==0)
+            return 1;
+    }
+    return 0;
+}
+
+    public int isApartment(){
+        for(PropertyType x : propertyType){
+            if(x.toString().compareTo("Apartment")==0)
+                return 1;
+        }
+        return 0;
+    }
+
+
+    public int isAttachedHouse(){
+        for(PropertyType x : propertyType){
+            if(x.toString().compareTo("AttachedHouse")==0)
+                return 1;
+        }
+        return 0;
+    }
+
+    public int isDetachedHouse(){
+        for(PropertyType x : propertyType){
+            if(x.toString().compareTo("DetachedHouse")==0)
+                return 1;
+        }
+        return 0;
+    }
+
+    public int isTownHouse(){
+        for(PropertyType x : propertyType){
+            if(x.toString().compareTo("TownHouse")==0)
+                return 1;
+        }
+        return 0;
+    }
+
+    public int isCondo(){
+        for(PropertyType x : propertyType){
+            if(x.toString().compareTo("Condo")==0)
+                return 1;
+        }
+        return 0;
+    }
+    public int isDuplex(){
+        for(PropertyType x : propertyType){
+            if(x.toString().compareTo("Duplex")==0)
+                return 1;
+        }
+        return 0;
+    }
+
+    public int furnished(){
+        if(furnished)
+            return 1;
+        return 0;
+    }
+
+
 }

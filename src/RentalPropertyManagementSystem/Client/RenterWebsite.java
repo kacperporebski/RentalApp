@@ -28,6 +28,7 @@ public class RenterWebsite
         propertyRepo = PropertyRepository.getInstance();
         serverReadUserData();
         serverReadPropertyData();
+        serverReadSearchCritera();
     }
 
     //private ArrayList<Manager> managers;
@@ -96,6 +97,19 @@ public class RenterWebsite
     }
 
 */
+
+   public void serverReadSearchCritera() throws SQLException{
+
+       if (myDatabase.getSearchCriteriaDatabase().tableCreated() == true)
+           myDatabase.getSearchCriteriaDatabase().readIntoRepo(userRepo);
+       else{
+           myDatabase.getSearchCriteriaDatabase().createSearchCriteriaTable();
+           serverReadSearchCritera();
+       }
+
+
+   }
+
     public void serverReadUserData() throws SQLException {
         if (myDatabase.getUserDatabase().tableCreated() == true ) {
             myDatabase.getUserDatabase().readIntoRepo(userRepo);

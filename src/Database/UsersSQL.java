@@ -5,6 +5,8 @@ import RentalPropertyManagementSystem.Client.Container.UserType;
 import RentalPropertyManagementSystem.Repositories.UserRepository;
 import RentalPropertyManagementSystem.Users.AccountHolder;
 import RentalPropertyManagementSystem.Users.Landlord;
+import RentalPropertyManagementSystem.Users.Manager;
+import RentalPropertyManagementSystem.Users.RegisteredRenter;
 
 import java.sql.*;
 import java.util.Calendar;
@@ -76,12 +78,32 @@ public class UsersSQL extends MySQL {
             String query = "SELECT * FROM RentalUsers";
             rs=stmt.executeQuery(query);
             while(rs.next()){
+                int switchVal=1;
+                if(rs.getString(4).compareTo("RegRenter")==0)
+                    switchVal=2;
+                else if(rs.getString(4).compareTo("Manager")==0)
+                switchVal=3;
 
+                switch (switchVal){
+                    case 1:
+                        Landlord temp = new Landlord(rs.getString(1), rs.getString(2) , rs.getString(3),
+                                new Account(rs.getString(5), rs.getString(6), UserType.valueOf(rs.getString(4))));
+                        uRepo.addUser( temp );
+                        break;
+                    case 2:
+                        RegisteredRenter temp1 = new RegisteredRenter(rs.getString(1), rs.getString(2) , rs.getString(3),
+                                new Account(rs.getString(5), rs.getString(6), UserType.valueOf(rs.getString(4))));
+                        uRepo.addUser( temp1 );
+                        break;
+                    case 3:
+                        Manager temp2 = new Manager(rs.getString(1), rs.getString(2) , rs.getString(3),
+                                new Account(rs.getString(5), rs.getString(6), UserType.valueOf(rs.getString(4))));
+                        uRepo.addUser( temp2 );
+                        break;
+
+
+                }
                 //public Landlord(String fname, String lname, String mail, Account account)
-              Landlord temp = new Landlord(rs.getString(1), rs.getString(2) , rs.getString(3),
-                      new Account(rs.getString(5), rs.getString(6), UserType.valueOf(rs.getString(4))));
-                uRepo.addUser( temp );
-
             }
             stmt.close();
         }catch (SQLException e){

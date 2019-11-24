@@ -6,10 +6,10 @@ public enum UserType
 {
     Manager("Manager"),
     Landlord("Landlord"),
-    RegRenter("Registered Renter"),
+    RegRenter("RegRenter"),
     MANAGER("Manager"),
     LANDLORD("Landlord"),
-    REGRENTER("Registered Renter");
+    REGRENTER("RegRenter");
 
     String type;
 
