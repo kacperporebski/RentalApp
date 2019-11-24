@@ -41,6 +41,7 @@ public class RPMSController
         view.getRegRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRegRenterScreen().getPropertyList().addMouseListener(new DoubleClickRentRentOrEmail());
         view.getRegRenterScreen().getDisplayNotificationsButton().addActionListener(new DisplayNotificationsActionListener());
+        view.getRegRenterScreen().getNotificationScreen().getClearNotificationsButton().addActionListener(new ClearNotificationsActionListener());
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
         view.getRenterScreen().getSearchCriteriaScreen().getSubscribeButton().addActionListener(new SubscribeSearchCriteria());
@@ -93,6 +94,7 @@ public class RPMSController
                         break;
                     case RegRenter:
                         view.getRegRenterScreen().setVisible(true);
+                        displayProperties(view.getRegRenterScreen().getPropertyList(), renterWebsite.propertyRepo.getAllActiveProperties());
                         break;
                 }
 
@@ -389,6 +391,17 @@ public class RPMSController
             ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
             displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
             view.getRegRenterScreen().getNotificationScreen().setVisible(true);
+        }
+    }
+
+    public class ClearNotificationsActionListener implements  ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            ((RegisteredRenter)currentUser.get()).clearNotifications();
+            ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
+            displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
         }
     }
 

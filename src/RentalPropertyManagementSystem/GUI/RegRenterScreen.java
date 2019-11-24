@@ -14,6 +14,7 @@ public class RegRenterScreen extends JFrame
     private JButton logoutButton;
     private JButton displayNotificationsButton;
     private JPanel regPanel;
+    private JButton unsubscribeButton;
     private SearchCriteriaScreen searchCriteriaScreen;
 
     private PayFeeScreen payFeeScreen;
@@ -193,6 +194,16 @@ public class RegRenterScreen extends JFrame
     public void setSendEmailScreen(SendEmailScreen sendEmailScreen)
     {
         this.sendEmailScreen = sendEmailScreen;
+    }
+
+    public JButton getUnsubscribeButton()
+    {
+        return unsubscribeButton;
+    }
+
+    public void setUnsubscribeButton(JButton unsubscribeButton)
+    {
+        this.unsubscribeButton = unsubscribeButton;
     }
 }
 
