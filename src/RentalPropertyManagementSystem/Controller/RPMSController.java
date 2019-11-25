@@ -105,10 +105,13 @@ public class RPMSController
 
                 view.getMenuScreen().setVisible(false);
                 view.getLoginScreen().setVisible(false);
+                view.getLoginScreen().getPasswordTextField().setText("");
+                view.getLoginScreen().getUsernameTextField().setText("");
             }
             else
             {
                 System.out.println("Couldn't login");
+                view.getLoginScreen().getError().setVisible(true);
             }
         }
     }
@@ -178,8 +181,10 @@ public class RPMSController
 
                 view.getLoginScreen().setVisible(true);
             }
-            else
+            else {
                 System.out.println("User already exists " + user.toString());
+                view.getRegUserScreen().getUserExists().setVisible(true);
+            }
 
             renter.setSearchCriteria(null);
         }

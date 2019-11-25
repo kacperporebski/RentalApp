@@ -11,11 +11,15 @@ public class LoginScreen extends JFrame
     private JButton loginButton;
     private JTextField passwordTextField;
 
+    private CannotLoginScreen error;
+
     public LoginScreen()
     {
         this.setName("LoginScreen");
         this.setContentPane(panel1);
         this.pack();
+
+        error = new CannotLoginScreen();
     }
 
     public JPanel getPanel1()
@@ -47,4 +51,17 @@ public class LoginScreen extends JFrame
     {
         return loginButton;
     }
+
+    public void setPasswordTextField(JTextField passwordTextField) {
+        this.passwordTextField = passwordTextField;
+    }
+
+    public void setUsernameTextField(JTextField usernameTextField) {
+        this.usernameTextField = usernameTextField;
+    }
+
+    public CannotLoginScreen getError() {
+        return error;
+    }
 }
+

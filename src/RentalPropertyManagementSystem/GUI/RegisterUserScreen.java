@@ -19,6 +19,8 @@ public class RegisterUserScreen extends JFrame
     private JPanel panel;
 
     private InvalidRegisterScreen error;
+    private UserAlreadyExistsScreen userExists;
+
 
     public RegisterUserScreen()
     {
@@ -27,6 +29,7 @@ public class RegisterUserScreen extends JFrame
         this.pack();
 
         error = new InvalidRegisterScreen();
+        userExists = new UserAlreadyExistsScreen();
 
         cancelButton.addActionListener(new CancelButtonActionListener());
     }
@@ -154,5 +157,9 @@ public class RegisterUserScreen extends JFrame
 
     public InvalidRegisterScreen getError() {
         return error;
+    }
+
+    public UserAlreadyExistsScreen getUserExists() {
+        return userExists;
     }
 }
