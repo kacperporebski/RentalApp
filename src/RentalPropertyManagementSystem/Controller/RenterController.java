@@ -192,7 +192,7 @@ public class RenterController extends Controller
 
                 System.out.println("Must first register\n");
                 view.getRegUserScreen().setVisible(true);
-                view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(2);
+                view.getRegUserScreen().getAccountTypeBox().setSelectedIndex(1);
                 view.getRenterScreen().getSearchCriteriaScreen().setVisible(false);
                 view.getRenterScreen().setVisible(false);
             }
