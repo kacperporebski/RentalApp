@@ -152,9 +152,6 @@ public class RPMSController
             AccountHolder user;
             switch(account.getAccountType())
             {
-                case Manager:
-                    user = new Manager(firstname, lastname, email, account);
-                    break;
                 case Landlord:
                     user = new Landlord(firstname, lastname, email, account);
                     break;
@@ -164,8 +161,6 @@ public class RPMSController
                 default:
                     throw new IllegalStateException("Unexpected value: " + account.getAccountType());
             }
-
-
 
             boolean added = renterWebsite.userRepo.addUser(user);
             if(added) {

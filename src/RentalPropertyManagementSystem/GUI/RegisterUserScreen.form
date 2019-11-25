@@ -105,7 +105,6 @@
         <properties>
           <model>
             <item value="Landlord"/>
-            <item value="Manager"/>
             <item value="RegRenter"/>
           </model>
         </properties>
