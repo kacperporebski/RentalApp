@@ -56,4 +56,14 @@ public class NotificationScreen extends JFrame
     {
         this.panel = panel;
     }
+
+    public JButton getRemoveSelectedButton()
+    {
+        return removeSelectedButton;
+    }
+
+    public void setRemoveSelectedButton(JButton removeSelectedButton)
+    {
+        this.removeSelectedButton = removeSelectedButton;
+    }
 }
