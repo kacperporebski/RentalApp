@@ -46,7 +46,6 @@ public class RPMSController
         view.getRegRenterScreen().getNotificationScreen().getNotificationList().addMouseListener(new DoubleClickRentRentOrEmail());
         view.getRegRenterScreen().getNotificationScreen().getRemoveSelectedButton().addActionListener(new RemoveSelectedNotificationActionListener());
         view.getRegRenterScreen().getUnsubscribeButton().addActionListener(new UnsubscribeRegRenterActionListener());
-        view.getRegRenterScreen().getUnsubscribeButton().addActionListener(new LogoutActionListener());
 
 
         view.getRenterScreen().getSearchCriteriaScreen().getEnterButton().addActionListener(new EnterSearchCriteria());
@@ -196,7 +195,10 @@ public class RPMSController
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            renterWebsite.userRepo.removeUser(currentUser.get());
+            ((RegisteredRenter)(currentUser.get())).unsubscribe();
+            ArrayList<Notification> notificationList = ((RegisteredRenter)currentUser.get()).getNotifications();
+            displayNotifications(view.getRegRenterScreen().getNotificationScreen().getNotificationList(), notificationList);
+            renterWebsite.propertyRepo.removeObserver(((RegisteredRenter)currentUser.get()));
         }
     }
 
