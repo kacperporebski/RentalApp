@@ -15,6 +15,7 @@ public class LandlordScreen extends JFrame
 
     private RegisterPropertyScreen regPropertyScreen;
     private UnpaidFeeScreen unpaidFeeScreen;
+    private ChangePropertyScreen changePropertyScreen;
 
     public LandlordScreen(){
         this.setName("Landlord Screen");
@@ -23,6 +24,7 @@ public class LandlordScreen extends JFrame
 
         regPropertyScreen = new RegisterPropertyScreen();
         unpaidFeeScreen = new UnpaidFeeScreen();
+        changePropertyScreen = new ChangePropertyScreen();
 
         registerNewPropertyButton.addActionListener(new RegPropertyActionListener());
         viewUnpaidFeesButton.addActionListener(new UnpaidFeesActionListener());
@@ -130,5 +132,9 @@ public class LandlordScreen extends JFrame
     public void setUnpaidFeeScreen(UnpaidFeeScreen unpaidFeeScreen)
     {
         this.unpaidFeeScreen = unpaidFeeScreen;
+    }
+
+    public ChangePropertyScreen getChangePropertyScreen() {
+        return changePropertyScreen;
     }
 }

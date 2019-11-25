@@ -59,6 +59,7 @@ public class RPMSController
         view.getLandlordScreen().getUnpaidFeeScreen().getRefreshButton().addActionListener(new DisplayUnpaidFees());
         view.getLandlordScreen().getUnpaidFeeScreen().getUnpaidFeesList().addMouseListener(new PayUnpaidFees());
         view.getLandlordScreen().getUnpaidFeeScreen().getPayFeeScreen().getPayFeeButton().addActionListener(new PayFeeButtonListener());
+        view.getLandlordScreen().getPropertyList().addMouseListener(new DoubleClickEditProperty());
 
         view.getManagerScreen().getLogoutButton().addActionListener(new LogoutActionListener());
         view.getManagerScreen().getChangeRegistrationFeeButton().addActionListener(new ChangeRegFeeActionListener());
@@ -678,6 +679,51 @@ public class RPMSController
                 view.getManagerScreen().getPropertiesScreen().getChangeListing().getChangeStateButton().addActionListener(new ChangeListingActionListener(index));
                 view.getManagerScreen().getPropertiesScreen().getChangeListing().setVisible(true);
             }
+        }
+    }
+
+    public class DoubleClickEditProperty extends MouseAdapter
+    {
+        public void mouseClicked(MouseEvent e)
+        {
+            if(e.getClickCount() == 2)
+            {
+                int index = view.getLandlordScreen().getPropertyList().getSelectedIndex();
+
+                for(ActionListener t : view.getLandlordScreen().getChangePropertyScreen().getMakeChangesButton().getActionListeners()){
+                    view.getLandlordScreen().getChangePropertyScreen().getMakeChangesButton().removeActionListener(t);
+                }
+
+                view.getLandlordScreen().getChangePropertyScreen().getMakeChangesButton().addActionListener(new ChangePropertyActionListener(index));
+                view.getLandlordScreen().getChangePropertyScreen().setVisible(true);
+            }
+        }
+    }
+
+    public class ChangePropertyActionListener implements ActionListener{
+        int index;
+
+        public ChangePropertyActionListener(int i){
+            index = i;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e){
+            STATE changeState = STATE.valueOf(view.getLandlordScreen().getChangePropertyScreen().getComboBox1().getSelectedItem().toString());
+            renterWebsite.propertyRepo.getLandlordProperties(((Landlord)currentUser.get())).get(index).setState(changeState);
+
+           Fee newFee;
+            try {
+                Double strNewFee = Double.parseDouble(view.getLandlordScreen().getChangePropertyScreen().getNewFee().getText());
+                newFee = new Fee(strNewFee);
+            } catch (NumberFormatException s){
+                System.out.println("Invalid input");
+                newFee = renterWebsite.propertyRepo.getLandlordProperties(((Landlord)currentUser.get())).get(index).getRent();
+            }
+            renterWebsite.propertyRepo.getLandlordProperties(((Landlord)currentUser.get())).get(index).setRent(newFee);
+
+            displayProperties(view.getLandlordScreen().getPropertyList(), renterWebsite.propertyRepo.getLandlordProperties((Landlord)currentUser.get()));
+            view.getLandlordScreen().setVisible(true);
+            view.getLandlordScreen().getChangePropertyScreen().setVisible(false);
         }
     }
 
