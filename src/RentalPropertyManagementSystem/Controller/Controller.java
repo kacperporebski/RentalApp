@@ -29,6 +29,7 @@ public abstract class Controller
     {
         this.view = view;
         this.renterWebsite = website;
+        renter = new Renter();
     }
 
     public void displayProperties(JList list, ArrayList<Property> propertyList)
