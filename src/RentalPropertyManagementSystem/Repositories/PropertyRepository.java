@@ -111,8 +111,7 @@ public class PropertyRepository implements Subject
 
 
     @Override
-    public void registerObserver(Observer obs)
-    {
+    public void registerObserver(Observer obs) {
         observerList.add(obs);
         obs.update(properties);
     }
