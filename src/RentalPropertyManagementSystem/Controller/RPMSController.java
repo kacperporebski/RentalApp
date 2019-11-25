@@ -313,6 +313,11 @@ public class RPMSController
                 ((RegisteredRenter)currentUser.get()).setSearchCriteria(criteria);
                 view.getRegRenterScreen().getSearchCriteriaScreen().setVisible(false);
                 renterWebsite.propertyRepo.registerObserver(((RegisteredRenter)currentUser.get()));
+
+                if(renterWebsite.getMyDatabase().getSearchCriteriaDatabase().existSearchCritera((RegisteredRenter)currentUser.get())){
+                    renterWebsite.getMyDatabase().getSearchCriteriaDatabase().removeSearchCritera((RegisteredRenter)currentUser.get());
+                }
+
                 renterWebsite.getMyDatabase().getSearchCriteriaDatabase().addSearchCriteria((RegisteredRenter)currentUser.get());
             }
             //If Regular Renter:

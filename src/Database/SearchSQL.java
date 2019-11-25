@@ -57,6 +57,42 @@ public class SearchSQL extends MySQL {
     nw 17
      */
 
+
+
+      public boolean existSearchCritera(RegisteredRenter u){
+
+              String s = "";
+              try{
+                  String query = "SELECT * FROM searchcriteria where username= ?";
+                  PreparedStatement pStmt = conn.prepareStatement(query);
+                  pStmt.setString(1, u.getUsername());
+                  rs= pStmt.executeQuery();
+                 if (rs.next()){
+                     return true;
+                  }
+                  pStmt.close();
+              }catch (SQLException e){
+                  e.printStackTrace();
+              }
+              return false;
+          }
+
+
+
+      public void removeSearchCritera(RegisteredRenter u){
+          try{
+                  String query = "DELETE FROM searchcriteria where username= ?";
+                  PreparedStatement pStmt = conn.prepareStatement(query);
+                  pStmt.setString(1,u.getUsername());
+                  pStmt.executeUpdate();
+                  pStmt.close();
+              }catch (SQLException e){
+                  e.printStackTrace();
+              }
+
+
+      }
+
     public void addSearchCriteria(RegisteredRenter u){
         try{
             String query  = "INSERT INTO searchcriteria (username, apartment, attachedhouse, detachedhouse, " +

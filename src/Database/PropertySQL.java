@@ -95,23 +95,7 @@ public class PropertySQL extends MySQL {
         return s;
     }
 
-    public String getProperty(int id){
-        String s = "";
-        try{
-            String query = "SELECT * FROM property where id= ?";
-            PreparedStatement pStmt = conn.prepareStatement(query);
-            pStmt.setInt(1, id);
-            rs= pStmt.executeQuery();
-            while (rs.next()){
-                s+= "ID: " + rs.getString(1) + "   Name: " + rs.getString(2) + "   Quantity: " + rs.getString(3)
-                        + "\nPrice: $" + rs.getString(4) + "   Supplier ID: " + rs.getString(5);
-            }
-            pStmt.close();
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return s;
-    }
+
 
     public boolean tableCreated() throws SQLException {
         DatabaseMetaData meta = conn.getMetaData();
